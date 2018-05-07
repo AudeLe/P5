@@ -9,6 +9,7 @@ return array(
     'templates\\' => array($baseDir . '/templates'),
     'src\\' => array($baseDir . '/src'),
     'public\\' => array($baseDir . '/public'),
+    'navbar\\' => array($baseDir . '/templates/navbar'),
     'models\\' => array($baseDir . '/src/models'),
     'controllers\\' => array($baseDir . '/src/controllers'),
     'config\\' => array($baseDir . '/config'),

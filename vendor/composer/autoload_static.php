@@ -19,6 +19,10 @@ class ComposerStaticInitf9d85b76ac09dd2a04083222db838d31
         array (
             'public\\' => 7,
         ),
+        'n' => 
+        array (
+            'navbar\\' => 7,
+        ),
         'm' => 
         array (
             'models\\' => 7,
@@ -46,6 +50,10 @@ class ComposerStaticInitf9d85b76ac09dd2a04083222db838d31
         'public\\' => 
         array (
             0 => __DIR__ . '/../..' . '/public',
+        ),
+        'navbar\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/templates/navbar',
         ),
         'models\\' => 
         array (
