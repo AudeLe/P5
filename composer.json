@@ -18,7 +18,8 @@
       "controllers\\": "src/controllers/",
       "DAO\\": "src/DAO/",
       "models\\": "src/models/",
-      "templates\\": "templates/"
+      "templates\\": "templates/",
+      "navbar\\": "templates/navbar/"
     }
   }
 }
