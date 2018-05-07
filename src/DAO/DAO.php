@@ -1,5 +1,5 @@
 <?php
-    namespace HaB\src\DAO;
+    namespace DAO;
 
     use PDO;
     use Exception;
