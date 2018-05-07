@@ -6,5 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'HaB\\' => array($baseDir . '/P5'),
+    'templates\\' => array($baseDir . '/templates'),
+    'src\\' => array($baseDir . '/src'),
+    'public\\' => array($baseDir . '/public'),
+    'models\\' => array($baseDir . '/src/models'),
+    'controllers\\' => array($baseDir . '/src/controllers'),
+    'config\\' => array($baseDir . '/config'),
+    'DAO\\' => array($baseDir . '/src/DAO'),
 );
