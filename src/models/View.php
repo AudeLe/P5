@@ -1,5 +1,5 @@
 <?php
-    namespace HaB\src\models;
+    namespace models;
 
     class View{
 
@@ -7,7 +7,7 @@
         private $title;
 
         public function __construct($action){
-            $this->file = '../templates.'.$action.'.php';
+            $this->file = '../templates/'.$action.'.php';
         }
 
         public function render($data){
