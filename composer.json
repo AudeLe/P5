@@ -1,7 +1,24 @@
 {
+  "name": "HaB",
+
+  "authors": [
+    {
+      "name": "Aude LEISSEN",
+      "mail": "aude.leissen@gmail.com"
+    }
+  ],
+
+  "require": {},
+
   "autoload": {
     "psr-4": {
-      "HaB\\": "P5/"
+      "config\\": "config/",
+      "public\\": "public/",
+      "src\\": "src/",
+      "controllers\\": "controllers/",
+      "DAO\\": "DAO/",
+      "models\\": "models/",
+      "templates\\": "templates/"
     }
   }
 }
