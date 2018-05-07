@@ -4,7 +4,7 @@
   "authors": [
     {
       "name": "Aude LEISSEN",
-      "mail": "aude.leissen@gmail.com"
+      "email": "aude.leissen@gmail.com"
     }
   ],
 
@@ -15,9 +15,9 @@
       "config\\": "config/",
       "public\\": "public/",
       "src\\": "src/",
-      "controllers\\": "controllers/",
-      "DAO\\": "DAO/",
-      "models\\": "models/",
+      "controllers\\": "src/controllers/",
+      "DAO\\": "src/DAO/",
+      "models\\": "src/models/",
       "templates\\": "templates/"
     }
   }
