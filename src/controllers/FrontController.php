@@ -1,8 +1,8 @@
 <?php
 
-    namespace HaB\src\controllers;
+    namespace controllers;
 
-    use HaB\src\models\View;
+    use models\View;
 
     class FrontController{
 
