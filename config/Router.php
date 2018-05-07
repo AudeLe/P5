@@ -1,8 +1,8 @@
 <?php
 
-    namespace HaB\config;
+    namespace config;
 
-    use HaB\src\controllers\FrontController;
+    use controllers\FrontController;
     use Exception;
 
     class Router {
