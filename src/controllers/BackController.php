@@ -11,8 +11,8 @@
         }
 
         // Registration on the website
-        public function registration($login, $passwordVisitor, $passwordVisitorCheck){
-            $this->connectionManager->registration($login, $passwordVisitor, $passwordVisitorCheck);
+        public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor){
+            $this->connectionManager->registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor);
 
             $view = new View('registration');
             $view->render(['registration']);

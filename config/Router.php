@@ -23,8 +23,8 @@
 
                     // Registration on the website
                     if($_GET['action'] == 'registration'){
-                        if(!empty($_POST['login']) && !empty($_POST['passwordVisitor']) && !empty($_POST['passwordVisitorCheck'])){
-                            $this->backController->registration($_POST['login'], $_POST['passwordVisitor'], $_POST['passwordVisitorCheck']);
+                        if(!empty($_POST['login']) && !empty($_POST['passwordVisitor']) && !empty($_POST['passwordVisitorCheck']) && !empty($_POST['emailVisitor']) && !empty($_POST['birthDateVisitor'])){
+                            $this->backController->registration($_POST['login'], $_POST['passwordVisitor'], $_POST['passwordVisitorCheck'], $_POST['emailVisitor'], $_POST['birthDateVisitor']);
                         } else {
                             throw new Exception('Impossible d\'enregistrer vos informations.');
                         }

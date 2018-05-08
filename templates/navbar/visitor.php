@@ -35,6 +35,14 @@
                                 <label for="passwordVisitorCheck">Veuillez saisir à nouveau votre mot de passe</label><br />
                                 <input type="password" id="passwordVisitorCheck" name="passwordVisitorCheck" />
                             </div>
+							<div>
+								<label for="emailVisitor">Email</label><br/>
+								<input type="text" id="emailVisitor" name="emailVisitor" />
+							</div>
+							<div>
+								<label for="birthDateVisitor">Date de naissance</label><br/>
+								<input type="text" id="birthDateVisitor" name="birthDateVisitor" value="dd/mm/yyyy"/>
+							</div>
                             <div>
                                 <input type="submit" value="S'inscrire" class="submitButton"/>
                             </div>

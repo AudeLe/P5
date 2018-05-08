@@ -4,7 +4,7 @@
     class ConnectionDAO extends DAO{
 
         // Register a new member
-        public function registration($login, $passwordVisitor, $passwordVisitorCheck){
+        public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor){
             $sql = 'SELECT login FROM members WHERE login = ?';
             $result = $this->sql($sql, [$login]);
             $row = $result -> fetch();
@@ -19,9 +19,11 @@
 
                     $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
 
-                    $sql = 'INSERT INTO members(login, password, registrationDate) VALUES (:login, :password, NOW())';
+                    $sql = 'INSERT INTO members(login, password, email, birthDate, registrationDate) VALUES (:login, :password, :email, :birthDate, NOW())';
                     $result = $this->sql($sql, [
                         'login' => $login,
+                        'email' => $emailVisitor,
+                        'birthDate' => $birthDateVisitor,
                         'password' => $passwordVisitorHashed
                     ]);
                 } else {
