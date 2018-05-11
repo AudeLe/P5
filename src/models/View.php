@@ -7,12 +7,12 @@
         private $title;
 
         public function __construct($action){
-            $this->file = '../templates/'.$action.'.php';
+            $this->file = '../templates/'.$action.'.html.twig';
         }
 
         public function render($data){
             $content = $this -> renderFile($this->file, $data);
-            $view = $this->renderFile('../templates/template.php', [
+            $view = $this->renderFile('../templates/template.html.twig', [
                 'title' => $this->title,
                 'content' => $content
             ]);
