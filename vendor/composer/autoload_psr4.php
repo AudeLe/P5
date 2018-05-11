@@ -13,5 +13,7 @@ return array(
     'models\\' => array($baseDir . '/src/models'),
     'controllers\\' => array($baseDir . '/src/controllers'),
     'config\\' => array($baseDir . '/config'),
+    'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'DAO\\' => array($baseDir . '/src/DAO'),
 );
