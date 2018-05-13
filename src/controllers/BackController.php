@@ -4,11 +4,11 @@
     use models\View;
     use DAO\ConnectionDAO;
 
-    class BackController{
+    class BackController extends Controller{
 
-        public function __construct(){
+        /*public function __construct(){
             $this->connectionManager = new ConnectionDAO();
-        }
+        }*/
 
         // Registration on the website
         public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor){
