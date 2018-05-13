@@ -47,6 +47,8 @@ class ComposerStaticInitf9d85b76ac09dd2a04083222db838d31
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\Validator\\' => 28,
+            'Symfony\\Component\\Translation\\' => 30,
         ),
         'D' => 
         array (
@@ -94,6 +96,14 @@ class ComposerStaticInitf9d85b76ac09dd2a04083222db838d31
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\Validator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/validator',
+        ),
+        'Symfony\\Component\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation',
         ),
         'DAO\\' => 
         array (
