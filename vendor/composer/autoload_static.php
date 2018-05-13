@@ -11,6 +11,10 @@ class ComposerStaticInitf9d85b76ac09dd2a04083222db838d31
     );
 
     public static $prefixLengthsPsr4 = array (
+        'v' => 
+        array (
+            'vendor\\' => 7,
+        ),
         't' => 
         array (
             'templates\\' => 10,
@@ -51,6 +55,10 @@ class ComposerStaticInitf9d85b76ac09dd2a04083222db838d31
     );
 
     public static $prefixDirsPsr4 = array (
+        'vendor\\' => 
+        array (
+            0 => 'C:\\wamp64\\www\\P5\\vendor',
+        ),
         'templates\\' => 
         array (
             0 => __DIR__ . '/../..' . '/templates',
