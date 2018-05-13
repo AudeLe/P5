@@ -4,11 +4,10 @@
 
     use models\View;
 
-    class FrontController{
+    class FrontController extends Controller{
 
         public function welcome(){
 
-            $view = new View('home');
-            $view->render([]);
+            echo $this->twig->render('home.html.twig');
         }
     }
