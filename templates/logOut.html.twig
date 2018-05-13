@@ -1,6 +1,8 @@
-<?php header('refresh:5; url= ../public/index.php'); ?>
+{% extends "template.html.twig" %}
 
-<?php $this->title = 'Déconnexion' ?>
+{% header('refresh:5; url= ../public/index.php') %}
+
+{% block title %}Déconnexion{% endblock %}
 
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

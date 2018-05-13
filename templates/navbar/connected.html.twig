@@ -34,17 +34,13 @@
     </li>
 
     <li class="nav-item">
-        <?php
-        if($_SESSION['status'] == 'admin'){
-            ?>
-            <a class="nav-link" href="../public/index.php?action="><!--Action à déterminer--><i class="fas fa-user-circle"></i><?$_SESSION['login'] ?></a>
-            <?php
-        } else {
-            ?>
-            <a class="nav-link" href="../public/index.php?action="><!-- Action à déterminer --><i class="fas fa-user-circle"><?= $_SESSION['login'] ?></i></a>
-            <?php
-        }
-        ?>
+
+        {% if app.session.get('status') == 'admin' %}
+            <a class="nav-link" href="../public/index.php?action="><!--Action à déterminer--><i class="fas fa-user-circle"></i>{{ app.session.get('login') }}</a>
+        {% else %}
+            <a class="nav-link" href="../public/index.php?action="><!-- Action à déterminer --><i class="fas fa-user-circle">{{ app.session.get('login') }}</i></a>
+        {% endif %}
+
     </li>
 
     <li class="nav-item">
