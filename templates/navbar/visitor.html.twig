@@ -22,26 +22,26 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="../public/index.php?action=registration" id="registrationForm" method="post">
+                        <form action="../public/index.php?action=registration" id="registrationForm" method="post" onsubmit="return checkForm.finalCheckForm(this)">
                             <div>
                                 <label for="login">Identifiant</label><br />
-                                <input type="text" id="login" name="login" />
+                                <input type="text" id="login" name="login" onblur="checkForm.checkLogin(this)"/>
                             </div>
                             <div>
                                 <label for="passwordVisitor">Mot de passe</label><br />
-                                <input type="password" id="passwordVisitor" name="passwordVisitor" />
+                                <input type="password" id="passwordVisitor" name="passwordVisitor" onblur="checkForm.checkPassword(this)"/>
                             </div>
                             <div>
                                 <label for="passwordVisitorCheck">Veuillez saisir à nouveau votre mot de passe</label><br />
-                                <input type="password" id="passwordVisitorCheck" name="passwordVisitorCheck" />
+                                <input type="password" id="passwordVisitorCheck" name="passwordVisitorCheck" onblur="checkForm.checkConfirmationPassword(this)"/>
                             </div>
 							<div>
 								<label for="emailVisitor">Email</label><br/>
-								<input type="text" id="emailVisitor" name="emailVisitor" />
+								<input type="text" id="emailVisitor" name="emailVisitor" onblur="checkForm.checkEmail(this)"/>
 							</div>
 							<div>
 								<label for="birthDateVisitor">Date de naissance</label><br/>
-								<input type="text" id="birthDateVisitor" name="birthDateVisitor" value="dd/mm/yyyy"/>
+								<input type="text" id="birthDateVisitor" name="birthDateVisitor" onblur="checkForm.checkBirthDate(this)"/>
 							</div>
                             <div>
                                 <input type="submit" value="S'inscrire" class="submitButton"/>
