@@ -1,7 +1,27 @@
 <?php
     namespace DAO;
 
+    use Symfony\Component\Validator\Validation;
+    use Symfony\Component\Validator\Constraints\Length;
+    use Symfony\Component\Validator\Constraints\NotBlank;
+
     class ConnectionDAO extends DAO{
+
+        // Validates the inputs before recording them into the db
+        protected function validateInputsRegistration(){
+            $validator = Validation::createValidator();
+            $violations = $validator->validate('Bernhard', array(
+               new Length(array('min' => 10)),
+               new NotBlank(),
+            ));
+
+            if (0 !== count($violations)){
+                // There are errors to show
+                foreach($violations as $violation){
+                    echo $violation->getMessage().'<br />';
+                }
+            }
+        }
 
         // Register a new member
         public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor){
