@@ -6,7 +6,7 @@ var bookData = {
 
         isbnSubmission.addEventListener("click", function(){
             var isbn = document.getElementById("ISBN").value;
-
+            console.log(isbn);
             bookData.googleBookAjaxCall(isbn);
 
         });
@@ -19,26 +19,55 @@ var bookData = {
             console.log(bookDetails);
             console.log(bookDetails.totalItems);
 
-            if(bookDetails.totalItems > 0){
-                console.log("ok");
-
+            /*
+            First draft of the code.
+            Have to manage the case of empty datas !
+            If there are several datas (such as for the authors) have to display most of them (with a limit of 3,5?)
+             */
+            var book = [];
+            if (bookDetails.totalItems > 0) {
                 var googleBook = bookDetails.items[0];
 
-                var title = googleBook.volumeInfo.title;
-                // Si plusieurs auteurs, les intégrer !!
-                var author = googleBook.volumeInfo.authors[0];
-                // Intégrer les ISBN (10 et 13)
-
+                book['title'] = googleBook.volumeInfo.title;
+                book['author'] = googleBook.volumeInfo.authors[0];
+                book['publishedDate'] = googleBook.volumeInfo.publishedDate;
+                book['description'] = googleBook.volumeInfo.description;
+                book['isbnIndustry'] = googleBook.volumeInfo.industryIdentifiers[1].identifier;
+                book['nbPages'] = googleBook.volumeInfo.pageCount;
             }
 
-            var bookDetailsInsert = document.getElementById("bookDetailsInsert");
-            bookDetailsInsert.textContent = "titre : "+ title;
-            /* FONCTIONNE !
-            bookDetailsInsert.textContent = "auteur : "+ author;
-             */
+            bookData.bookDetailsInsertion(book);
         });
+    },
 
+    bookDetailsInsertion: function(book){
+            console.log(book);
+            var bookInformations = document.getElementById("bookInformations");
+            bookInformations.style.display = "block";
 
+            var bookTitle = document.getElementById("bookTitle");
+            bookTitle.textContent = "";
+            bookTitle.textContent = book['title'];
+
+            var bookAuthors = document.getElementById("bookAuthors");
+            bookAuthors.textContent = "";
+            bookAuthors.textContent = book.author;
+
+            var bookPublishedDate = document.getElementById("bookPublishedDate");
+            bookPublishedDate.textContent = "";
+            bookPublishedDate.textContent = book.publishedDate;
+
+            var bookDescription = document.getElementById("bookDescription");
+            bookDescription.textContent = "";
+            bookDescription.textContent = book.description;
+
+            var bookISBN = document.getElementById("bookISBN");
+            bookISBN.textContent = "";
+            bookISBN.textContent = book.isbnIndustry;
+
+            var bookNbPages = document.getElementById("bookNbPages");
+            bookNbPages.textContent = "";
+            bookNbPages.textContent = book.nbPages;
     }
 }
 
