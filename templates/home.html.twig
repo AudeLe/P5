@@ -3,7 +3,20 @@
 {% block title %}Test{% endblock %}
 
 {% block content %}
-Test
+
+    <!--<form action="../public/index.php?action=recoverGoogleBook" method="post">-->
+    <label for="ISBN">Veuillez renter l'ISBN de l'ouvrage souhaité</label><br/>
+    <input type="text" id="ISBN" name="ISBN"/>
+    <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
+    <!--</form>-->
+
+    {% block bookInformations %}
+        <div id = "bookInformations">
+            <h3>Titre</h3>
+            <p id="bookDetailsInsert"></p>
+        </div>
+
+    {% endblock %}
 {% endblock %}
 
 {% block footer %} {{ parent() }} {% endblock %}
