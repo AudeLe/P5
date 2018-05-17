@@ -23,6 +23,8 @@
                 'cache' => false
             ));
 
+            // Accessing the $_SESSION datas through Twig
+            $this->twig->addGlobal('session', $_SESSION);
 
         }
 
