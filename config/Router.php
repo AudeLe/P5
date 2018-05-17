@@ -23,8 +23,8 @@
 
                     // Registration on the website
                     if($_GET['action'] == 'registration'){
-                        if(!empty($_POST['login']) && !empty($_POST['passwordVisitor']) && !empty($_POST['passwordVisitorCheck']) && !empty($_POST['emailVisitor']) && !empty($_POST['birthDateVisitor'])){
-                            $this->backController->registration($_POST['login'], $_POST['passwordVisitor'], $_POST['passwordVisitorCheck'], $_POST['emailVisitor'], $_POST['birthDateVisitor']);
+                        if(!empty($_POST['login']) && !empty($_POST['passwordVisitor']) && !empty($_POST['passwordVisitorCheck']) && !empty($_POST['emailVisitor'])){
+                            $this->backController->registration($_POST['login'], $_POST['passwordVisitor'], $_POST['passwordVisitorCheck'], $_POST['emailVisitor']);
                         } else {
                             throw new Exception('Impossible d\'enregistrer vos informations.');
                         }
@@ -42,6 +42,14 @@
                     // Log out of the website
                     elseif ($_GET['action'] == 'logOut'){
                         $this->backController->logOut();
+                    }
+
+                    elseif($_GET['action'] == 'memberProfile'){
+                        if(isset($_GET['login'])){
+                            $this->backController->memberProfile($_GET['login']);
+                        } else {
+                            throw new Exception('Veuillez vous connecter afin d\'accéder à vos commentaires.');
+                        }
                     }
 
                 } else{
