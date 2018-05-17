@@ -2,20 +2,15 @@
     namespace controllers;
 
     use models\View;
-    use DAO\ConnectionDAO;
+
 
     class BackController extends Controller{
 
-        /*public function __construct(){
-            $this->connectionManager = new ConnectionDAO();
-        }*/
-
         // Registration on the website
-        public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor){
-            $this->connectionManager->registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor);
+        public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
+            $this->connectionManager->registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor);
 
-            $view = new View('registration');
-            $view->render(['registration']);
+            echo $this->twig->render('registration.html.twig');
         }
 
         // Connection on the website
@@ -27,7 +22,12 @@
         public function logOut(){
             $this->connectionManager->logOut();
 
-            $view= new View('logOut');
-            $view->render([]);
+            echo $this->twig->render('logout.html.twig');
+        }
+
+        public function memberProfile($login){
+            $this->connectionManager->memberProfile($login);
+
+            echo $this->twig->render('memberProfileView.html.twig');
         }
     }
