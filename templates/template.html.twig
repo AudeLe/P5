@@ -40,10 +40,12 @@
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						{% if app.session.get('id') %}
+						{% if session.id %}
                             {% include 'navbar/connected.html.twig' %}
+							<p>connecté</p>
                         {% else %}
                             {% include 'navbar/visitor.html.twig' %}
+							<p>visiteur</p>
                         {% endif %}
 
 
@@ -60,7 +62,7 @@
 
         <!-- JavaScript Files -->
         <script src="../public/js/ajax.js"></script>
-		<script src="../public/js/checkForm.js"></script>
+		<!--<script src="../public/js/checkForm.js"></script>-->
 		<script src="../public/js/getBookDatas.js"></script>
 		<!-- Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
