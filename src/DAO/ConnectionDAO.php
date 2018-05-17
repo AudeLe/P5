@@ -1,10 +1,15 @@
 <?php
     namespace DAO;
 
+    use models\RegistrationForm;
+
     class ConnectionDAO extends DAO{
 
         // Register a new member
-        public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor, $birthDateVisitor){
+        public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
+            // If returns and error, the rest of the code shouldn't execute !!
+            $this->checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor);
+
             $sql = 'SELECT login FROM members WHERE login = ?';
             $result = $this->sql($sql, [$login]);
             $row = $result -> fetch();
@@ -12,18 +17,17 @@
             // If the login is already used, display a message
             // Otherwise, allows the visitor to register
             if($row){
-                echo 'Ce pseudo est déj) utilisé.';
+                echo 'Ce pseudo est déjà utilisé.';
             } else {
                 // Check if the visitor has typed the same passwords
                 if($passwordVisitor == $passwordVisitorCheck){
 
                     $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
 
-                    $sql = 'INSERT INTO members(login, password, email, birthDate, registrationDate) VALUES (:login, :password, :email, :birthDate, NOW())';
+                    $sql = 'INSERT INTO members(login, password, email, registrationDate) VALUES (:login, :password, :email, NOW())';
                     $result = $this->sql($sql, [
                         'login' => $login,
                         'email' => $emailVisitor,
-                        'birthDate' => $birthDateVisitor,
                         'password' => $passwordVisitorHashed
                     ]);
                 } else {
@@ -54,7 +58,7 @@
                     if($row['status'] == 'admin'){
                         header('Location: ../public/index.php?action='); /* ACTION A DETERMINER */
                     } else {
-                        header('Location: ../public/index.php?action='); /* ACTION A DETERMINER */
+                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].''); /* ACTION A DETERMINER */
                     }
                 } else {
                     echo 'Mauvais identifiant ou mot de passe.';
@@ -68,5 +72,19 @@
         public function logOut(){
             $_SESSION = array();
             session_destroy();
+        }
+
+        public function memberProfile($login){
+            // Récupérer la liste des livres de la personne connectée
+        }
+
+        private function checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
+            $registrationForm = new RegistrationForm();
+            $registrationForm->checkLogin($login);
+            $registrationForm->checkPassword($passwordVisitor, $passwordVisitorCheck);
+            //$registrationForm->checkPasswordConfirmation($passwordVisitor, $passwordVisitorCheck);
+            $registrationForm->checkEmail($emailVisitor);
+
+            //return $violations;
         }
     }
