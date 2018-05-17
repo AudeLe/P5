@@ -14,7 +14,8 @@
         private $passwordVisitor;
         private $passwordVisitorCheck;
         private $emailVisitor;
-        private $birthDateVisitor;
+        //private $birthDateVisitor;
+
         // Validates the inputs before recording them into the db
 
         public function __construct()
@@ -26,24 +27,25 @@
         {
             $violations = $this->validator->validate($login, array(
                 new NotBlank(),
-                new Length(array('min' => 2, 'max' <= 25))
+                new Length(array('min' => 2, 'max' => 25))
             ));
 
             $this->check($violations);
         }
 
-        public function checkPassword($passwordVisitor){
+        public function checkPassword($passwordVisitor, $passwordVisitorCheck){
             $violations = $this->validator->validate($passwordVisitor, array(
                 new NotBlank(),
                 new Regex(array(
                     'pattern' => '/^(?=.*\d)(?=.*[!@#$%^&*;?])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/'
-                ))
+                )),
+                new IdenticalTo($passwordVisitorCheck)
             ));
 
             $this->check($violations);
         }
 
-        public function checkPasswordConfirmation($passwordVisitorCheck, $passwordVisitor){
+        /*public function checkPasswordConfirmation($passwordVisitorCheck, $passwordVisitor){
             $violations = $this->validator->validate($passwordVisitorCheck, array(
                 new NotBlank(),
                 new Regex(array(
@@ -53,7 +55,7 @@
             ));
 
             $this->check($violations);
-        }
+        }*/
 
         public function checkEmail($emailVisitor){
             $violations = $this->validator->validate($emailVisitor, array(
@@ -64,7 +66,7 @@
             $this->check($violations);
         }
 
-        public function checkBirthDate($birthDateVisitor){
+        /*public function checkBirthDate($birthDateVisitor){
             $violations = $this->validator->validate($birthDateVisitor, array(
                new NotBlank(),
                new Regex(array(
@@ -73,7 +75,7 @@
             ));
 
             $this->check($violations);
-        }
+        }*/
 
         private function check($violations){
             if (0 !== count($violations)) {
@@ -83,6 +85,5 @@
                 }
             }
         }
-
 
     }
