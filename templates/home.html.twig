@@ -5,7 +5,8 @@
 {% block content %}
 
     <!--<form action="../public/index.php?action=recoverGoogleBook" method="post">-->
-    <label for="ISBN">Veuillez renter l'ISBN de l'ouvrage souhaité</label><br/>
+    <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
+    <p>Veuillez indiquer uniquement les chiffres</p>
     <input type="text" id="ISBN" name="ISBN"/>
     <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
     <!--</form>-->
@@ -33,5 +34,3 @@
 
     {% endblock %}
 {% endblock %}
-
-{% block footer %} {{ parent() }} {% endblock %}
