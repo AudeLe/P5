@@ -35,10 +35,10 @@
 
     <li class="nav-item">
 
-        {% if app.session.get('status') == 'admin' %}
-            <a class="nav-link" href="../public/index.php?action="><!--Action à déterminer--><i class="fas fa-user-circle"></i>{{ app.session.get('login') }}</a>
+        {% if session.status == 'admin' %}
+            <a class="nav-link" href="../public/index.php?action="><!--Action à déterminer--><i class="fas fa-user-circle"></i>{{ session.login }}</a>
         {% else %}
-            <a class="nav-link" href="../public/index.php?action="><!-- Action à déterminer --><i class="fas fa-user-circle">{{ app.session.get('login') }}</i></a>
+            <a class="nav-link" href="../public/index.php?action=memberProfile&login={{ session.login }}"><i class="fas fa-user-circle"></i>{{ session.login }}</a>
         {% endif %}
 
     </li>
