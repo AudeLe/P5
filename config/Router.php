@@ -2,8 +2,10 @@
 
     namespace config;
 
-    use controllers\FrontController;
     use controllers\BackController;
+    use controllers\BookController;
+    use controllers\FrontController;
+
     use Exception;
 
     class Router {
@@ -11,8 +13,9 @@
         private $frontController;
 
         public function __construct(){
-            $this->frontController = new FrontController();
             $this->backController = new BackController();
+            $this->bookController = new BookController();
+            $this->frontController = new FrontController();
         }
 
         public function requestRouter(){
@@ -44,12 +47,24 @@
                         $this->backController->logOut();
                     }
 
+                    // Access the member profile page
                     elseif($_GET['action'] == 'memberProfile'){
                         if(isset($_GET['login'])){
                             $this->backController->memberProfile($_GET['login']);
                         } else {
                             throw new Exception('Veuillez vous connecter afin d\'accéder à vos commentaires.');
                         }
+                    }
+
+
+                    /* ----- BOOK DATAS -----*/
+                    elseif ($_GET['action'] == 'registerBookDatas'){
+                        if(!empty($_POST['bookTitle']) && !empty($_POST['bookAuthors']) && !empty($_POST['bookPublishedDate']) && !empty($_POST['bookDescription']) && !empty($_POST['bookISBN']) && !empty($_POST['bookNbPages'])){
+                            $this->bookController->registerBookDatas($_POST['bookTitle'], $_POST['bookAuthors'], $_POST['bookPublishedDate'], $_POST['bookDescription'], $_POST['bookISBN'], $_POST['bookNbPages']);
+                        } else {
+                            throw new Exception('Veuillez remplir tous les champs.');
+                        }
+
                     }
 
                 } else{
