@@ -7,6 +7,7 @@
 
     use DAO\ConnectionDAO;
     use DAO\BookDAO;
+    use DAO\MemberDAO;
 
     class Controller{
 
@@ -14,8 +15,9 @@
 
         function __construct(){
 
-            $this->connectionManager = new ConnectionDAO();
             $this->bookManager = new BookDAO();
+            $this->connectionManager = new ConnectionDAO();
+            $this->memberManager = new MemberDAO();
 
             //Twig configuration
             $loader = new Twig_Loader_Filesystem('../templates');
