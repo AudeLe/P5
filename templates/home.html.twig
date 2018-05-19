@@ -3,34 +3,9 @@
 {% block title %}Test{% endblock %}
 
 {% block content %}
+    <h1>Have A Book ?</h1>
 
-    <!--<form action="../public/index.php?action=recoverGoogleBook" method="post">-->
-    <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
-    <p>Veuillez indiquer uniquement les chiffres</p>
-    <input type="text" id="ISBN" name="ISBN"/>
-    <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
-    <!--</form>-->
-
-    {% block bookInformations %}
-        <div id = "bookInformations">
-            <h5>Titre</h5>
-            <div id="bookTitle"></div>
-
-            <h5>Auteur(s)</h5>
-            <div id="bookAuthors"></div>
-
-            <h5>Date de publication</h5>
-            <div id="bookPublishedDate"></div>
-
-            <h5>Résumé</h5>
-            <div id="bookDescription"></div>
-
-            <h5>ISBN</h5>
-            <div id="bookISBN"></div>
-
-            <h5>Nombre de pages</h5>
-            <div id="bookNbPages"></div>
-        </div>
-
-    {% endblock %}
+    <p>Sur ce site, vous pouvez enregistrer vos ouvrages, afin de suivre quels livres vous avez déjà.<br />
+    Grâce à cette application, vous pouvez partager votre liste avec vos proches et vos amis afin qu'ils/elles puissent vérifier si vous les avez déjà.
+    </p>
 {% endblock %}
