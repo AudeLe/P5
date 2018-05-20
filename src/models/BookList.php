@@ -3,7 +3,7 @@
 
     class BookList{
 
-        private $idMember;
+        private $id_member;
         private $author;
         private $title;
         private $summary;
@@ -12,11 +12,11 @@
         private $nbPages;
         
         public function getIdMember(){
-            return $this->idMember;
+            return $this->id_member;
         }
         
-        public function setIdMember($idMember){
-            $this->idMember = $idMember;
+        public function setIdMember($id_member){
+            $this->id_member = $id_member;
         }
         
         public function getAuthor(){
