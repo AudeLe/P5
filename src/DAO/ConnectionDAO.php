@@ -43,7 +43,7 @@
             $result = $this->sql($sql, [$loginConnection]);
             $row = $result -> fetch();
 
-            // Verfies if the login is in the database
+            // Verifies if the login is in the database
             if($row){
                 $checkPassword = password_verify($passwordVisitorConnection, $row['password']);
 
@@ -53,6 +53,9 @@
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['login'] = $row['login'];
                     $_SESSION['status'] = $row['status'];
+
+                    //var_dump($_SESSION['login']);
+                    //die();
 
                     // Regarding the status of the member, the redirection is different
                     if($row['status'] == 'admin'){
