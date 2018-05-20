@@ -29,6 +29,6 @@
             $this->connectionManager->memberProfile($login);
             $memberBookList = $this->memberManager->getMemberBookList($login);
 
-            echo $this->twig->render('memberPages/memberProfileView.html.twig');
+            echo $this->twig->render('memberPages/memberProfileView.html.twig', array('memberBookList' => $memberBookList));
         }
     }
