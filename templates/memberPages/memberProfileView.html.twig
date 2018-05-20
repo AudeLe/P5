@@ -50,14 +50,14 @@
         </div>
     {% endblock %}
 
-    {% block memberBookList %}
+    {% block memberBookListArray %}
         <h5>Liste de livres</h5>
         <table>
-            {% for memberBook in memberBookList %}
-                <tr>
-                    <td>{{ memberBook.ISBN }}</td>
-                    <td>{{ memberBook.getAuthor }}</td>
-                </tr>
+            {% for book in memberBookList %}
+
+                    <p>{{ book.id }}</p>
+
+
             {% endfor %}
         </table>
 
