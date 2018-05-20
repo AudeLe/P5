@@ -54,10 +54,16 @@
         <h5>Liste de livres</h5>
         <table>
             {% for book in memberBookList %}
-
-                    <p>{{ book.id }}</p>
-
-
+                <tr>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.summary }}</td>
+                    <td>{{ book.publishingYear }}</td>
+                    <td>{{ book.ISBN }}</td>
+                    <td>{{ book.nbPages }}</td>
+                </tr>
+            {% else %}
+                <p>Vous n'avez pas d'ouvrages enregistrés pour l'instant.</p>
             {% endfor %}
         </table>
 
