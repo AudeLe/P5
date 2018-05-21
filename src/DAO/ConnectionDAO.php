@@ -51,7 +51,7 @@
                 if($checkPassword == true){
                     // Charging the credentials of the session
                     $_SESSION['id'] = $row['id'];
-                    $_SESSION['login'] = $row['login'];
+                    $_SESSION['login'] = $loginConnection;
                     $_SESSION['status'] = $row['status'];
 
                     //var_dump($_SESSION['login']);
@@ -61,7 +61,7 @@
                     if($row['status'] == 'admin'){
                         header('Location: ../public/index.php?action='); /* ACTION A DETERMINER */
                     } else {
-                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].''); /* ACTION A DETERMINER */
+                        header('Location: ../public/index.php?action=memberProfile&login='.$loginConnection.''); /* ACTION A DETERMINER */
                     }
                 } else {
                     echo 'Mauvais identifiant ou mot de passe.';
