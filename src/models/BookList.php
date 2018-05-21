@@ -3,6 +3,7 @@
 
     class BookList{
 
+        private $id;
         private $id_member;
         private $author;
         private $title;
@@ -11,6 +12,14 @@
         private $ISBN;
         private $nbPages;
         
+        public function getId(){
+            return $this->id;
+        }
+
+        public function setId($id){
+            $this->id = $id;
+        }
+
         public function getIdMember(){
             return $this->id_member;
         }
