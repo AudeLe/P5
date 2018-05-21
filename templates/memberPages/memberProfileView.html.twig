@@ -53,6 +53,15 @@
     {% block memberBookListArray %}
         <h5>Liste de livres</h5>
         <table>
+            <tr>
+                <th>Auteur</th>
+                <th>Titre</th>
+                <th>Résumé</th>
+                <th>Année de publication</th>
+                <th>ISBN</th>
+                <th>Nombre de pages</th>
+                <th>Supprimer de la liste</th>
+            </tr>
             {% for book in memberBookList %}
                 <tr>
                     <td>{{ book.author }}</td>
@@ -61,6 +70,8 @@
                     <td>{{ book.publishingYear }}</td>
                     <td>{{ book.ISBN }}</td>
                     <td>{{ book.nbPages }}</td>
+                    <!-- Confirm before deletion -->
+                    <td><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}"><i class="fas fa-trash alt"></i></a></td>
                 </tr>
             {% else %}
                 <p>Vous n'avez pas d'ouvrages enregistrés pour l'instant.</p>
