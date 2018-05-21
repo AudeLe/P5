@@ -9,7 +9,9 @@
             echo $this->twig->render('memberPages/memberProfileView.html.twig');
         }
 
-        /*public function modifyBookDatas(){
-            echo $this->twig->render('memberPages/modifyBookDatasView.html.twig');
-        }*/
+        public function deleteBook($id){
+            $this->bookManager->deleteBook($id);
+
+            //echo $this->twig->render('memberPages/memberProfileView.html.twig');
+        }
     }
