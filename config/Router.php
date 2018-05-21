@@ -64,7 +64,14 @@
                         } else {
                             throw new Exception('Veuillez remplir tous les champs.');
                         }
+                    }
 
+                    elseif($_GET['action'] == 'deleteBook') {
+                        if (isset($_GET['bookId'])) {
+                            $this->bookController->deleteBook($_GET['bookId']);
+                        } else {
+                            throw new Exception('Impossible de supprimer cet ouvrage de votre liste.');
+                        }
                     }
 
                 } else{
