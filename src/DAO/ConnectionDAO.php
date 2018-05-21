@@ -39,7 +39,7 @@
         // Allows a member to connect to his/her personal space
         public function connection($loginConnection, $passwordVisitorConnection){
 
-            $sql = 'SELECT id, password, status FROM members WHERE login = ?';
+            $sql = 'SELECT id, login, password, status FROM members WHERE login = ?';
             $result = $this->sql($sql, [$loginConnection]);
             $row = $result -> fetch();
 
@@ -51,17 +51,14 @@
                 if($checkPassword == true){
                     // Charging the credentials of the session
                     $_SESSION['id'] = $row['id'];
-                    $_SESSION['login'] = $loginConnection;
+                    $_SESSION['login'] = $row['login'];
                     $_SESSION['status'] = $row['status'];
-
-                    //var_dump($_SESSION['login']);
-                    //die();
 
                     // Regarding the status of the member, the redirection is different
                     if($row['status'] == 'admin'){
                         header('Location: ../public/index.php?action='); /* ACTION A DETERMINER */
                     } else {
-                        header('Location: ../public/index.php?action=memberProfile&login='.$loginConnection.''); /* ACTION A DETERMINER */
+                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].''); /* ACTION A DETERMINER */
                     }
                 } else {
                     echo 'Mauvais identifiant ou mot de passe.';
