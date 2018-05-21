@@ -56,6 +56,34 @@
                         }
                     }
 
+                    // Verify the credentials before allowing the user to modify them
+                    elseif($_GET['action'] == 'verifyInformations'){
+                        if(!empty($_POST['verifyLogin']) && !empty($_POST['verifyPassword'])){
+                            $this->backController->verifyInformations($_POST['verifyLogin'], $_POST['verifyPassword']);
+                        } else {
+                            throw new Exception('Veuillez confirmer vos identifiants afin de pouvoir les modifier.');
+                        }
+                    }
+
+                    // Modify the login
+                    elseif($_GET['action'] == 'editLogin'){
+                        if(!empty($_POST['editLogin'])){
+                            $this->backController->editLogin($_POST['login']);
+                        } else {
+                            throw new Exception('Impossible de modifier votre pseudonyme.');
+                        }
+                    }
+
+                    // Modify the password
+                    elseif($_GET['action'] == 'editPassword'){
+                        if(!empty($_POST['editPassword']) && !empty($_POST['confirmEditPassword'])){
+                            $this->backController->editPassword($_POST['editPassword'], $_POST['confirmEditPassword']);
+                        } else {
+                            throw new Exception('Veuillez indiquer le même mot de passe');
+                        }
+                    }
+
+
 
                     /* ----- BOOK DATAS -----*/
                     elseif ($_GET['action'] == 'registerBookDatas'){

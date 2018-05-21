@@ -74,9 +74,65 @@
             session_destroy();
         }
 
-        public function memberProfile($login){
-            // Récupérer la liste des livres de la personne connectée
+        // Verify the credentials before allowing the member/admin to change them
+        public function verifyInformations($login, $password){
+            $sql = 'SELECT id, password FROM members WHERE login = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
+
+            if($row){
+                $confirmPassword = password_verify($password, $row['password']);
+
+                if($confirmPassword == false){
+                    echo 'Mauvais identifiant ou mot de passe';
+                    if($_SESSION['status'] == 'admin'){
+                        header('Location: ../public/index.php?action='/*ACTION A DETERMINER*/);
+                    } else {
+                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                    }
+                }
+            }
         }
+
+        // Edit the login
+        public function editLogin($login){
+            $sql = 'SELECT login FROM members WHERE login = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
+
+            if($row){
+                echo 'Ce pseudo est déjà utilisé';
+            } else {
+                $sql = 'UPDATE members SET login = :login WHERE id = :id';
+                $result = $this->sql($sql, [
+                    'login' => $login,
+                    'id' => $_SESSION['id']
+                ]);
+            }
+             header('Location: ../public/index.php');
+        }
+
+        // Edit the password
+        public function editPassword($password, $confirmPassword){
+            if($password == $confirmPassword){
+                $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+
+                $sql = 'UPDATE members SET password = :password WHERE id = :id';
+                $this->sql($sql, [
+                    'id' => $_SESSION['id'],
+                    'password' => $passwordHashed
+                ]);
+
+                header('Location: ../public/index.php');
+            } else {
+                echo 'Votre mot de passe n\'a pas pu être modifié.';
+            }
+        }
+
 
         private function checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
             $registrationForm = new RegistrationForm();

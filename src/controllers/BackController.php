@@ -25,6 +25,26 @@
             echo $this->twig->render('logout.html.twig');
         }
 
+        // Modification of the credentials
+        public function verifyInformations($login, $password){
+            $this->connectionManager->verifyInformations($login, $password);
+
+            echo $this->twig->render('memberPages/editInformationsView.html.twig');
+        }
+
+        // Edit the login
+        public function editLogin($login){
+            $this->connectionManager->editLogin($login);
+            $this->connectionManager->logOut();
+        }
+
+        // Edit the password
+        public function editPassword($password, $confirmPassword){
+            $this->connectionManager->editPassword($password, $confirmPassword);
+            $this->connectionManager->logOut();
+        }
+
+        // Access the member's profile
         public function memberProfile($login){
             $this->connectionManager->memberProfile($login);
             $memberBookList = $this->memberManager->getMemberBookList($login);
