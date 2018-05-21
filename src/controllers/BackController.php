@@ -44,9 +44,13 @@
             $this->connectionManager->logOut();
         }
 
+        // Delete the account
+        public function deleteAccount($id, $login, $password){
+            $this->connectionManager->deleteAccount($id, $login, $password);
+        }
+
         // Access the member's profile
         public function memberProfile($login){
-            $this->connectionManager->memberProfile($login);
             $memberBookList = $this->memberManager->getMemberBookList($login);
 
             echo $this->twig->render('memberPages/memberProfileView.html.twig', array('memberBookList' => $memberBookList));

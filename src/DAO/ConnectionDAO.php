@@ -133,6 +133,32 @@
             }
         }
 
+        // Delete the account
+        public function deleteAccount($id, $login, $password){
+            $sql = 'SELECT id, password FROM members WHERE login = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
+
+            if($row){
+                $confirmPassword = password_verify($password, $row['password']);
+
+                if($confirmPassword == false){
+                    echo 'Mauvais identifiant ou mot de passe';
+                    header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                } else {
+                    $this->logOut();
+                    $sql = 'DELETE FROM members WHERE id = :id';
+                    $this->sql($sql, [
+                        'id' => $id
+                    ]);
+
+                    header('Location: ../public/index.php');
+                }
+            }
+        }
+
 
         private function checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
             $registrationForm = new RegistrationForm();

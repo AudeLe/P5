@@ -83,6 +83,15 @@
                         }
                     }
 
+                    // Deletion of the account
+                    elseif($_GET['action'] == 'deleteAccount'){
+                        if(isset($_GET['id']) && !empty($_POST['loginDelete']) && !empty($_POST['passwordDelete'])){
+                            $this->backController->deleteAccount($_GET['id'], $_POST['loginDelete'], $_POST['passwordDelete']);
+                        } else {
+                            throw new Exception('Impossible de supprimer votre compte');
+                        }
+                    }
+
 
 
                     /* ----- BOOK DATAS -----*/

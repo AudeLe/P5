@@ -77,7 +77,9 @@
                 <p>Vous n'avez pas d'ouvrages enregistrés pour l'instant.</p>
             {% endfor %}
         </table>
+    {% endblock %}
 
+    {% block managingAccount %}
         <h3>Gestion de compte</h3>
         <div>
             <h4>Changer son mot de passe ou son pseudo</h4>
@@ -96,7 +98,26 @@
                 </div>
             </form>
         </div>
-
     {% endblock %}
 
+    {% block deletionAccount %}
+        <div>
+            <h4>Suppression de compte</h4>
+            <p>Veuillez entrer vos identifiants afin de confirmer la suppression de votre compte.</p>
+
+            <form action="../public/index.php?action=deleteAccount&id={{ session.id }}" method="post">
+                <div>
+                    <label for="loginDelete">Pseudo</label>
+                    <input type="text" id="loginDelete" name="loginDelete" value="{{ session.login }}" readonly/>
+                </div>
+                <div>
+                    <label for="passwordDelete">Mot de passe</label>
+                    <input type="password" id="passwordDelete" name="passwordDelete"/>
+                </div>
+                <div>
+                    <input type="submit" value="Supprimer mon compte" class="submitButton"/>
+                </div>
+            </form>
+        </div>
+    {% endblock %}
 {% endblock %}
