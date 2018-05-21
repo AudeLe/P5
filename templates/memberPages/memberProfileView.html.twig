@@ -78,6 +78,25 @@
             {% endfor %}
         </table>
 
+        <h3>Gestion de compte</h3>
+        <div>
+            <h4>Changer son mot de passe ou son pseudo</h4>
+            <p>Veuillez entrer vos identifiants actuels.</p>
+            <form action="../public/index.php?action=verifyInformations" method="post">
+                <div>
+                    <label for="verifyLogin">Pseudo</label><br />
+                    <input type="text" id="verifyLogin" name="verifyLogin" value="{{ session.login }}" readonly/>
+                </div>
+                <div>
+                    <label for="verifyPassword">Mot de passe</label><br />
+                    <input type="password" id="verifyPassword" name="verifyPassword"/>
+                </div>
+                <div>
+                    <input type="submit" value="Confirmer mes identifiants" class="submitButton"/>
+                </div>
+            </form>
+        </div>
+
     {% endblock %}
 
 {% endblock %}
