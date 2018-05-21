@@ -24,6 +24,7 @@
 
         private function buildObject(array $row){
             $book = new BookList();
+            $book->setId($row['id']);
             $book->setAuthor($row['author']);
             $book->setTitle($row['title']);
             //$book->setIdMember($row['id_member']);
