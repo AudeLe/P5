@@ -26,6 +26,15 @@
                 ]);
                 header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
             }
+        }
+
+        public function deleteBook($id){
+            $sql = 'DELETE FROM bookslist WHERE id = :id ';
+            $result = $this->sql($sql, [
+                'id' => $id
+            ]);
+
+            header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
 
         }
 
