@@ -9,17 +9,33 @@
             $result = $this->sql($sql, [
                 'id_member' => $_SESSION['id']
             ]);
-            //$row = $result->fetch();
 
             $memberBookList = [];
             foreach($result as $row){
                 $bookId = $row['id'];
                 $memberBookList[$bookId] = $this->buildObject($row);
             }
-            //var_dump($memberBookList);
-            //die();
+
             return $memberBookList;
 
+        }
+
+        // Verify if a book has been registered
+        public function searchBook($id, $ISBN){
+            $sql = 'SELECT id_member, author, title, ISBN FROM bookslist WHERE ISBN = :ISBN';
+            $result = $this->sql($sql, [
+                'ISBN' => $ISBN
+            ]);
+            $row = $result->fetch();
+
+            if($row['id_member'] == $id){
+                $message = 'Vous avez déjà enregistré cet ouvrage.';
+            } else {
+                $message = 'Vous n\'avez pas ou n\'avez pas encore enregistré cet ouvrage.';
+            }
+
+            //header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+            return $message;
         }
 
         private function buildObject(array $row){

@@ -95,6 +95,7 @@
 
 
                     /* ----- BOOK DATAS -----*/
+                    // Record the datas of the selected book
                     elseif ($_GET['action'] == 'registerBookDatas'){
                         if(!empty($_POST['bookTitle']) && !empty($_POST['bookAuthors']) && !empty($_POST['bookPublishedDate']) && !empty($_POST['bookDescription']) && !empty($_POST['bookISBN']) && !empty($_POST['bookNbPages'])){
                             $this->bookController->registerBookDatas($_POST['bookTitle'], $_POST['bookAuthors'], $_POST['bookPublishedDate'], $_POST['bookDescription'], $_POST['bookISBN'], $_POST['bookNbPages']);
@@ -103,6 +104,16 @@
                         }
                     }
 
+                    // Search if the user already has the book
+                    elseif($_GET['action'] == 'searchBook'){
+                        if(isset($_GET['id']) && !empty($_POST['ISBNSearch'])){
+                            $this->bookController->searchBook($_GET['id'], $_POST['ISBNSearch']);
+                        } else {
+                            throw new Exception('Impossible de savoir si vous avez déjà cet ouvrage.');
+                        }
+                    }
+
+                    // Delete the book
                     elseif($_GET['action'] == 'deleteBook') {
                         if (isset($_GET['bookId'])) {
                             $this->bookController->deleteBook($_GET['bookId']);
