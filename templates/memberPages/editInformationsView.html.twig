@@ -1,0 +1,41 @@
+{% extends "template.html.twig" %}
+
+{% block title %}Modification de ses identifiants{% endblock %}
+
+{% block content %}
+    <h3>Changer son pseudo ou son mot de passe</h3>
+
+    <p>Une fois votre pseudonyme ou votre mot de passe modifié, vous serez déconnecté(e) afin d'enregistrer vos modifications.<br />
+    Veuillez vous connecter de nouveau adin d'avoir accès à votre espace personnel.</p>
+
+    {% block modifyLogin %}
+        <h4>Changer son pseudonyme</h4>
+        <form action="../public/index.php?action=editLogin" method="post">
+            <div>
+                <label for="editLogin">Nouveau Pseudonyme</label>
+                <input type="text" id="editLogin" name="editLogin"/>
+            </div>
+            <div>
+                <input type="submit" value="Modifier son pseudo" class="submitButton"/>
+            </div>
+        </form>
+    {% endblock %}
+
+    {% block modifyPassword %}
+        <h4>Changer son mot de passe</h4>
+        <form action="../public/index.php?action=editPassword" method="post">
+            <div>
+                <label for="editPassword">Nouveau mot de passe</label>
+                <input type="password" id="editPassword" name="editPassword"/>
+            </div>
+            <div>
+                <label for="confirmEditPassword">Veuillez entrer de nouveau votre mot de passe</label>
+                <input type="password" id="confirmEditPassword" name="confirmEditPassword"/>
+            </div>
+            <div>
+                <input type="submit" value="Modifier son mot de passe" class="submitButton"/>
+            </div>
+        </form>
+    {% endblock %}
+
+{% endblock %}
