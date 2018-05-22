@@ -3,20 +3,19 @@
 
     class BookDAO extends DAO {
 
-        public function registerBookDatas($bookTitle, $bookAuthors, $bookPublishedDate, $bookDescription, $bookISBN, $bookNbPages){
-            $sql = 'SELECT ISBN, id_member FROM bookslist WHERE ISBN = :bookISBN';
+        public function registerBookDatas($id, $bookTitle, $bookAuthors, $bookPublishedDate, $bookDescription, $bookISBN, $bookNbPages){
+            $sql = 'SELECT ISBN, id_member FROM bookslist WHERE id_member = :idMember';
             $result = $this->sql($sql, [
-                'bookISBN' => $bookISBN
+                'idMember' => $id
             ]);
             $row = $result->fetch();
 
-            if ($row['id_member'] == $_SESSION['id']){
+            if ($row['id_member'] == $id){
                 echo 'Vous avez déjà enregistré ce livre.';
-                header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
             } else {
                 $sql = 'INSERT INTO bookslist(id_member, title, author, summary, publishingYear, ISBN, nbPages) VALUES(:idMember, :title, :author, :summary, :publishingYear, :ISBN, :nbPages)';
                 $result = $this->sql($sql, [
-                    'idMember' => $_SESSION['id'],
+                    'idMember' => $id,
                     'title' => $bookTitle,
                     'author' => $bookAuthors,
                     'summary' => $bookDescription,
@@ -24,8 +23,10 @@
                     'ISBN' => $bookISBN,
                     'nbPages' => $bookNbPages
                 ]);
-                header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                echo 'Votre livre a bien été enregistré.';
             }
+
+            header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
         }
 
         public function deleteBook($id){
