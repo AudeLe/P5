@@ -81,7 +81,7 @@
             if (0 !== count($violations)) {
                 // There are errors to show
                 foreach ($violations as $violation) {
-                    echo $violation->getMessage() . '<br />';
+                    return $violation->getMessage() . '<br />';
                 }
             }
         }
