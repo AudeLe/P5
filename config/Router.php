@@ -97,16 +97,28 @@
                         }
                     }
 
-
+                    // Ask to access the booklist of someone else
+                    elseif($_GET['action'] == 'reachFriend'){
+                        if(isset($_GET['login']) && !empty($_POST['loginFriend'])){
+                            $this->backController->reachFriend($_GET['login'], $_POST['loginFriend']);
+                        } else {
+                            throw new Exception('Impossible de contacter la personne indiquée.');
+                        }
+                    }
 
                     /* ----- BOOK DATAS -----*/
                     // Record the datas of the selected book
                     elseif ($_GET['action'] == 'registerBookDatas'){
-                        if(!empty($_POST['bookTitle']) && !empty($_POST['bookAuthors']) && !empty($_POST['bookPublishedDate']) && !empty($_POST['bookDescription']) && !empty($_POST['bookISBN']) && !empty($_POST['bookNbPages'])){
-                            $this->bookController->registerBookDatas($_POST['bookTitle'], $_POST['bookAuthors'], $_POST['bookPublishedDate'], $_POST['bookDescription'], $_POST['bookISBN'], $_POST['bookNbPages']);
+                        if(isset($_GET['id'])){
+                            if(!empty($_POST['bookTitle']) && !empty($_POST['bookAuthors']) && !empty($_POST['bookPublishedDate']) && !empty($_POST['bookDescription']) && !empty($_POST['bookISBN']) && !empty($_POST['bookNbPages'])){
+                                $this->bookController->registerBookDatas($_GET['id'], $_POST['bookTitle'], $_POST['bookAuthors'], $_POST['bookPublishedDate'], $_POST['bookDescription'], $_POST['bookISBN'], $_POST['bookNbPages']);
+                            } else {
+                                throw new Exception('Veuillez remplir tous les champs.');
+                            }
                         } else {
-                            throw new Exception('Veuillez remplir tous les champs.');
+                            throw new Exception('Impossible de vous identifier.');
                         }
+
                     }
 
                     // Search if the user already has the book
