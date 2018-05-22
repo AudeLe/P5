@@ -11,11 +11,16 @@
     class Router {
 
         private $frontController;
+        private $backController;
+        private $bookController;
+
+        protected $twig;
 
         public function __construct(){
             $this->backController = new BackController();
             $this->bookController = new BookController();
             $this->frontController = new FrontController();
+
         }
 
         public function requestRouter(){
