@@ -8,32 +8,40 @@
         // Register a new member
         public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
             // If returns and error, the rest of the code shouldn't execute !!
-            $this->checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor);
-
-            $sql = 'SELECT login FROM members WHERE login = ?';
-            $result = $this->sql($sql, [$login]);
-            $row = $result -> fetch();
-
-            // If the login is already used, display a message
-            // Otherwise, allows the visitor to register
-            if($row){
-                echo 'Ce pseudo est déjà utilisé.';
+            $registrationValidator = new RegistrationForm();
+            $registrationValidator->checkLogin($login);
+            $registrationValidator->checkPassword($passwordVisitor, $passwordVisitorCheck);
+            $registrationValidator->checkEmail($emailVisitor);
+            //$this->checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor);
+            if($violations){
+                echo 'Impossible de vous inscire.';
             } else {
-                // Check if the visitor has typed the same passwords
-                if($passwordVisitor == $passwordVisitorCheck){
+                $sql = 'SELECT login FROM members WHERE login = ?';
+                $result = $this->sql($sql, [$login]);
+                $row = $result -> fetch();
 
-                    $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
-
-                    $sql = 'INSERT INTO members(login, password, email, registrationDate) VALUES (:login, :password, :email, NOW())';
-                    $result = $this->sql($sql, [
-                        'login' => $login,
-                        'email' => $emailVisitor,
-                        'password' => $passwordVisitorHashed
-                    ]);
+                // If the login is already used, display a message
+                // Otherwise, allows the visitor to register
+                if($row){
+                    echo 'Ce pseudo est déjà utilisé.';
                 } else {
-                    echo 'Vous n\'avez pas saisi les mêmes mots de passe.';
+                    // Check if the visitor has typed the same passwords
+                    if($passwordVisitor == $passwordVisitorCheck){
+
+                        $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
+
+                        $sql = 'INSERT INTO members(login, password, email, registrationDate) VALUES (:login, :password, :email, NOW())';
+                        $result = $this->sql($sql, [
+                            'login' => $login,
+                            'email' => $emailVisitor,
+                            'password' => $passwordVisitorHashed
+                        ]);
+                    } else {
+                        echo 'Vous n\'avez pas saisi les mêmes mots de passe.';
+                    }
                 }
             }
+
         }
 
         // Allows a member to connect to his/her personal space
