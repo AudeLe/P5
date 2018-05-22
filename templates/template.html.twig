@@ -42,13 +42,9 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						{% if session.id %}
                             {% include 'navbar/connected.html.twig' %}
-							<p>connecté</p>
                         {% else %}
                             {% include 'navbar/visitor.html.twig' %}
-							<p>visiteur</p>
                         {% endif %}
-
-
 					</div>
 				</nav>
             {% endblock %}
