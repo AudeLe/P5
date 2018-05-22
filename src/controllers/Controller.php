@@ -14,7 +14,7 @@
 
         protected $twig;
 
-        function __construct(){
+        public function __construct(){
 
             $this->bookManager = new BookDAO();
             $this->connectionManager = new ConnectionDAO();
@@ -34,5 +34,4 @@
             $this->twig->addExtension(new Twig_Extension_Debug());
 
         }
-
     }
