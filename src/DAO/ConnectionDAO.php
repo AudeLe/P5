@@ -7,15 +7,20 @@
 
         // Register a new member
         public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
-            // If returns and error, the rest of the code shouldn't execute !!
+
+            $violations = [];
+
             $registrationValidator = new RegistrationForm();
-            $registrationValidator->checkLogin($login);
-            $registrationValidator->checkPassword($passwordVisitor, $passwordVisitorCheck);
-            $registrationValidator->checkEmail($emailVisitor);
-            //$this->checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor);
-            if($violations){
-                echo 'Impossible de vous inscire.';
-            } else {
+
+            $violations['login'] = $registrationValidator->checkLogin($login);
+            $violations['password'] = $registrationValidator->checkPassword($passwordVisitor);
+            $violations['passwordConfirmation'] = $registrationValidator->checkPasswordConfirmation($passwordVisitorCheck, $passwordVisitor);
+            $violations['email'] = $registrationValidator->checkEmail($emailVisitor);
+
+            // Verifies if there is an error
+            if(empty($violations['login']) && empty($violations['password']) && empty($violations['passwordConfirmation']) && empty($violations['email'])){
+
+                // If there is not, the datas are registered
                 $sql = 'SELECT login FROM members WHERE login = ?';
                 $result = $this->sql($sql, [$login]);
                 $row = $result -> fetch();
@@ -25,21 +30,23 @@
                 if($row){
                     echo 'Ce pseudo est déjà utilisé.';
                 } else {
-                    // Check if the visitor has typed the same passwords
-                    if($passwordVisitor == $passwordVisitorCheck){
+                    $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
 
-                        $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
-
-                        $sql = 'INSERT INTO members(login, password, email, registrationDate) VALUES (:login, :password, :email, NOW())';
-                        $result = $this->sql($sql, [
-                            'login' => $login,
-                            'email' => $emailVisitor,
-                            'password' => $passwordVisitorHashed
-                        ]);
-                    } else {
-                        echo 'Vous n\'avez pas saisi les mêmes mots de passe.';
+                    $sql = 'INSERT INTO members(login, password, email, registrationDate) VALUES (:login, :password, :email, NOW())';
+                    $result = $this->sql($sql, [
+                        'login' => $login,
+                        'email' => $emailVisitor,
+                        'password' => $passwordVisitorHashed
+                    ]);
+                }
+            } else {
+                // If there is, the error(s) is/are displayed
+                foreach ($violations as $violation) {
+                    if ($violation !== null){
+                        echo $violation . '<br />';
                     }
                 }
+
             }
 
         }
@@ -167,14 +174,4 @@
             }
         }
 
-
-        private function checkRegistration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
-            $registrationForm = new RegistrationForm();
-            $registrationForm->checkLogin($login);
-            $registrationForm->checkPassword($passwordVisitor, $passwordVisitorCheck);
-            //$registrationForm->checkPasswordConfirmation($passwordVisitor, $passwordVisitorCheck);
-            $registrationForm->checkEmail($emailVisitor);
-
-            //return $violations;
-        }
     }
