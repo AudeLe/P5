@@ -1,7 +1,6 @@
 <?php
     namespace models;
 
-    use Symfony\Component\Validator\Constraints\Date;
     use Symfony\Component\Validator\Constraints\IdenticalTo;
     use Symfony\Component\Validator\Validation;
     use Symfony\Component\Validator\Constraints\Length;
