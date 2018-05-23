@@ -14,10 +14,8 @@
         private $passwordVisitor;
         private $passwordVisitorCheck;
         private $emailVisitor;
-        //private $birthDateVisitor;
 
         // Validates the inputs before recording them into the db
-
         public function __construct()
         {
             $this->validator = Validation::createValidator();
@@ -25,57 +23,60 @@
 
         public function checkLogin($login)
         {
-            $violations = $this->validator->validate($login, array(
+            $violations = $this->validator->validate($login, [
                 new NotBlank(),
-                new Length(array('min' => 2, 'max' => 25))
-            ));
+                new Length([
+                    'min' => 2,
+                    'max' => 25,
+                    'minMessage' => 'Votre pseudo doit être composé de 2 caractères minimum et de 25 caractères au maximum.',
+                    'maxMessage' => 'Votre pseudo doit être composé de 2 caractères minimum et de 25 caractères au maximum.'
+                ])
+            ]);
 
-            $this->check($violations);
+            $errors = $this->check($violations);
+
+            return $errors;
+
         }
 
-        public function checkPassword($passwordVisitor, $passwordVisitorCheck){
-            $violations = $this->validator->validate($passwordVisitor, array(
+        public function checkPassword($passwordVisitor){
+            $violations = $this->validator->validate($passwordVisitor, [
                 new NotBlank(),
-                new Regex(array(
-                    'pattern' => '/^(?=.*\d)(?=.*[!@#$%^&*;?])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/'
-                )),
-                new IdenticalTo($passwordVisitorCheck)
-            ));
+                new Regex([
+                    'pattern' => '/^(?=.*\d)(?=.*[!@#$%^&*;?])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/',
+                    'message' => 'Votre mot de passe doit comporter entre 8 et 20 charactères. Il doit est composé d\'au moins un caractère spécial (!@#$%^&*;?), d\'un chiffre, d\'une minuscule et d\'une majuscule.',
+                ])
+            ]);
 
-            $this->check($violations);
+            $errors =$this->check($violations);
+
+            return $errors;
         }
 
-        /*public function checkPasswordConfirmation($passwordVisitorCheck, $passwordVisitor){
+        public function checkPasswordConfirmation($passwordVisitorCheck, $passwordVisitor){
             $violations = $this->validator->validate($passwordVisitorCheck, array(
                 new NotBlank(),
-                new Regex(array(
-                    'pattern' => '/^(?=.*\d)(?=.*[!@#$%^&*;?])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/'
-                )),
-                new IdenticalTo($passwordVisitor)
+                new IdenticalTo([
+                    'value' => $passwordVisitor,
+                    'message' => 'Vous n\'avez pas entré le même mot de passe.'
+                ])
             ));
 
-            $this->check($violations);
-        }*/
+            $errors = $this->check($violations);
+
+            return $errors;
+        }
 
         public function checkEmail($emailVisitor){
             $violations = $this->validator->validate($emailVisitor, array(
                new NotBlank(),
-               new Email()
+               new Email(['message' => 'Email invalide.'])
             ));
 
-            $this->check($violations);
+            $errors = $this->check($violations);
+
+            return $errors;
         }
-
-        /*public function checkBirthDate($birthDateVisitor){
-            $violations = $this->validator->validate($birthDateVisitor, array(
-               new NotBlank(),
-               new Regex(array(
-                       'pattern' => '/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/'
-               ))
-            ));
-
-            $this->check($violations);
-        }*/
 
         private function check($violations){
             if (0 !== count($violations)) {
