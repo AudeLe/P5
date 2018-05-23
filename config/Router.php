@@ -14,7 +14,7 @@
         private $backController;
         private $bookController;
 
-        protected $twig;
+        //protected $twig;
 
         public function __construct(){
             $this->backController = new BackController();
@@ -99,11 +99,16 @@
 
                     // Ask to access the booklist of someone else
                     elseif($_GET['action'] == 'reachFriend'){
-                        if(isset($_GET['login']) && !empty($_POST['loginFriend'])){
-                            $this->backController->reachFriend($_GET['login'], $_POST['loginFriend']);
+                        if(isset($_GET['login'])){
+                            if(!empty($_POST['loginFriend'])){
+                                $this->backController->reachFriend($_GET['login'], $_POST['loginFriend']);
+                            } else {
+                                throw new Exception('Impossible de contacter la personne indiquée.');
+                            }
                         } else {
-                            throw new Exception('Impossible de contacter la personne indiquée.');
+                            throw new Exception('Impossible de vous identifier.');
                         }
+
                     }
 
                     /* ----- BOOK DATAS -----*/
@@ -145,6 +150,9 @@
                 }
             } catch(Exception $e){
                 echo 'Erreur : ' . $e->getMessage();
+                //var_dump($twigApp);
+                //die();
+                //return $this->twig->render('errorView.html.twig', array('errorMessage' => $e));
             }
         }
     }
