@@ -1,6 +1,11 @@
 <?php
     namespace DAO;
 
+
+    use Swift_SmtpTransport;
+    use Swift_Mailer;
+    use Swift_Message;
+
     use models\BookList;
 
     class MemberDAO extends DAO{
@@ -34,9 +39,60 @@
                 $message = 'Vous n\'avez pas ou n\'avez pas encore enregistré cet ouvrage.';
             }
 
+            /* FONCTIONNE MAIS PROBLEME AU NIVEAU DE LA REDIRECTION*/
+
             //header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
             return $message;
         }
+
+        public function reachFriend($login, $loginFriend){
+            if($login == $loginFriend){
+                echo 'Vous ne pouvez pas vous envoyer une demande d\'ami(e).';
+            } else {
+                $sql = 'SELECT login, email FROM members WHERE login = :login';
+                $result = $this->sql($sql,[
+                    'login' => $loginFriend
+                ]);
+                $row = $result->fetch();
+
+                if($row){
+                    $email = $row['email'];
+
+                    //var_dump($email);
+                    //die();
+                    $this->sendEmail($email);
+                    echo 'Une demande de partage de liste de livres a été envoyé.';
+                } else{
+                    echo 'Le pseudo indiqué ne correspond à aucun de nos membres.';
+                }
+
+                //return $message;
+            }
+        }
+
+
+        public function sendEmail($email){
+            // Create the Transport
+            $smtp_host_ip = gethostbyname('smtp.gmail.com');
+            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
+                ->setUsername('aude.leissen.dev@gmail.com')
+                ->setPassword('ggyuzcgqmxcbofvy');
+
+            // Create theMailer using your created Transport
+            $mailer = new Swift_Mailer($transport);
+
+            // Create a message
+            $message = (new Swift_Message('Demande d\'autorisation de partage de liste de livres'))
+                ->setFrom(['aude.leissen.dev@gmail.com' => 'Plop'])
+                ->setTo($email)
+                ->setBody('Here is the message itself');
+
+            // Send the message
+            $result = $mailer->send($message);
+            var_dump($result);
+            die();
+        }
+
 
         private function buildObject(array $row){
             $book = new BookList();
