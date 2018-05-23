@@ -55,4 +55,10 @@
 
             echo $this->twig->render('memberPages/memberProfileView.html.twig', array('memberBookList' => $memberBookList));
         }
+
+        public function reachFriend($login, $loginFriend){
+            $message = $this->memberManager->reachFriend($login, $loginFriend);
+
+            //echo $this->twig->render('memberPages/memberProfileView.html.twig', array('message' => $message), array('message' => $message));
+        }
     }
