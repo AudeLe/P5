@@ -99,6 +99,11 @@
                         }
                     }
 
+                    // Access to the page allowing to reach a friend
+                    elseif($_GET['action'] == 'friendsPage'){
+                        $this->backController->friendsPage();
+                    }
+
                     // Ask to access the booklist of someone else
                     elseif($_GET['action'] == 'reachFriend'){
                         if(isset($_GET['login'])){
@@ -109,6 +114,23 @@
                             }
                         } else {
                             throw new Exception('Impossible de vous identifier.');
+                        }
+
+                    }
+
+                    elseif ($_GET['action'] == 'accountPage'){
+                        $this->backController->accountPage();
+                    }
+
+                    elseif($_GET['action'] == 'deleteAccountPage'){
+                        $this->backController->deleteAccountPage();
+                    }
+
+                    elseif($_GET['action'] == 'getMemberBookList'){
+                        if(isset($_GET['login'])){
+                            $this->backController->getMemberBookList($_GET['login']);
+                        } else{
+                            throw new Exception('Impossible de récupérer votre liste de livres.');
                         }
 
                     }
@@ -126,6 +148,11 @@
                             throw new Exception('Impossible de vous identifier.');
                         }
 
+                    }
+
+                    // Access to the page to search a book
+                    elseif($_GET['action'] == 'searchBookPage'){
+                        $this->backController->searchBookPage();
                     }
 
                     // Search if the user already has the book
