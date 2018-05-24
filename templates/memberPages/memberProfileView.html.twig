@@ -3,181 +3,58 @@
 {% block title %}{{ session.login }}{% endblock %}
 
 {% block content %}
-    <!--<div class="row">
+    <div class="row">
         {% block navbarLeftSide %}
-                <div class="col-3">
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" >
-                        <a class="nav-link active" id="v-pills-registerBook-tab" data-toggle="pill" href="#v-pills-registerBook" role="tab" aria-controls="v-pills-registerBook" aria-selected="true">Enregistrer un livre</a>
-                        <a class="nav-link" id="v-pills-bookList-tab" data-toggle="pill" href="#v-pills-bookList" role="tab" aria-controls="v-pills-bookList" aria-selected="false">Liste de livres</a>
-                        <a class="nav-link" id="v-pills-searchBook-tab" data-toggle="pill" href="#v-pills-searchBook" role="tab" aria-controls="v-pills-searchBook" aria-selected="false">Rechercher un livre</a>
-                        <a class="nav-link" id="v-pills-friends-tab" data-toggle="pill" href="#v-pills-friends" role="tab" aria-controls="v-pills-friends" aria-selected="false">Cercle d'amis</a>
-                        <a class="nav-link" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-selected="false">Compte</a>
-                        <a class="nav-link" id="v-pills-deleteAccount-tab" data-toggle="pill" href="#v-pills-deleteAccount" role="tab" aria-controls="v-pills-deleteAccount" aria-selected="false">Suppression de compte</a>
-                    </div>
-                </div>
-        {% endblock %}-->
-
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endblock %}
 
         {% block displayContent %}
-            <!--<div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">-->
-                    {% block bookInformations %}
-                        <!--<div class="tab-pane fade show active" id="v-pills-registerBook" role="tabpanel" aria-labelledby="v-pills-registerBook-tab">-->
-                            <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
-                            <p>Veuillez indiquer uniquement les chiffres</p>
-                            <input type="text" id="ISBN" name="ISBN"/>
-                            <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
+            <div class="col-9">
+                {% block bookInformations %}
+                    <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
+                    <p>Veuillez indiquer uniquement les chiffres</p>
+                    <input type="text" id="ISBN" name="ISBN"/>
+                    <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
 
-                            <div id="bookInformations">
-                                <form action="../public/index.php?action=registerBookDatas&id={{ session.id }}" method="post">
-                                    <div>
-                                        <label for="bookTitle">Titre</label><br />
-                                        <input type="text" id="bookTitle" name="bookTitle" />
-                                    </div>
-
-                                    <div>
-                                        <label for="bookAuthors">Auteur(s)</label><br />
-                                        <input type="text" id="bookAuthors" name="bookAuthors"/>
-                                    </div>
-
-                                    <div>
-                                        <label for="bookPublishedDate">Date de publication</label><br />
-                                        <input type="text" id="bookPublishedDate" name="bookPublishedDate" />
-                                    </div>
-
-                                    <div>
-                                        <label for="bookDescription">Résumé</label><br />
-                                        <textarea id="bookDescription" name="bookDescription"></textarea>
-                                    </div>
-
-                                    <div>
-                                        <label for="bookISBN">ISBN</label><br />
-                                        <input type="text" id="bookISBN" name="bookISBN" />
-                                    </div>
-
-                                    <div>
-                                        <label for="bookNbPages">Nombre de pages</label><br />
-                                        <input type="text" id="bookNbPages" name="bookNbPages"/>
-                                    </div>
-
-                                    <input type="submit" value="Enregistrer le livre" />
-                                </form>
+                    <div id="bookInformations">
+                        <form action="../public/index.php?action=registerBookDatas&id={{ session.id }}" method="post">
+                            <div>
+                                <label for="bookTitle">Titre</label><br />
+                                <input type="text" id="bookTitle" name="bookTitle" />
                             </div>
-                        <!--</div>-->
-                    {% endblock %}
-
-                    {% block memberBookListArray %}
-                        <!--<div class="tab-pane fade" id="v-pills-bookList" role="tabpanel" aria-labelledby="v-pills-bookList-tab">-->
-                            <h5>Liste de livres</h5>
-                            <table>
-                                <tr>
-                                    <th>Auteur</th>
-                                    <th>Titre</th>
-                                    <th>Résumé</th>
-                                    <th>Année de publication</th>
-                                    <th>ISBN</th>
-                                    <th>Nombre de pages</th>
-                                    <th>Supprimer de la liste</th>
-                                </tr>
-                                {% for book in memberBookList %}
-                                    <tr>
-                                        <td>{{ book.author }}</td>
-                                        <td>{{ book.title }}</td>
-                                        <td>{{ book.summary }}</td>
-                                        <td>{{ book.publishingYear }}</td>
-                                        <td>{{ book.ISBN }}</td>
-                                        <td>{{ book.nbPages }}</td>
-                                        <!-- Confirm before deletion -->
-                                        <td><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}"><i class="fas fa-trash alt"></i></a></td>
-                                    </tr>
-                                {% else %}
-                                    <p>Vous n'avez pas d'ouvrages enregistrés pour l'instant.</p>
-                                {% endfor %}
-                            </table>
-                        <!--</div>-->
-                    {% endblock %}
-
-                    {% block searchBook %}
-                        <!--<div class="tab-pane fade" id="v-pills-searchBook" role="tabpanel" aria-labelledby="v-pills-searchBook-tab">-->
-                            <h4>Chercher si l'on a déjà un livre</h4>
-                            <form action="../public/index.php?action=searchBook&id={{ session.id }}" method="post">
-                                <div>
-                                    <label for="ISBNSearch">ISBN</label>
-                                    <input type="text" id="ISBNSearch" name="ISBNSearch"/>
-                                </div>
-                                <div>
-                                    <input type="submit" value="Rechercher"/>
-                                </div>
-                            </form>
 
                             <div>
-                                {{ message }}
+                                <label for="bookAuthors">Auteur(s)</label><br />
+                                <input type="text" id="bookAuthors" name="bookAuthors"/>
                             </div>
-                        <!--</div>-->
-                    {% endblock %}
 
-                    {% block friendsCircle %}
-                        <!--<div class="tab-pane fade" id="v-pills-friends" role="tabpanel" aria-labelledby="v-pills-friends-tab">-->
-                            <h3>Ajout ami(e)</h3>
-                            <p>Entrez le pseudo de la personne que vous souhaitez ajouter à votre cercle d'amis.<br/>
-                            Si la personne accepte votre demande, vous pourrez alors savoir si elle a déjà un ouvrage en rentrant l'ISBN de celui-ci.
-                            </p>
-
-                            <form action="../public/index.php?action=reachFriend&login={{ session.login }}" method="post">
-                                <label for="loginFriend">Entrez le pseudo de la personne que vous souhaitez ajouter</label><br/>
-                                <input type="text" id="loginFriend" name="loginFriend"/>
-                                <input type="submit" value="Envoyer une demande d'ami(e)" class="submitButton"/>
-                            </form>
-                        <!--</div>-->
-                    {% endblock %}
-
-                    {% block managingAccount %}
-                        <!--<div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">-->
-                            <h3>Gestion de compte</h3>
                             <div>
-                                <h4>Changer son mot de passe ou son pseudo</h4>
-                                <p>Veuillez entrer vos identifiants actuels.</p>
-                                <form action="../public/index.php?action=verifyInformations" method="post">
-                                    <div>
-                                        <label for="verifyLogin">Pseudo</label><br />
-                                        <input type="text" id="verifyLogin" name="verifyLogin" value="{{ session.login }}" readonly/>
-                                    </div>
-                                    <div>
-                                        <label for="verifyPassword">Mot de passe</label><br />
-                                        <input type="password" id="verifyPassword" name="verifyPassword"/>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="Confirmer mes identifiants" class="submitButton"/>
-                                    </div>
-                                </form>
+                                <label for="bookPublishedDate">Date de publication</label><br />
+                                <input type="text" id="bookPublishedDate" name="bookPublishedDate" />
                             </div>
-                        <!--</div>-->
-                    {% endblock %}
 
-                    {% block deletionAccount %}
-                        <!--<div class="tab-pane fade" id="v-pills-deleteAccount" role="tabpanel" aria-labelledby="v-pills-deleteAccount-tab">-->
-                            <h4>Suppression de compte</h4>
-                            <p>Veuillez entrer vos identifiants afin de confirmer la suppression de votre compte.</p>
+                            <div>
+                                <label for="bookDescription">Résumé</label><br />
+                                <textarea id="bookDescription" name="bookDescription"></textarea>
+                            </div>
 
-                            <form action="../public/index.php?action=deleteAccount&id={{ session.id }}" method="post">
-                                <div>
-                                    <label for="loginDelete">Pseudo</label>
-                                    <input type="text" id="loginDelete" name="loginDelete" value="{{ session.login }}" readonly/>
-                                </div>
-                                <div>
-                                    <label for="passwordDelete">Mot de passe</label>
-                                    <input type="password" id="passwordDelete" name="passwordDelete"/>
-                                </div>
-                                <div>
-                                    <input type="submit" value="Supprimer mon compte" class="submitButton"/>
-                                </div>
-                            </form>
-                        <!--</div>-->
-                    {% endblock %}
+                            <div>
+                                <label for="bookISBN">ISBN</label><br />
+                                <input type="text" id="bookISBN" name="bookISBN" />
+                            </div>
 
-                <!--</div>
-            </div>-->
+                            <div>
+                                <label for="bookNbPages">Nombre de pages</label><br />
+                                <input type="text" id="bookNbPages" name="bookNbPages"/>
+                            </div>
+
+                            <input type="submit" value="Enregistrer le livre" />
+                        </form>
+                    </div>
+                {% endblock %}
+
+            </div>
         {% endblock %}
-    <!--</div>-->
+    </div>
 
 {% endblock %}
