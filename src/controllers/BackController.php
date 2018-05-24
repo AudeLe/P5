@@ -51,14 +51,42 @@
 
         // Access the member's profile
         public function memberProfile($login){
+            //$memberBookList = $this->memberManager->getMemberBookList($login);
+
+            echo $this->twig->render('memberPages/memberProfileView.html.twig');
+        }
+
+        // Access to the member's book list
+        public function getMemberBookList($login){
             $memberBookList = $this->memberManager->getMemberBookList($login);
 
-            echo $this->twig->render('memberPages/memberProfileView.html.twig', array('memberBookList' => $memberBookList));
+            echo $this->twig->render('memberPages/bookListView.html.twig', array('memberBookList' => $memberBookList));
+        }
+
+        // Access to the member's page to search a book
+        public function searchBookPage(){
+
+            echo $this->twig->render('memberPages/searchBookView.html.twig');
+
+        }
+
+        // Access to the member's page to ask a friend to share their booklist
+        public function friendsPage(){
+
+            echo $this->twig->render('memberPages/friendsCircleView.html.twig');
         }
 
         public function reachFriend($login, $loginFriend){
             $message = $this->memberManager->reachFriend($login, $loginFriend);
 
-            //echo $this->twig->render('memberPages/memberProfileView.html.twig', array('message' => $message), array('message' => $message));
+            echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('message' => $message));
+        }
+
+        public function accountPage(){
+            echo $this->twig->render('memberPages/accountView.html.twig');
+        }
+
+        public function deleteAccountPage(){
+            echo $this->twig->render('memberPages/deletionAccountView.html.twig');
         }
     }
