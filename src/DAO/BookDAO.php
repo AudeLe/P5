@@ -42,7 +42,7 @@
                     echo 'Votre livre a bien été enregistré.';
                 }
 
-                header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                header('Location: ../public/index.php?action=getMemberBookList&login='. $_SESSION['login'] .'');
             } else {
                 // Otherwise the error(s) is/are displayed
                 foreach ($violations as $violation){
