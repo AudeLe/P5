@@ -1,0 +1,32 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ session.login }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% block navbarLeftSide %}
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endblock %}
+
+        {% block displayContent %}
+            <div class="col-9">
+                {% block searchBook %}
+                    <h4>Chercher si l'on a déjà un livre</h4>
+                    <form action="../public/index.php?action=searchBook&id={{ session.id }}" method="post">
+                        <div>
+                            <label for="ISBNSearch">ISBN</label>
+                            <input type="text" id="ISBNSearch" name="ISBNSearch"/>
+                        </div>
+                        <div>
+                            <input type="submit" value="Rechercher"/>
+                        </div>
+                    </form>
+
+                    <div>
+                        {{ message }}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

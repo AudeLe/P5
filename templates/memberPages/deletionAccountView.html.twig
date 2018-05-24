@@ -1,0 +1,36 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ session.login }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% block navbarLeftSide %}
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endblock %}
+
+
+        {% block displayContent %}
+            <div class="col-9">
+                {% block deletionAccount %}
+                    <h4>Suppression de compte</h4>
+                    <p>Veuillez entrer vos identifiants afin de confirmer la suppression de votre compte.</p>
+
+                    <form action="../public/index.php?action=deleteAccount&id={{ session.id }}" method="post">
+                        <div>
+                            <label for="loginDelete">Pseudo</label>
+                            <input type="text" id="loginDelete" name="loginDelete" value="{{ session.login }}" readonly/>
+                        </div>
+                        <div>
+                            <label for="passwordDelete">Mot de passe</label>
+                            <input type="password" id="passwordDelete" name="passwordDelete"/>
+                        </div>
+                        <div>
+                            <input type="submit" value="Supprimer mon compte" class="submitButton"/>
+                        </div>
+                    </form>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

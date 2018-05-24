@@ -1,0 +1,30 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ session.login }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% block navbarLeftSide %}
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endblock %}
+
+
+        {% block displayContent %}
+            <div class="col-9">
+                {% block friendsCircle %}
+                    <h3>Ajout ami(e)</h3>
+                    <p>Entrez le pseudo de la personne que vous souhaitez ajouter à votre cercle d'amis.<br/>
+                        Si la personne accepte votre demande, vous pourrez alors savoir si elle a déjà un ouvrage en rentrant l'ISBN de celui-ci.
+                    </p>
+
+                    <form action="../public/index.php?action=reachFriend&login={{ session.login }}" method="post">
+                        <label for="loginFriend">Entrez le pseudo de la personne que vous souhaitez ajouter</label><br/>
+                        <input type="text" id="loginFriend" name="loginFriend"/>
+                        <input type="submit" value="Envoyer une demande d'ami(e)" class="submitButton"/>
+                    </form>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
