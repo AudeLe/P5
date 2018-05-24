@@ -3,5 +3,13 @@
 {% block title %}Erreur{% endblock %}
 
 {% block content %}
-    {{ errorMessage }}
+    <h3>Erreur !</h3>
+    <p>Vous venez d'être redirigé(e) sur cette page car une erreur s'est produite.<br />
+        Veuillez consulter le message en dessous afin d'en connaître le détail.
+    </p>
+
+    <div>
+        <p>Erreur : {{ errorMessage }}</p>
+    </div>
+
 {% endblock %}
