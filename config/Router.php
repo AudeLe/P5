@@ -4,6 +4,7 @@
 
     use controllers\BackController;
     use controllers\BookController;
+    use controllers\Controller;
     use controllers\FrontController;
 
     use Exception;
@@ -19,6 +20,7 @@
         public function __construct(){
             $this->backController = new BackController();
             $this->bookController = new BookController();
+            $this->controller = new Controller();
             $this->frontController = new FrontController();
 
         }
@@ -149,10 +151,10 @@
                     $this->frontController->welcome();
                 }
             } catch(Exception $e){
-                echo 'Erreur : ' . $e->getMessage();
-                //var_dump($twigApp);
-                //die();
-                //return $this->twig->render('errorView.html.twig', array('errorMessage' => $e));
+
+                $errorMessage = $e->getMessage();
+
+                $this->controller->errorManagement($errorMessage);
             }
         }
     }
