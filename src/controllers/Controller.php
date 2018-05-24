@@ -34,4 +34,9 @@
             $this->twig->addExtension(new Twig_Extension_Debug());
 
         }
+
+        public function errorManagement($errorMessage){
+
+            echo $this->twig->render('errorView.html.twig', array('errorMessage' => $errorMessage));
+        }
     }
