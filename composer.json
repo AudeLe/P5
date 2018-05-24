@@ -11,7 +11,8 @@
   "require": {
     "twig/twig": "^2.4",
     "swiftmailer/swiftmailer":"^6.0",
-    "symfony/validator": "^4.0"
+    "symfony/validator": "^4.0",
+    "phpmailer/phpmailer": "^6.0"
   },
 
   "autoload": {
