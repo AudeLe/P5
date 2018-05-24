@@ -7,7 +7,6 @@
         public function registerBookDatas($id, $bookTitle, $bookAuthors, $bookPublishedDate, $bookDescription, $bookISBN, $bookNbPages){
             $this->bookManager->registerBookDatas($id, $bookTitle, $bookAuthors, $bookPublishedDate, $bookDescription, $bookISBN, $bookNbPages);
 
-            echo $this->twig->render('memberPages/memberProfileView.html.twig');
         }
 
         // Delete the book
