@@ -17,9 +17,9 @@
 
         // Verifies if the book has already been registered
         public function searchBook($id, $ISBN){
-            // FONCTIONNE MAIS REDIRECTION A REVOIR !!!
+
             $message = $this->memberManager->searchBook($id, $ISBN);
 
-            echo $this->twig->render('memberPages/memberProfileView.html.twig', array('message' => $message));
+            echo $this->twig->render('memberPages/searchBookView.html.twig', array('message' => $message));
         }
     }
