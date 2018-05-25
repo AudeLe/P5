@@ -47,36 +47,88 @@
             return $message;
         }
 
+
         public function reachFriend($login, $loginFriend){
+            // You cannot sned an invit to yourself
             if($login == $loginFriend){
                 $message =  'Vous ne pouvez pas vous envoyer une demande d\'ami(e).';
             } else {
-                $sql = 'SELECT login, email FROM members WHERE login = :login';
-                $result = $this->sql($sql,[
-                    'login' => $loginFriend
+                // We are checking if the user already has people sharing their booklist with.
+                $sql = 'SELECT login_member, login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :login';
+                $result = $this->sql($sql, [
+                    'login' => $login
                 ]);
-                $row = $result->fetch();
+                $row = $result -> fetch();
 
+                // If the member is registered as someone who already has asked people to share their booklist
+                // we are checking if the person asked is already in the member's sharedbooklist table.
                 if($row){
-                    $email = $row['email'];
 
-                    $subjectMail = 'HaB - Demande de partage de liste de livres';
-                    $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+                    // We are checking if the spots already have a value
+                    if($row['login_share_booklist_1'] !== null && $row['login_share_booklist_2'] !== null && $row['login_share_booklist_3'] !== null){
+                        $message = 'Vous ne pouvez pas enregister plus de 3 personnes.';
+                    }
+                    // We are checking if within one the spots the friend is already registered
+                    elseif($row['login_share_booklist_1'] == $loginFriend || $row['login_share_booklist_2'] == $loginFriend || $row['login_share_booklist_3'] == $loginFriend){
+                        $message = $loginFriend . ' fait déjà partie de votre cercle d\'ami(e)s.';
+                    }
+                    // If it's not the case, an email with the request is sent
+                    else {
+                        $sql = 'SELECT login, email FROM members WHERE login = :login';
+                        $result = $this->sql($sql,[
+                            'login' => $loginFriend
+                        ]);
+                        $row = $result->fetch();
 
-                    $this->sendEmail($email, $subjectMail, $bodyMail);
-                    $message = 'Une demande de partage de liste de livres a été envoyé.';
+                        if($row){
+                            // We are recovering the email of the recipient
+                            $email = $row['email'];
 
+                            $subjectMail = 'HaB - Demande de partage de liste de livres';
+                            $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+
+                            $this->sendEmail($email, $subjectMail, $bodyMail);
+                            $message = 'Une demande de partage de liste de livres a été envoyé.';
+
+                        } else {
+                            // If there is anyone with this login
+                            // we are displing a message saying it.
+                            $message = 'Le pseudo indiqué ne correspond à aucun de nos membres.';
+                        }
+                    }
+
+                // If the member is not registered within the sharedbooklist, an email with the request is sent.
                 } else {
 
-                    $message = 'Le pseudo indiqué ne correspond à aucun de nos membres.';
-                }
+                    $sql = 'SELECT login, email FROM members WHERE login = :login';
+                    $result = $this->sql($sql,[
+                        'login' => $loginFriend
+                    ]);
+                    $row = $result->fetch();
 
-                return $message;
+                    if($row){
+                        // We are recovering the email of the recipient
+                        $email = $row['email'];
+
+                        $subjectMail = 'HaB - Demande de partage de liste de livres';
+                        $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+
+                        $this->sendEmail($email, $subjectMail, $bodyMail);
+                        $message = 'Une demande de partage de liste de livres a été envoyé.';
+
+                    } else {
+                        // If there is anyone with this login
+                        // we are displing a message saying it.
+                        $message = 'Le pseudo indiqué ne correspond à aucun de nos membres.';
+                    }
+                }
             }
             return $message;
         }
 
         public function shareBookListWithFriend($login, $loginFriend){
+
+            // We are checking is the member already asked someone to share their booklist
             $sql = 'SELECT login_member, login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :login';
             $result = $this->sql($sql, [
                 'login' =>$login
@@ -85,56 +137,50 @@
 
             if($row){
                 // If the member already ask to share someone's booklist, checking if there still is place to register
-                if($row['login_share_booklist_1'] !== null){
-                    if($row['login_share_booklist_1'] !== $loginFriend){
-                        $sql = 'UPDATE sharedbooklist SET login_share_booklist_1 = :loginFriend';
-                        $this->sql($sql, [
-                            'loginFriend' => $loginFriend
-                        ]);
+                // If the spot is null, then we register the friend.
+                if($row['login_share_booklist_1'] == null){
 
-                        $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
-                        $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
+                    $sql = 'UPDATE sharedbooklist SET login_share_booklist_1 = :loginFriend WHERE login_member = :login';
+                    $this->sql($sql, [
+                        'login' => $login,
+                        'loginFriend' => $loginFriend
+                    ]);
 
-                    } else {
-                        echo 'Vous avez déjà été ajouté.';
-                    }
+                    $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
+                    $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
 
-                } elseif($row['login_share_booklist_2']){
-                    if($row['login_share_booklist_2'] !== $loginFriend){
-                        $sql = 'UPDATE sharedbooklist SET login_share_booklist_2 = :loginFriend';
-                        $this->sql($sql, [
-                            'loginFriend' => $loginFriend
-                        ]);
 
-                        $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
-                        $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
+                } elseif($row['login_share_booklist_2'] == null){
 
-                    } else {
+                    $sql = 'UPDATE sharedbooklist SET login_share_booklist_2 = :loginFriend WHERE login_member = :login';
+                    $this->sql($sql, [
+                        'login' => $login,
+                        'loginFriend' => $loginFriend
+                    ]);
 
-                        $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
-                        $message = 'Vous avez déjà été ajouté. Une mail a été envoyé à ' . $login . ' afin de le lui signaler.';
-                    }
+                    $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
+                    $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
 
-                } elseif($row['login_share_booklist_3']){
-                    if($row['login_share_booklist_3'] !== $loginFriend){
-                        $sql = 'UPDATE sharedbooklist SET login_share_booklist_3 = :loginFriend';
-                        $this->sql($sql, [
-                            'loginFriend' => $loginFriend
-                        ]);
 
-                        $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
-                        $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
-                    } else {
-                        $bodyMail = 'Vous avez déjà ajouté ' . $loginFriend . ' à votre cercle d\'ami(e)s. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
-                        $message = 'Vous avez déjà été ajouté. Un mail a été envoyé à ' . $login . ' afin de le lui signaler';
-                    }
+                } elseif($row['login_share_booklist_3'] == null){
+
+                    $sql = 'UPDATE sharedbooklist SET login_share_booklist_3 = :loginFriend WHERE login_member = :login';
+                    $this->sql($sql, [
+                        'login' => $login,
+                        'loginFriend' => $loginFriend
+                    ]);
+
+                    $bodyMail = 'Votre demande à ' . $loginFriend . ' a été acceptée. Connectez vous à votre espace personnel afin de vérifier s\'il/elle a déjà un livre !';
+                    $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
+
                 } else {
-                    $message = 'Vous ne pouvez être ajouté à son cercle d\'ami(e)s. Le maximum a été atteint. Un mail expliquant cette situation au demandeur a été envoyé';
+                    // If there is not spot available, display a message saying so.
+                    $message = 'Vous ne pouvez être ajouté à son cercle d\'ami(e)s. Le maximum a été atteint (3 personnes).';
                 }
 
             } else {
                 // If the member has not ask to share someone's booklist yet, updating the db
-                $sql = 'UPDATE sharedbooklist SET login_member = :login, login_share_booklist_1 = :loginShareBooklist';
+                $sql = 'INSERT INTO sharedbooklist(login_member, login_share_booklist_1) VALUES (:login, :loginShareBooklist)';
                 $this->sql($sql, [
                     'login' => $login,
                     'loginShareBooklist' => $loginFriend
@@ -175,7 +221,7 @@
 
             $this->sendEmail($email, $subjectMail, $bodyMail);
 
-            $message = 'Un mail a été envoyé à ' . $login . 'afin de lui signifier que vous avez refusé sa demande.';
+            $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez refusé sa demande.';
 
             return $message;
         }
