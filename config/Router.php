@@ -164,6 +164,31 @@
                         }
                     }
 
+                    // Ask the authorization to share a book list
+                    elseif($_GET['action'] == 'shareBookList'){
+                        if(isset($_GET['login']) && isset($_GET['loginFriend'])){
+                            $this->backController->shareBookList($_GET['login'], $_GET['loginFriend']);
+                        } else {
+                            throw new Exception('Impossible d\'accéder à la page de demande de partage de livres.');
+                        }
+                    }
+
+                    elseif($_GET['action'] == 'shareBookListWithFriend'){
+                        if(isset($_GET['login']) && isset($_GET['loginFriend'])){
+                            $this->backController->shareBookListWithFriend($_GET['login'], $_GET['loginFriend']);
+                        } else {
+                            throw new Exception('Impossible d\'enregistrer votre souhait de partager votre liste de livres.');
+                        }
+                    }
+
+                    elseif($_GET['action'] == 'notShare'){
+                        if(isset($_GET['login']) && isset($_GET['loginFriend'])){
+                            $this->backController->notShare($_GET['login'], $_GET['loginFriend']);
+                        } else {
+                            throw new Exception('Impossible d\'enregistrer votre soujait de ne pas partager votre liste de livres.');
+                        }
+                    }
+
                     // Delete the book
                     elseif($_GET['action'] == 'deleteBook') {
                         if (isset($_GET['bookId'])) {
