@@ -60,7 +60,10 @@
                 if($row){
                     $email = $row['email'];
 
-                    $this->sendEmail($email);
+                    $subjectMail = 'HaB - Demande de partage de liste de livres';
+                    $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+
+                    $this->sendEmail($email, $subjectMail, $bodyMail);
                     $message = 'Une demande de partage de liste de livres a été envoyé.';
 
                 } else {
@@ -73,8 +76,19 @@
             return $message;
         }
 
+        public function shareBookListWithFriend($login, $loginFriend){
+            $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez accepté sa demande.';
 
-        public function sendEmail($email){
+            return $message;
+        }
+
+        public function notShare($login, $loginFriend){
+            $message = 'Un mail a été envoyé à ' . $login . 'afin de lui signifier que vous avez refusé sa demande.';
+
+            return $message;
+        }
+
+        public function sendEmail($email, $subjectMail, $bodyMail){
             $mail = new PHPMailer(true);
             try{
                 // Server settings
@@ -94,8 +108,8 @@
 
                 // Content
                 $mail->isHTML(true);
-                $mail->Subject = 'Here is the subject.';
-                $mail->Body = 'This is the HTML message body <b>in bold !</b>';
+                $mail->Subject = $subjectMail;
+                $mail->Body = $bodyMail;
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients.';
 
                 $mail->send();
