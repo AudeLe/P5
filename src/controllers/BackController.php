@@ -89,4 +89,20 @@
         public function deleteAccountPage(){
             echo $this->twig->render('memberPages/deletionAccountView.html.twig');
         }
+
+        public function shareBookList($login, $loginFriend){
+            echo $this->twig->render('memberPages/shareBookListView.html.twig', array('login' => $login, 'loginFriend' => $loginFriend));
+        }
+
+        public function shareBookListWithFriend($login, $loginFriend){
+            $message = $this->memberManager->shareBookListWithFriend($login, $loginFriend);
+
+            echo $this->twig->render('memberPages/resultAskShare.html.twig', array('message' => $message));
+        }
+
+        public function notShare($login, $loginFriend){
+            $message = $this->memberManager->notShare($login, $loginFriend);
+
+            echo $this->twig->render('memberPages/resultAskShare.html.twig', array('message' => $message));
+        }
     }
