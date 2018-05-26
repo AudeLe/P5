@@ -29,12 +29,14 @@
                 {% endblock %}
 
                 {% block reminderFriends %}
-                    <p>Vous avez ajouté ces personnes à votre cercle d'ami(e)s :</p>
-                    {% for friend in friends %}
-                        {{ friend }}<br />
+                    {% if friends %}
+                        <p>Vous avez ajouté ces personnes à votre cercle d'ami(e)s :</p>
+                        {% for friend in friends %}
+                            {{ friend }}<br />
+                        {% endfor %}
                     {% else %}
                         <p>Vous n'avez pas d'ami(e)s ajouté(e)s pour l'instant.</p>
-                    {% endfor %}
+                    {% endif %}
                 {% endblock %}
             </div>
         {% endblock %}
