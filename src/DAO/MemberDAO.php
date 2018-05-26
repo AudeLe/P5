@@ -252,6 +252,46 @@
             return $totalBooks;
         }
 
+        public function deleteSharedBooklist($login, $loginFriend){
+            $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
+
+            if($row['login_share_booklist_1'] == $loginFriend){
+                $sql = 'UPDATE sharedbooklist SET login_share_booklist_1 = :newValue WHERE login_member = :login';
+                $result = $this->sql($sql, [
+                    'newValue' => NULL,
+                    'login' => $login
+                ]);
+
+            } elseif ($row['login_share_booklist_2'] == $loginFriend) {
+                $sql = 'UPDATE sharedbooklist SET login_share_booklist_2 = :newValue WHERE login_member = :login';
+                $result = $this->sql($sql, [
+                    'newValue' => NULL,
+                    'login' => $login
+                ]);
+            } elseif ($row['login_share_booklist_3'] == $loginFriend) {
+                $sql = 'UPDATE sharedbooklist SET login_share_booklist_3 = :newValue WHERE login_member = :login';
+                $result = $this->sql($sql, [
+                    'newValue' => NULL,
+                    'login' => $login
+                ]);
+            }
+
+            $sql = 'SELECT email FROM members WHERE login = :loginFriend';
+            $result = $this->sql($sql, [
+                'loginFriend' => $loginFriend
+            ]);
+            $row = $result->fetch();
+
+            $email = $row['email'];
+            $subjectMail = 'Suppression de liste de partage';
+            $bodyMail = 'Vous venez d\'être supprimé de la liste de partage de livres de ' . $login . '.';
+            $this->sendEmail($email, $subjectMail, $bodyMail);
+        }
+
         public function sendEmail($email, $subjectMail, $bodyMail){
             $mail = new PHPMailer(true);
             try{

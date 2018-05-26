@@ -216,13 +216,21 @@
 
                     }
 
-                    elseif ($_GET['action'] == 'searchBookFriendPage'){
+                    elseif($_GET['action'] == 'searchBookFriendPage'){
                         if(isset($_GET['login'])){
                             $this->backController->searchBookFriendPage($_GET['login']);
                         } else {
                             throw new Exception('Impossible de vous identifier.');
                         }
 
+                    }
+
+                    elseif($_GET['action'] == 'deleteSharedBooklist'){
+                        if(isset($_GET['login']) && isset($_GET['loginFriend'])){
+                            $this->backController->deleteSharedBooklist($_GET['login'], $_GET['loginFriend']);
+                        } else {
+                            throw new Exception('Impossible de supprimer cette personne de votre cercle d\'ami(e)s.');
+                        }
                     }
 
                 } else{

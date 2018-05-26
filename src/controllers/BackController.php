@@ -113,4 +113,10 @@
             $friends = $this->memberManager->reminderFriends($login);
             echo $this->twig->render('memberPages/searchBookFriendView.html.twig', array('friends' => $friends));
         }
+
+        public function deleteSharedBooklist($login, $loginFriend){
+            $this->memberManager->deleteSharedBooklist($login, $loginFriend);
+            $this->friendsPage($login);
+            //echo $this->twig->render('memberPages/friendsCircleView.html.twig');
+        }
     }
