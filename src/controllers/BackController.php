@@ -107,4 +107,9 @@
 
             echo $this->twig->render('memberPages/resultAskShare.html.twig', array('message' => $message));
         }
+
+        public function searchBookFriendPage($login){
+            $friends = $this->memberManager->reminderFriends($login);
+            echo $this->twig->render('memberPages/searchBookFriendView.html.twig', array('friends' => $friends));
+        }
     }
