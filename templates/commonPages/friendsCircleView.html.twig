@@ -5,7 +5,11 @@
 {% block content %}
     <div class="row">
         {% block navbarLeftSide %}
-            {% include 'memberPages/navbarMember.html.twig' %}
+            {% if session.status == 'admin' %}
+                {% include 'adminPages/navbarAdmin.html.twig' %}
+            {% else %}
+                {% include 'memberPages/navbarMember.html.twig' %}
+            {% endif %}
         {% endblock %}
 
 

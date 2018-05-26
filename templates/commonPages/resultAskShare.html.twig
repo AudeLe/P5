@@ -1,0 +1,15 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Résultat demande d'autorisation de partage{% endblock %}
+
+{% block content %}
+    {% block navbarLeftSide %}
+        {% if session.status == 'admin' %}
+            {% include 'adminPages/navbarAdmin.html.twig' %}
+        {% else %}
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {{ message }}
+{% endblock %}

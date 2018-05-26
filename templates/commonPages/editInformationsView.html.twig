@@ -3,6 +3,14 @@
 {% block title %}Modification de ses identifiants{% endblock %}
 
 {% block content %}
+    {% block navbarLeftSide %}
+        {% if session.status == 'admin' %}
+            {% include 'adminPages/navbarAdmin.html.twig' %}
+        {% else %}
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
     <h3>Changer son pseudo ou son mot de passe</h3>
 
     <p>Une fois votre pseudonyme ou votre mot de passe modifié, vous serez déconnecté(e) afin d'enregistrer vos modifications.<br />
