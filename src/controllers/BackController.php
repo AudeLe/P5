@@ -85,11 +85,12 @@
             echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('message' => $message, 'friends' => $friends));
         }
 
-        public function accountPage(){
+        public function accountPage($login){
+            $this->memberManager->managingSharedLists($login);
             echo $this->twig->render('memberPages/accountView.html.twig');
         }
 
-        public function deleteAccountPage(){
+        public function deleteAccountPage($login){
             echo $this->twig->render('memberPages/deletionAccountView.html.twig');
         }
 
