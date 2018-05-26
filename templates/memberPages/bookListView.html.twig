@@ -11,6 +11,10 @@
 
         {% block displayContent %}
             <div class="col-9">
+
+                {% block nbBooks %}
+                    <p>Vous avez {{ totalBooks }} livre(s) enregistré(s).</p>
+                {% endblock %}
                 {% block memberBookListArray %}
                     <h5>Liste de livres</h5>
                     <table>
