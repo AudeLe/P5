@@ -54,7 +54,7 @@
         // Allows a member to connect to his/her personal space
         public function connection($loginConnection, $passwordVisitorConnection){
 
-            $sql = 'SELECT id, login, password, status FROM members WHERE login = ?';
+            $sql = 'SELECT id, login, password, email, status FROM members WHERE login = ?';
             $result = $this->sql($sql, [$loginConnection]);
             $row = $result -> fetch();
 
@@ -67,6 +67,7 @@
                     // Charging the credentials of the session
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['login'] = $row['login'];
+                    $_SESSION['email'] = $row['email'];
                     $_SESSION['status'] = $row['status'];
 
                     // Regarding the status of the member, the redirection is different
