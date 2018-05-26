@@ -267,6 +267,26 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'editBookDatas'){
+                        if(isset($_GET['bookId'])){
+                            $this->bookController->editBookDatas($_GET['bookId']);
+                        } else {
+                            throw new Exception('Impossible de modifier cet ouvrage.');
+                        }
+                    }
+
+                    elseif($_GET['action'] == 'registerEditBookDatas'){
+                        if(isset($_GET['bookId'])){
+                            if(!empty($_POST['editTitle']) && !empty($_POST['editAuthor']) && !empty($_POST['editPublishingYear']) && !empty($_POST['editSummary']) && !empty($_POST['editISBN']) && !empty($_POST['editNbPages'])){
+                                $this->bookController->registerEditBookDatas($_GET['bookId'], $_POST['editTitle'], $_POST['editAuthor'], $_POST['editPublishingYear'], $_POST['editSummary'], $_POST['editISBN'], $_POST['editNbPages']);
+                            } else {
+                                throw new Exception('Tous les champs ne sont pas remplis.');
+                            }
+                        } else {
+                            throw new Exception('Impossible d\'enregistrer vos modifications.');
+                        }
+                    }
+
                     elseif($_GET['action'] == 'checkBookFriend'){
                         if(isset($_GET['login'])){
                             if(!empty($_POST['checkBookFriendISBN']) && !empty($_POST['checkBookFriend'])){

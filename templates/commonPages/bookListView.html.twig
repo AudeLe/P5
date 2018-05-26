@@ -29,6 +29,7 @@
                             <th>Année de publication</th>
                             <th>ISBN</th>
                             <th>Nombre de pages</th>
+                            <th>Modifier la fiche du livre</th>
                             <th>Supprimer de la liste</th>
                         </tr>
                         {% for book in memberBookList %}
@@ -39,6 +40,7 @@
                                 <td>{{ book.publishingYear }}</td>
                                 <td>{{ book.ISBN }}</td>
                                 <td>{{ book.nbPages }}</td>
+                                <td><a href="../public/index.php?action=editBookDatas&bookId={{ book.id }}"><i class="fas fa-edit"></i></a></td>
                                 <!-- Confirm before deletion -->
                                 <td><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}"><i class="fas fa-trash alt"></i></a></td>
                             </tr>

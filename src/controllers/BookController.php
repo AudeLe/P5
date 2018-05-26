@@ -14,6 +14,16 @@
             $this->bookManager->deleteBook($id);
         }
 
+        public function editBookDatas($bookId){
+            $bookDatas = $this->bookManager->editBookDatas($bookId);
+
+            echo $this->twig->render('commonPages/editBookDatas.html.twig', array('bookDatas' => $bookDatas));
+        }
+
+        public function registerEditBookDatas($bookId, $editTitle, $editAuthor, $editPublishingYear, $editSummary, $editISBN, $editNbPages){
+            $this->bookManager->registerEditBookDatas($bookId, $editTitle, $editAuthor, $editPublishingYear, $editSummary, $editISBN, $editNbPages);
+        }
+
         // Verifies if the book has already been registered
         public function searchBook($id, $ISBN){
 

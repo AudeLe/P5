@@ -2,6 +2,7 @@
     namespace DAO;
 
     use models\BookDatasForm;
+    use models\BookList;
 
     class BookDAO extends DAO {
 
@@ -64,6 +65,36 @@
 
         }
 
+        public function editBookDatas($bookId){
+            $sql = 'SELECT id, author, title, summary, publishingYear, ISBN, nbPages FROM bookslist WHERE id = :id';
+            $result = $this->sql($sql, [
+                'id' => $bookId
+            ]);
+
+            $bookDatas = [];
+            foreach($result as $row){
+                $bookId = $row['id'];
+                $bookDatas[$bookId] = $this->buildObject($row);
+            }
+
+            return $bookDatas;
+        }
+
+        public function registerEditBookDatas($bookId, $editTitle, $editAuthor, $editPublishingYear, $editSummary, $editISBN, $editNbPages){
+            $sql = 'UPDATE bookslist SET author = :newAuthor, title = :newTitle, summary = :newSummary, publishingYear = :newPublishingYear, ISBN = :ISBN, nbPages = :newNbPages WHERE id = :id';
+            $this->sql($sql, [
+                'newAuthor' => $editAuthor,
+                'newTitle' => $editTitle,
+                'newSummary' => $editSummary,
+                'newPublishingYear' => $editPublishingYear,
+                'ISBN' => $editISBN,
+                'newNbPages' => $editNbPages,
+                'id' => $bookId
+            ]);
+
+            header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+        }
+
         public function checkBookFriend($ISBN, $loginFriend){
             $sql = 'SELECT id FROM members WHERE login = :login';
             $result = $this->sql($sql, [
@@ -98,8 +129,19 @@
                 $message = 'Il n\' a pas d\'ouvrages enregistrés pour l\'instant.';
                 return $message;
             }
+        }
 
-
+        private function buildObject(array $row){
+            $book = new BookList();
+            $book->setId($row['id']);
+            $book->setAuthor($row['author']);
+            $book->setTitle($row['title']);
+            //$book->setIdMember($row['id_member']);
+            $book->setISBN($row['ISBN']);
+            $book->setSummary($row['summary']);
+            $book->setPublishingYear($row['publishingYear']);
+            $book->setNbPages($row['nbPages']);
+            return $book;
         }
 
     }
