@@ -47,6 +47,16 @@
             return $message;
         }
 
+        public function reminderFriends($login){
+            $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
+            $friends = [$row['login_share_booklist_1'], $row['login_share_booklist_2'], $row['login_share_booklist_3']];
+
+            return $friends;
+        }
 
         public function reachFriend($login, $loginFriend){
             // You cannot sned an invit to yourself
