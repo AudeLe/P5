@@ -9,6 +9,7 @@
     use DAO\ConnectionDAO;
     use DAO\BookDAO;
     use DAO\MemberDAO;
+    use DAO\AdministratorDAO;
 
     class Controller{
 
@@ -16,6 +17,7 @@
 
         public function __construct(){
 
+            $this->adminManager = new AdministratorDAO();
             $this->bookManager = new BookDAO();
             $this->connectionManager = new ConnectionDAO();
             $this->memberManager = new MemberDAO();
