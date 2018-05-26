@@ -64,4 +64,42 @@
 
         }
 
+        public function checkBookFriend($ISBN, $loginFriend){
+            $sql = 'SELECT id FROM members WHERE login = :login';
+            $result = $this->sql($sql, [
+                'login' => $loginFriend
+            ]);
+            $row = $result->fetch();
+
+            $id = $row['id'];
+
+
+            if($row){
+                $sql = 'SELECT id_member, ISBN FROM bookslist WHERE id_member = :id';
+                $result = $this->sql($sql, [
+                   'id' => $id
+                ]);
+
+                foreach($result as $row){
+
+                    $bookISBN = $row['ISBN'];
+
+                    if($bookISBN == $ISBN){
+                        $message = $loginFriend . ' a déjà cet ouvrage.';
+                        return $message;
+                    } else {
+                        $message = $loginFriend . ' n\'a pas enregistré cet ouvrage.';
+                        return $message;
+                    }
+
+                }
+
+            } else{
+                $message = 'Il n\' a pas d\'ouvrages enregistrés pour l\'instant.';
+                return $message;
+            }
+
+
+        }
+
     }
