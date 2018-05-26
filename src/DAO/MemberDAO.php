@@ -2,7 +2,7 @@
     namespace DAO;
 
     use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\exception;
+    use PHPMailer\PHPMailer\Exception;
 
     /*use Swift_SmtpTransport;
     use Swift_Mailer;
