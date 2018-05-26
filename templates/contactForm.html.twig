@@ -1,0 +1,42 @@
+{% extends "template.html.twig" %}
+
+
+
+{% block title %}Contactez-nous !{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <p>Vous pouvez nous contacter via ce formulaire. Nous répondrons le plus rapidement possible.<br />
+            Si vous êtes membre et que votre email ne correspond pas à celui affiché dans le champ "Email", veuillez le modifier dans votre espace personnel afin de nous envoyer un message.
+        </p>
+        <form action="../public/index.php?action=contactAdmin" method="post">
+            <div>
+                <label for="loginSeeker">Pseudo</label><br/>
+                {% if session.login is defined %}
+                    <input type="text" name="loginSeeker" id="loginSeeker" value="{{ session.login }}" readonly/>
+                {% else %}
+                    <input type="text" name="loginSeeker" id="loginSeeker" required/>
+                {% endif %}
+            </div>
+            <div>
+                <label for="emailSeeker">Email</label><br/>
+                {% if session.email is defined %}
+                    <input type="text" name="emailSeeker" id="emailSeeker" value="{{ session.email }}" readonly/>
+                {% else %}
+                    <input type="email" name="emailSeeker" id="emailSeeker" required/>
+                {% endif %}
+            </div>
+            <div>
+                <label for="subjectMail">Objet du message</label><br/>
+                <input type="text" name="subjectMail" id="subjectMail" required/>
+            </div>
+            <div>
+                <label for="bodyMail">Message</label><br/>
+                <textarea name="bodyMail" id="bodyMail" required></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Envoyer"/>
+            </div>
+        </form>
+    </div>
+{% endblock %}

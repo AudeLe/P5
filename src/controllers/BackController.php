@@ -129,4 +129,14 @@
             $nbBooks = $this->adminManager->countBooks();
             echo $this->twig->render('adminPages/statisticsView.html.twig', array('nbMembers' => $nbMembers, 'nbBooks' => $nbBooks));
         }
+
+        public function contactForm(){
+            echo $this->twig->render('contactForm.html.twig');
+        }
+
+        public function contactAdmin($loginSeeker, $emailSeeker, $subjectMail, $bodyMail){
+            $message = $this->adminManager->contactAdmin($loginSeeker, $emailSeeker, $subjectMail, $bodyMail);
+
+            echo $this->twig->render('statusContactMail.html.twig', array('message' => $message));
+        }
     }

@@ -256,6 +256,18 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'contactForm'){
+                        $this->backController->contactForm();
+                    }
+
+                    elseif($_GET['action'] == 'contactAdmin'){
+                        if(!empty($_POST['loginSeeker']) && !empty($_POST['emailSeeker']) && !empty($_POST['subjectMail']) && !empty($_POST['bodyMail'])){
+                            $this->backController->contactAdmin($_POST['loginSeeker'], $_POST['emailSeeker'], $_POST['subjectMail'], $_POST['bodyMail']);
+                        } else {
+                            throw new Exception('Impossible d\'envoyer votre message à l\'administrateur.');
+                        }
+                    }
+
                 } else{
                     // Default action
                     $this->frontController->welcome();
