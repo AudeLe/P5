@@ -203,6 +203,28 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'checkBookFriend'){
+                        if(isset($_GET['login'])){
+                            if(!empty($_POST['checkBookFriendISBN']) && !empty($_POST['checkBookFriend'])){
+                                $this->bookController->checkBookFriend($_GET['login'], $_POST['checkBookFriendISBN'], $_POST['checkBookFriend']);
+                            } else {
+                                throw new Exception('Impossible de vérifier si la personne a déjà cet ouvrage ou non.');
+                            }
+                        } else {
+                            throw new Exception('Impossible de vous identifier.');
+                        }
+
+                    }
+
+                    elseif ($_GET['action'] == 'searchBookFriendPage'){
+                        if(isset($_GET['login'])){
+                            $this->backController->searchBookFriendPage($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible de vous identifier.');
+                        }
+
+                    }
+
                 } else{
                     // Default action
                     $this->frontController->welcome();
