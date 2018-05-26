@@ -49,7 +49,9 @@
     </li>
 
     <!-- Link to contact the administration of the webiste-->
-    <li class="nav-item">
-        <a class="nav-link" href="../public/index.php?action=contactForm">Contactez-nous !</a>
-    </li>
+    {% if session.status == 'member' %}
+        <li class="nav-item">
+            <a class="nav-link" href="../public/index.php?action=contactForm">Contactez-nous !</a>
+        </li>
+    {% endif %}
 </ul>
