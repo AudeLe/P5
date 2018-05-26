@@ -71,9 +71,9 @@
 
                     // Regarding the status of the member, the redirection is different
                     if($row['status'] == 'admin'){
-                        header('Location: ../public/index.php?action='); /* ACTION A DETERMINER */
+                        header('Location: ../public/index.php?action=adminProfile&login=' .$_SESSION['login'].'');
                     } else {
-                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].''); /* ACTION A DETERMINER */
+                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
                     }
                 } else {
                     echo 'Mauvais identifiant ou mot de passe.';
