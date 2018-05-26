@@ -1,0 +1,47 @@
+{% extends "template.html.twig" %}
+
+{% block title %}À définir{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% block navbarLeftSide %}
+            {% include 'memberPages/navbarMember.html.twig' %}
+        {% endblock %}
+
+        {% block displayContent %}
+            <div class="col-9">
+                {% block checkFriendBook %}
+                    <p> Vérifier si un(e) de vos ami(e)s a déjà un livre</p>
+
+                    <form action="../public/index.php?action=checkBookFriend&login={{ session.login }}" method="post">
+                        <p>Veuillez entrer l'ISBN du livre que vous souhaiteriez vérifier et sélectionner la personne correspondante.</p>
+                        <div>
+                            <label for="checkBookFriendISBN">ISBN de l'ouvrage que l'on souhaite vérifier</label>
+                            <input type="text" name="checkBookFriendISBN" id="checkBookFriendISBN"/>
+                        </div>
+                        <div>
+                            <label for="checkBookFriend">Liste de livres de la personne souhaitée</label><br />
+                            <select name="checkBookFriend" id="checkBookFriend">
+                                {% for friend in friends %}
+                                    <option value="{{ friend }}">{{ friend }}</option>
+                                {% else %}
+                                    <option value="">---</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <input type="submit" value="Rechercher"/>
+                        </div>
+
+                    </form>
+
+                    <p>
+                        {{ message }}
+                    </p>
+
+
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
