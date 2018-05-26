@@ -293,16 +293,16 @@
         }
 
         public function managingSharedLists($login){
-            $sql = 'SELECT * FROM sharedbooklist';
-            $result = $this->sql($sql);
+            //$sql = 'SELECT * FROM sharedbooklist';
+            //$result = $this->sql($sql);
             //$row = $result->fetch();
 
-            foreach ($result as $row){
+            /*foreach ($result as $row){
                 echo $row;
 
-            }
+            }*/
 
-            die();
+            //die();
         }
 
         public function sendEmail($email, $subjectMail, $bodyMail){
