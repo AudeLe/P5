@@ -124,11 +124,21 @@
                     }
 
                     elseif ($_GET['action'] == 'accountPage'){
-                        $this->backController->accountPage();
+                        if(isset($_GET['login'])){
+                            $this->backController->accountPage($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible d\'accéder à cette page.');
+                        }
+
                     }
 
                     elseif($_GET['action'] == 'deleteAccountPage'){
-                        $this->backController->deleteAccountPage();
+                        if(isset($_GET['login'])){
+                            $this->backController->deleteAccountPage($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible d\'accéder à cette page.');
+                        }
+
                     }
 
                     elseif($_GET['action'] == 'getMemberBookList'){
