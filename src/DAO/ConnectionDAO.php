@@ -2,6 +2,7 @@
     namespace DAO;
 
     use models\RegistrationForm;
+    use DAO\MemberDAO;
 
     class ConnectionDAO extends DAO{
 
@@ -38,6 +39,12 @@
                         'email' => $emailVisitor,
                         'password' => $passwordVisitorHashed
                     ]);
+
+                    $email = $emailVisitor;
+                    $subjectMail = 'Demande de confirmation d\'inscription';
+                    $bodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=confirmRegistrationPage&login=' . $login . '">page</a>';
+                    $sendEmailFunction = new MemberDAO();
+                    $sendEmailFunction->sendEmail($email, $subjectMail, $bodyMail);
                 }
             } else {
                 // If there is, the error(s) is/are displayed
@@ -51,34 +58,56 @@
 
         }
 
+        public function confirmRegistration($login){
+            $sql = 'UPDATE members SET confirmRegistration = :newValue WHERE login = :login';
+            $this->sql($sql, [
+                'newValue' => 1,
+                'login' => $login
+            ]);
+        }
+
+        public function refuseRegistration($login){
+            $sql = 'DELETE FROM members WHERE login = :login';
+            $this->sql($sql, [
+                'login' => $login
+            ]);
+        }
+
         // Allows a member to connect to his/her personal space
         public function connection($loginConnection, $passwordVisitorConnection){
 
-            $sql = 'SELECT id, login, password, email, status FROM members WHERE login = ?';
+            $sql = 'SELECT id, login, password, email, status, confirmRegistration FROM members WHERE login = ?';
             $result = $this->sql($sql, [$loginConnection]);
             $row = $result -> fetch();
 
             // Verifies if the login is in the database
             if($row){
-                $checkPassword = password_verify($passwordVisitorConnection, $row['password']);
+                if($row['confirmRegistration'] == 0){
+                    // If the confirmation has not been done, redirect to this page
+                    header('Location: ../public/index.php?action=awaitingRegistrationConfirmation&login=' . $loginConnection . '');
 
-                // And if the password typed is the right one
-                if($checkPassword == true){
-                    // Charging the credentials of the session
-                    $_SESSION['id'] = $row['id'];
-                    $_SESSION['login'] = $row['login'];
-                    $_SESSION['email'] = $row['email'];
-                    $_SESSION['status'] = $row['status'];
-
-                    // Regarding the status of the member, the redirection is different
-                    if($row['status'] == 'admin'){
-                        header('Location: ../public/index.php?action=adminProfile&login=' .$_SESSION['login'].'');
-                    } else {
-                        header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
-                    }
                 } else {
-                    echo 'Mauvais identifiant ou mot de passe.';
+                    $checkPassword = password_verify($passwordVisitorConnection, $row['password']);
+
+                    // And if the password typed is the right one
+                    if($checkPassword == true){
+                        // Charging the credentials of the session
+                        $_SESSION['id'] = $row['id'];
+                        $_SESSION['login'] = $row['login'];
+                        $_SESSION['email'] = $row['email'];
+                        $_SESSION['status'] = $row['status'];
+
+                        // Regarding the status of the member, the redirection is different
+                        if($row['status'] == 'admin'){
+                            header('Location: ../public/index.php?action=adminProfile&login=' .$_SESSION['login'].'');
+                        } else {
+                            header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                        }
+                    } else {
+                        echo 'Mauvais identifiant ou mot de passe.';
+                    }
                 }
+
             } else {
                 echo 'Mauvais identifiant ou mot de passe.';
             }

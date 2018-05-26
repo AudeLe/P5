@@ -40,6 +40,38 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'confirmRegistrationPage'){
+                        if(isset($_GET['login'])){
+                            $this->backController->confirmRegistrationPage($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible de vous rediriger vers la page permettant la confirmation de votre inscriptio.');
+                        }
+                    }
+
+                    elseif($_GET['action'] == 'confirmRegistration'){
+                        if(isset($_GET['login'])){
+                            $this->backController->confirmRegistration($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible de confirmer votre inscription.');
+                        }
+                    }
+
+                    elseif($_GET['action'] == 'refuseRegistration'){
+                        if(isset($_GET['login'])){
+                            $this->backController->refuseRegistration($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible d\'enregistrer votre refus d\'inscription pour l\'instant.');
+                        }
+                    }
+
+                    elseif ($_GET['action'] == 'awaitingRegistrationConfirmation'){
+                        if(isset($_GET['login'])){
+                            $this->backController->awaitingRegistrationConfirmation($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible de vous rediriger vers la page demandée. Veuillez confirmer votre inscription.');
+                        }
+                    }
+
                     // Connection on the website
                     elseif($_GET['action'] == 'connection'){
                         if(!empty($_POST['loginConnection']) && !empty($_POST['passwordVisitorConnection'])){

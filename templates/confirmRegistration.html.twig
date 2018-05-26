@@ -1,0 +1,12 @@
+{% extends "template.html.twig" %}
+
+{% block title %}Confirmation d'inscription{% endblock %}
+
+{% block content %}
+    <div>
+        {{ login }}, confirmez-vous votre inscription ?
+        Si vous refusez, vous serez redirigé(e) vers la page d'accueil.
+        <a href="../public/index.php?action=confirmRegistration&login={{ login }}">Oui</a>
+        <a href="../public/index.php?action=refuseRegistration&login={{ login }}">Non</a>
+    </div>
+{% endblock %}

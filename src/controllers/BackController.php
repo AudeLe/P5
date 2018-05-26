@@ -8,7 +8,27 @@
         public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
             $this->connectionManager->registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor);
 
-            echo $this->twig->render('registration.html.twig');
+            echo $this->twig->render('awaitingRegistrationConfirmation.html.twig', array('login' => $login));
+        }
+
+        public function confirmRegistrationPage($login){
+            echo $this->twig->render('confirmRegistration.html.twig', array('login' => $login));
+        }
+
+        public function confirmRegistration($login){
+            $this->connectionManager->confirmRegistration($login);
+
+            echo $this->twig->render('registration.html.twig', array('login' => $login));
+        }
+
+        public function refuseRegistration($login){
+            $this->connectionManager->refuseRegistration($login);
+
+            echo $this->twig->render('home.html.twig');
+        }
+
+        public function awaitingRegistrationConfirmation($login){
+            echo $this->twig->render('awaitingRegistrationConfirmation.html.twig', array('login' => $login));
         }
 
         // Connection on the website
