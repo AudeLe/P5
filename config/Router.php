@@ -101,7 +101,12 @@
 
                     // Access to the page allowing to reach a friend
                     elseif($_GET['action'] == 'friendsPage'){
-                        $this->backController->friendsPage();
+                        if(isset($_GET['login'])){
+                            $this->backController->friendsPage($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible de vous identifier afin d\'accéder à la page demandée.');
+                        }
+                        
                     }
 
                     // Ask to access the booklist of someone else
