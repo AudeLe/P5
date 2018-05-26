@@ -62,6 +62,12 @@
             $this->connectionManager->logOut();
         }
 
+        // Edit the mail
+        public function editMail($editMail, $confirmEditMail){
+            $this->connectionManager->editMail($editMail, $confirmEditMail);
+            $this->connectionManager->logOut();
+        }
+
         // Delete the account
         public function deleteAccount($id, $login, $password){
             $this->connectionManager->deleteAccount($id, $login, $password);
