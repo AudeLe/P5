@@ -59,8 +59,21 @@
                         if(isset($_GET['login'])){
                             $this->backController->memberProfile($_GET['login']);
                         } else {
-                            throw new Exception('Veuillez vous connecter afin d\'accéder à vos commentaires.');
+                            throw new Exception('Veuillez vous connecter afin d\'accéder à votre page personnelle.');
                         }
+                    }
+
+                    // Access the admin profile page
+                    elseif($_GET['action'] == 'adminProfile'){
+                        if(isset($_GET['login'])){
+                            $this->backController->adminProfile($_GET['login']);
+                        } else {
+                            throw new Exception('Veuillez vous connecter afin d\'accéder à la page d\'administration.');
+                        }
+                    }
+
+                    elseif($_GET['action'] == 'statisticsPage'){
+                        $this->backController->statisticsApp();
                     }
 
                     // Verify the credentials before allowing the user to modify them
