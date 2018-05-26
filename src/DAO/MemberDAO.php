@@ -53,7 +53,12 @@
                 'login' => $login
             ]);
             $row = $result->fetch();
-            $friends = [$row['login_share_booklist_1'], $row['login_share_booklist_2'], $row['login_share_booklist_3']];
+
+            if(empty($row['login_share_booklist_1']) && empty($row['login_share_booklist_2']) && empty($row['login_share_booklist_3'])){
+                $friends = [];
+            } else {
+                $friends = [$row['login_share_booklist_1'], $row['login_share_booklist_2'], $row['login_share_booklist_3']];
+            }
 
             return $friends;
         }
@@ -234,6 +239,17 @@
             $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez refusé sa demande.';
 
             return $message;
+        }
+
+        public function nbBooks(){
+            $sql = 'SELECT COUNT(*) FROM bookslist WHERE id_member = :id';
+            $result = $this->sql($sql, [
+                'id' => $_SESSION['id']
+            ]);
+            $row = $result->fetch();
+            $totalBooks = $row['COUNT(*)'];
+
+            return $totalBooks;
         }
 
         public function sendEmail($email, $subjectMail, $bodyMail){
