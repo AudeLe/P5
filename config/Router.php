@@ -131,7 +131,16 @@
                         if(!empty($_POST['editPassword']) && !empty($_POST['confirmEditPassword'])){
                             $this->backController->editPassword($_POST['editPassword'], $_POST['confirmEditPassword']);
                         } else {
-                            throw new Exception('Veuillez indiquer le même mot de passe');
+                            throw new Exception('Impossible de modifier le mot de passe.');
+                        }
+                    }
+
+                    // Modify the mail
+                    elseif($_GET['action'] == 'editMail'){
+                        if(!empty($_POST['editMail']) && !empty($_POST['confirmEditMail'])){
+                            $this->backController->editMail($_POST['editMail'], $_POST['confirmEditMail']);
+                        } else {
+                            throw new Exception('Impossible d\'enregistrer la modification de votre email.');
                         }
                     }
 

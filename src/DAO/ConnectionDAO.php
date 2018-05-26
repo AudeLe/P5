@@ -178,6 +178,20 @@
             }
         }
 
+        public function editMail($editMail, $confirmEditMail){
+            if($editMail == $confirmEditMail){
+                $sql = 'UPDATE members SET email = :email WHERE id = :id';
+                $this->sql($sql, [
+                    'email' => $editMail,
+                    'id' => $_SESSION['id']
+                ]);
+
+                header('Location: ../public/index.php');
+            } else {
+                echo 'Votre email n\'a pas pu être modifié.';
+            }
+        }
+
         // Delete the account
         public function deleteAccount($id, $login, $password){
             $sql = 'SELECT id, password FROM members WHERE login = :login';
