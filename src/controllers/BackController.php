@@ -1,8 +1,6 @@
 <?php
     namespace controllers;
 
-    use models\View;
-
 
     class BackController extends Controller{
 
@@ -29,7 +27,7 @@
         public function verifyInformations($login, $password){
             $this->connectionManager->verifyInformations($login, $password);
 
-            echo $this->twig->render('memberPages/editInformationsView.html.twig');
+            echo $this->twig->render('commonPages/editInformationsView.html.twig');
         }
 
         // Edit the login
@@ -49,6 +47,11 @@
             $this->connectionManager->deleteAccount($id, $login, $password);
         }
 
+        // Access the admin's profile
+        public function adminProfile($login){
+            echo $this->twig->render('adminPages/adminProfileView.html.twig');
+        }
+
         // Access the member's profile
         public function memberProfile($login){
             //$memberBookList = $this->memberManager->getMemberBookList($login);
@@ -61,13 +64,13 @@
             $memberBookList = $this->memberManager->getMemberBookList($login);
             $totalBooks = $this->memberManager->nbBooks();
 
-            echo $this->twig->render('memberPages/bookListView.html.twig', array('memberBookList' => $memberBookList, 'totalBooks' => $totalBooks));
+            echo $this->twig->render('commonPages/bookListView.html.twig', array('memberBookList' => $memberBookList, 'totalBooks' => $totalBooks));
         }
 
         // Access to the member's page to search a book
         public function searchBookPage(){
 
-            echo $this->twig->render('memberPages/searchBookView.html.twig');
+            echo $this->twig->render('commonPages/searchBookView.html.twig');
 
         }
 
@@ -75,19 +78,19 @@
         public function friendsPage($login){
             $friends = $this->memberManager->reminderFriends($login);
 
-            echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('friends' => $friends));
+            echo $this->twig->render('commonPages/friendsCircleView.html.twig', array('friends' => $friends));
         }
 
         public function reachFriend($login, $loginFriend){
             $message = $this->memberManager->reachFriend($login, $loginFriend);
             $friends = $this->memberManager->reminderFriends($login);
 
-            echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('message' => $message, 'friends' => $friends));
+            echo $this->twig->render('commonPages/friendsCircleView.html.twig', array('message' => $message, 'friends' => $friends));
         }
 
         public function accountPage($login){
             $this->memberManager->managingSharedLists($login);
-            echo $this->twig->render('memberPages/accountView.html.twig');
+            echo $this->twig->render('commonPages/accountView.html.twig');
         }
 
         public function deleteAccountPage($login){
@@ -95,29 +98,35 @@
         }
 
         public function shareBookList($login, $loginFriend){
-            echo $this->twig->render('memberPages/shareBookListView.html.twig', array('login' => $login, 'loginFriend' => $loginFriend));
+            echo $this->twig->render('commonPages/shareBookListView.html.twig', array('login' => $login, 'loginFriend' => $loginFriend));
         }
 
         public function shareBookListWithFriend($login, $loginFriend){
             $message = $this->memberManager->shareBookListWithFriend($login, $loginFriend);
 
-            echo $this->twig->render('memberPages/resultAskShare.html.twig', array('message' => $message));
+            echo $this->twig->render('commonPages/resultAskShare.html.twig', array('message' => $message));
         }
 
         public function notShare($login, $loginFriend){
             $message = $this->memberManager->notShare($login, $loginFriend);
 
-            echo $this->twig->render('memberPages/resultAskShare.html.twig', array('message' => $message));
+            echo $this->twig->render('commonPages/resultAskShare.html.twig', array('message' => $message));
         }
 
         public function searchBookFriendPage($login){
             $friends = $this->memberManager->reminderFriends($login);
-            echo $this->twig->render('memberPages/searchBookFriendView.html.twig', array('friends' => $friends));
+            echo $this->twig->render('commonPages/searchBookFriendView.html.twig', array('friends' => $friends));
         }
 
         public function deleteSharedBooklist($login, $loginFriend){
             $this->memberManager->deleteSharedBooklist($login, $loginFriend);
             $this->friendsPage($login);
             //echo $this->twig->render('memberPages/friendsCircleView.html.twig');
+        }
+
+        public function statisticsApp(){
+            $nbMembers = $this->adminManager->countMembers();
+            $nbBooks = $this->adminManager->countBooks();
+            echo $this->twig->render('adminPages/statisticsView.html.twig', array('nbMembers' => $nbMembers, 'nbBooks' => $nbBooks));
         }
     }
