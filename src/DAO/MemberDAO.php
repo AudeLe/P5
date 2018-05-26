@@ -292,6 +292,19 @@
             $this->sendEmail($email, $subjectMail, $bodyMail);
         }
 
+        public function managingSharedLists($login){
+            $sql = 'SELECT * FROM sharedbooklist';
+            $result = $this->sql($sql);
+            //$row = $result->fetch();
+
+            foreach ($result as $row){
+                echo $row;
+
+            }
+
+            die();
+        }
+
         public function sendEmail($email, $subjectMail, $bodyMail){
             $mail = new PHPMailer(true);
             try{
