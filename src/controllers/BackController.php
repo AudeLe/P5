@@ -59,8 +59,9 @@
         // Access to the member's book list
         public function getMemberBookList($login){
             $memberBookList = $this->memberManager->getMemberBookList($login);
+            $totalBooks = $this->memberManager->nbBooks();
 
-            echo $this->twig->render('memberPages/bookListView.html.twig', array('memberBookList' => $memberBookList));
+            echo $this->twig->render('memberPages/bookListView.html.twig', array('memberBookList' => $memberBookList, 'totalBooks' => $totalBooks));
         }
 
         // Access to the member's page to search a book
