@@ -1,0 +1,24 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ session.login }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% block navbarLeftSide %}
+
+        {% include 'adminPages/navbarAdmin.html.twig' %}
+
+    {% endblock %}
+
+    {% block displayContent %}
+        <div class="col-9">
+            {% block nbMembers %}
+                <p>Il y a {{ nbMembers }} membres présentemment inscrits sur le site.</p>
+            {% endblock %}
+
+            {% block nbBooks %}
+                <p>Il y a {{ nbBooks }} livres enregistrés sur le site en ce moment.</p>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}
