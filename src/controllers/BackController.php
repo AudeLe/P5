@@ -71,15 +71,17 @@
         }
 
         // Access to the member's page to ask a friend to share their booklist
-        public function friendsPage(){
+        public function friendsPage($login){
+            $friends = $this->memberManager->reminderFriends($login);
 
-            echo $this->twig->render('memberPages/friendsCircleView.html.twig');
+            echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('friends' => $friends));
         }
 
         public function reachFriend($login, $loginFriend){
             $message = $this->memberManager->reachFriend($login, $loginFriend);
+            $friends = $this->memberManager->reminderFriends($login);
 
-            echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('message' => $message));
+            echo $this->twig->render('memberPages/friendsCircleView.html.twig', array('message' => $message, 'friends' => $friends));
         }
 
         public function accountPage(){
