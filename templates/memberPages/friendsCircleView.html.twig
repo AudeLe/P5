@@ -34,7 +34,9 @@
                     {% else %}
                         <p>Vous avez ajouté ces personnes à votre cercle d'ami(e)s :</p>
                         {% for friend in friends %}
-                            {{ friend }}<br />
+                            {% if friend is not null %}
+                                {{ friend }}<a href="../public/index.php?action=deleteSharedBooklist&login={{ session.login }}&loginFriend={{ friend }}"><i class="fas fa-ban"></i></a><br />
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 {% endblock %}
