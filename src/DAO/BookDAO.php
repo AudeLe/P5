@@ -57,7 +57,7 @@
 
         public function deleteBook($id){
             $sql = 'DELETE FROM bookslist WHERE id = :id ';
-            $result = $this->sql($sql, [
+            $this->sql($sql, [
                 'id' => $id
             ]);
 
@@ -151,7 +151,6 @@
             $book->setId($row['id']);
             $book->setAuthor($row['author']);
             $book->setTitle($row['title']);
-            //$book->setIdMember($row['id_member']);
             $book->setISBN($row['ISBN']);
             $book->setSummary($row['summary']);
             $book->setPublishingYear($row['publishingYear']);
