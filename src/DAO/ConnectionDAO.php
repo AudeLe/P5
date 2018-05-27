@@ -26,9 +26,18 @@
                 $result = $this->sql($sql, [$login]);
                 $row = $result -> fetch();
 
-                // If the login is already used, display a message
+                $sqlEmail = 'SELECT email FROM members WHERE email = :email';
+                $resultEmail = $this->sql($sqlEmail, [
+                    'email' => $emailVisitor
+                ]);
+                $rowEmail = $resultEmail->fetch();
+
+                // If the login or the email is already used, display a message
                 // Otherwise, allows the visitor to register
-                if($row){
+                if($rowEmail){
+                    echo 'Ce mail est déjà lié au compte d\'un(e) de nos membres.';
+                }
+                elseif($row){
                     echo 'Ce pseudo est déjà utilisé.';
                 } else {
                     $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
