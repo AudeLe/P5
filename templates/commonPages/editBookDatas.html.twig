@@ -17,19 +17,19 @@
                 <form action="../public/index.php?action=registerEditBookDatas&bookId={{ book.id }}" method="post">
                     <div>
                         <label for="editAuthor">Auteur</label><br />
-                        <input type="text" name="editAuthor" id="editAuthor" value="{{ book.author }}"/>
+                        <input type="text" name="editAuthor" id="editAuthor" value="{{ book.author }}" required/>
                     </div>
                     <div>
                         <label for="editTitle">Titre</label><br />
-                        <input type="text" name="editTitle" id="editTitle" value="{{ book.title }}"/>
+                        <input type="text" name="editTitle" id="editTitle" value="{{ book.title }}" required/>
                     </div>
                     <div>
                         <label for="editSummary">Résumé</label><br />
-                        <textarea name="editSummary" id="editSummary">{{ book.summary }}</textarea>
+                        <textarea name="editSummary" id="editSummary" required>{{ book.summary }}</textarea>
                     </div>
                     <div>
                         <label for="editPublishingYear">Année de publication</label><br />
-                        <input type="text" name="editPublishingYear" id="editPublishingYear" value="{{ book.publishingYear }}"/>
+                        <input type="text" name="editPublishingYear" id="editPublishingYear" value="{{ book.publishingYear }}" required/>
                     </div>
                     <div>
                         <label for="editISBN">ISBN</label><br />
@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         <label for="editNbPages">Nombre de pages</label><br />
-                        <input type="text" name="editNbPages" id="editNbPages" value="{{ book.nbPages }}" />
+                        <input type="text" name="editNbPages" id="editNbPages" value="{{ book.nbPages }}" required/>
                     </div>
                     <div>
                         <input type="submit" value="Enregistrer les modifications"/>

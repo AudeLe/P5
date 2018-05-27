@@ -21,7 +21,7 @@
         <form action="../public/index.php?action=editLogin" method="post">
             <div>
                 <label for="editLogin">Nouveau Pseudonyme</label>
-                <input type="text" id="editLogin" name="editLogin"/>
+                <input type="text" id="editLogin" name="editLogin" required/>
             </div>
             <div>
                 <input type="submit" value="Modifier son pseudo" class="submitButton"/>
@@ -34,11 +34,11 @@
         <form action="../public/index.php?action=editPassword" method="post">
             <div>
                 <label for="editPassword">Nouveau mot de passe</label>
-                <input type="password" id="editPassword" name="editPassword"/>
+                <input type="password" id="editPassword" name="editPassword" required/>
             </div>
             <div>
                 <label for="confirmEditPassword">Veuillez entrer de nouveau votre mot de passe</label>
-                <input type="password" id="confirmEditPassword" name="confirmEditPassword"/>
+                <input type="password" id="confirmEditPassword" name="confirmEditPassword" required/>
             </div>
             <div>
                 <input type="submit" value="Modifier son mot de passe" class="submitButton"/>
@@ -51,11 +51,11 @@
         <form action="../public/index.php?action=editMail" method="post">
             <div>
                 <label for="editMail">Nouvel Email</label>
-                <input type="email" name="editMail" id="editMail"/>
+                <input type="email" name="editMail" id="editMail" required/>
             </div>
             <div>
                 <label for="confirmEditMail">Veuillez confirmer votre email</label>
-                <input type="email" name="confirmEditMail" id="confirmEditMail"/>
+                <input type="email" name="confirmEditMail" id="confirmEditMail" required/>
             </div>
             <div>
                 <input type="submit" value="Modifier son email" class="submitButton"/>

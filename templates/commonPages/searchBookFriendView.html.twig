@@ -21,11 +21,11 @@
                         <p>Veuillez entrer l'ISBN du livre que vous souhaiteriez vérifier et sélectionner la personne correspondante.</p>
                         <div>
                             <label for="checkBookFriendISBN">ISBN de l'ouvrage que l'on souhaite vérifier</label>
-                            <input type="text" name="checkBookFriendISBN" id="checkBookFriendISBN"/>
+                            <input type="text" name="checkBookFriendISBN" id="checkBookFriendISBN" required/>
                         </div>
                         <div>
                             <label for="checkBookFriend">Liste de livres de la personne souhaitée</label><br />
-                            <select name="checkBookFriend" id="checkBookFriend">
+                            <select name="checkBookFriend" id="checkBookFriend" required>
                                 {% for friend in friends %}
                                     <option value="{{ friend }}">{{ friend }}</option>
                                 {% else %}
