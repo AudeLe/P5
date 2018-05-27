@@ -24,32 +24,32 @@
                         <form action="../public/index.php?action=registerBookDatas&id={{ session.id }}" method="post">
                             <div>
                                 <label for="bookTitle">Titre</label><br />
-                                <input type="text" id="bookTitle" name="bookTitle" />
+                                <input type="text" id="bookTitle" name="bookTitle" required/>
                             </div>
 
                             <div>
                                 <label for="bookAuthors">Auteur(s)</label><br />
-                                <input type="text" id="bookAuthors" name="bookAuthors"/>
+                                <input type="text" id="bookAuthors" name="bookAuthors" required/>
                             </div>
 
                             <div>
                                 <label for="bookPublishedDate">Date de publication</label><br />
-                                <input type="text" id="bookPublishedDate" name="bookPublishedDate" />
+                                <input type="text" id="bookPublishedDate" name="bookPublishedDate" required/>
                             </div>
 
                             <div>
                                 <label for="bookDescription">Résumé</label><br />
-                                <textarea id="bookDescription" name="bookDescription"></textarea>
+                                <textarea id="bookDescription" name="bookDescription" required></textarea>
                             </div>
 
                             <div>
                                 <label for="bookISBN">ISBN</label><br />
-                                <input type="text" id="bookISBN" name="bookISBN" />
+                                <input type="text" id="bookISBN" name="bookISBN" required/>
                             </div>
 
                             <div>
                                 <label for="bookNbPages">Nombre de pages</label><br />
-                                <input type="text" id="bookNbPages" name="bookNbPages"/>
+                                <input type="text" id="bookNbPages" name="bookNbPages" required/>
                             </div>
 
                             <input type="submit" value="Enregistrer le livre" />
