@@ -104,6 +104,14 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'registerBookPage'){
+                        if(isset($_GET['login'])){
+                            $this->backController->registerBookPage($_GET['login']);
+                        } else {
+                            throw new Exception('Impossible d\'accéder à la page permettant l\'enregistrement de livres.');
+                        }
+                    }
+
                     elseif($_GET['action'] == 'statisticsPage'){
                         $this->backController->statisticsApp();
                     }

@@ -100,6 +100,10 @@
 
         }
 
+        public function registerBookPage($login){
+            echo $this->twig->render('commonPages/registerBookView.html.twig');
+        }
+
         // Access to the member's page to ask a friend to share their booklist
         public function friendsPage($login){
             $friends = $this->memberManager->reminderFriends($login);

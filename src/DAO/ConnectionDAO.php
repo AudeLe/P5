@@ -217,20 +217,33 @@
                         $this->logOut();
                         $sql = 'DELETE members, bookslist FROM members INNER JOIN bookslist ON (members.id = bookslist.id_member) WHERE members.id = :id';
                         $this->sql($sql, [
-                           'id' => $id
-                        ]);
-
-                        header('Location: ../public/index.php');
-                    } else {
-                        $this->logOut();
-                        $sql = 'DELETE FROM members WHERE id = :id';
-                        $this->sql($sql, [
                             'id' => $id
                         ]);
 
-                        header('Location: ../public/index.php');
+                    } else {
+                            $this->logOut();
+                            $sql = 'DELETE FROM members WHERE id = :id';
+                            $this->sql($sql, [
+                                'id' => $id
+                            ]);
+
                     }
 
+                    $sqlShareBooklist = 'SELECT * FROM sharedbooklist WHERE login_member = :login';
+                    $resultShareBookist = $this->sql($sqlShareBooklist, [
+                        'login' => $login
+                    ]);
+                    $rowShareBooklist = $resultShareBookist -> fetch();
+
+                    if($rowShareBooklist){
+                        $this->logOut();
+                        $sqlBooklist = 'DELETE FROM sharedbooklist WHERE login_member = :login';
+                        $this->sql($sqlBooklist, [
+                            'login' => $login
+                        ]);
+
+                    }
+                    header('Location: ../public/index.php');
                 }
             }
         }
