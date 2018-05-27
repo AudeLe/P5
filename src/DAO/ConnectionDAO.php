@@ -207,13 +207,30 @@
                     echo 'Mauvais identifiant ou mot de passe';
                     header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
                 } else {
-                    $this->logOut();
-                    $sql = 'DELETE FROM members WHERE id = :id';
-                    $this->sql($sql, [
+                    $sql = 'SELECT * FROM bookslist WHERE id_member = :id';
+                    $result = $this->sql($sql, [
                         'id' => $id
                     ]);
+                    $row = $result->fetch();
 
-                    header('Location: ../public/index.php');
+                    if($row){
+                        $this->logOut();
+                        $sql = 'DELETE members, bookslist FROM members INNER JOIN bookslist ON (members.id = bookslist.id_member) WHERE members.id = :id';
+                        $this->sql($sql, [
+                           'id' => $id
+                        ]);
+
+                        header('Location: ../public/index.php');
+                    } else {
+                        $this->logOut();
+                        $sql = 'DELETE FROM members WHERE id = :id';
+                        $this->sql($sql, [
+                            'id' => $id
+                        ]);
+
+                        header('Location: ../public/index.php');
+                    }
+
                 }
             }
         }
