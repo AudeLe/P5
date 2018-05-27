@@ -40,6 +40,17 @@ var checkForm = {
         }
     },
 
+    checkConfirmationEditPassword: function(input){
+        var editPassword = document.getElementById("editPassword");
+        if (input.value != editPassword.value){
+            this.highlight(input, true);
+            return false;
+        } else {
+            this.highlight(input, false);
+            return true;
+        }
+    },
+
     checkEmail: function(input){
         var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,6}$/;
         if(!regex.test(input.value)){
