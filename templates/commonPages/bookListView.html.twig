@@ -42,7 +42,7 @@
                                 <td>{{ book.nbPages }}</td>
                                 <td><a href="../public/index.php?action=editBookDatas&bookId={{ book.id }}"><i class="fas fa-edit"></i></a></td>
                                 <!-- Confirm before deletion -->
-                                <td><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}"><i class="fas fa-trash alt"></i></a></td>
+                                <td><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer ce livre de votre liste ?')) return true; else return false"><i class="fas fa-trash alt"></i></a></td>
                             </tr>
                         {% else %}
                             <p>Vous n'avez pas d'ouvrages enregistrés pour l'instant.</p>

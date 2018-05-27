@@ -39,7 +39,7 @@
                         <p>Vous avez ajouté ces personnes à votre cercle d'ami(e)s :</p>
                         {% for friend in friends %}
                             {% if friend is not null %}
-                                {{ friend }}<a href="../public/index.php?action=deleteSharedBooklist&login={{ session.login }}&loginFriend={{ friend }}"><i class="fas fa-ban"></i></a><br />
+                                {{ friend }}<a href="../public/index.php?action=deleteSharedBooklist&login={{ session.login }}&loginFriend={{ friend }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer {{ friend }} de votre liste de partage ?')) return true; else return false"><i class="fas fa-ban"></i></a><br />
                             {% endif %}
                         {% endfor %}
                     {% endif %}
