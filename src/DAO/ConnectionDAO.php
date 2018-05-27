@@ -241,7 +241,31 @@
                         $this->sql($sqlBooklist, [
                             'login' => $login
                         ]);
+                    }
 
+                    $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist';
+                    $result = $this->sql($sql);
+                    $row = $result->fetch();
+
+                    if($row['login_share_booklist_1'] == $login){
+                        $sql = 'UPDATE sharedbooklist SET login_share_booklist_1 = :newValue WHERE login_share_booklist_1 = :login';
+                        $this->sql($sql, [
+                            'newValue' => NULL,
+                            'login' => $login
+                        ]);
+
+                    } elseif ($row['login_share_booklist_2'] == $login) {
+                        $sql = 'UPDATE sharedbooklist SET login_share_booklist_2 = :newValue WHERE login_share_booklist_2 = :login';
+                        $this->sql($sql, [
+                            'newValue' => NULL,
+                            'login' => $login
+                        ]);
+                    } elseif ($row['login_share_booklist_3'] == $login) {
+                        $sql = 'UPDATE sharedbooklist SET login_share_booklist_3 = :newValue WHERE login_share_booklist_3 = :login';
+                        $this->sql($sql, [
+                            'newValue' => NULL,
+                            'login' => $login
+                        ]);
                     }
                     header('Location: ../public/index.php');
                 }
