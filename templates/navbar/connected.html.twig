@@ -36,7 +36,7 @@
     <li class="nav-item">
 
         {% if session.status == 'admin' %}
-            <a class="nav-link" href="../public/index.php?action="><!--Action à déterminer--><i class="fas fa-user-circle"></i>{{ session.login }}</a>
+            <a class="nav-link" href="../public/index.php?action=adminProfile&login={{ session.login }}"><!--Action à déterminer--><i class="fas fa-user-circle"></i>{{ session.login }}</a>
         {% else %}
             <a class="nav-link" href="../public/index.php?action=memberProfile&login={{ session.login }}"><i class="fas fa-user-circle"></i>{{ session.login }}</a>
         {% endif %}
