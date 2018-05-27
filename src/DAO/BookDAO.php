@@ -80,6 +80,21 @@
             return $bookDatas;
         }
 
+        public function displayBook($bookId){
+            $sql = 'SELECT * FROM bookslist WHERE id = :id';
+            $result = $this->sql($sql, [
+                'id' => $bookId
+            ]);
+
+            $bookDatas = [];
+            foreach($result as $row){
+                $bookId = $row['id'];
+                $bookDatas[$bookId] = $this->buildObject($row);
+            }
+
+            return $bookDatas;
+        }
+
         public function registerEditBookDatas($bookId, $editTitle, $editAuthor, $editPublishingYear, $editSummary, $editISBN, $editNbPages){
             $sql = 'UPDATE bookslist SET author = :newAuthor, title = :newTitle, summary = :newSummary, publishingYear = :newPublishingYear, ISBN = :ISBN, nbPages = :newNbPages WHERE id = :id';
             $this->sql($sql, [

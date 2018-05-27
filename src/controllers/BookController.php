@@ -20,6 +20,12 @@
             echo $this->twig->render('commonPages/editBookDatas.html.twig', array('bookDatas' => $bookDatas));
         }
 
+        public function displayBook($bookId){
+            $bookDatas = $this->bookManager->displayBook($bookId);
+
+            echo $this->twig->render('commonPages/displayBooKview.html.twig', array('bookDatas' => $bookDatas));
+        }
+
         public function registerEditBookDatas($bookId, $editTitle, $editAuthor, $editPublishingYear, $editSummary, $editISBN, $editNbPages){
             $this->bookManager->registerEditBookDatas($bookId, $editTitle, $editAuthor, $editPublishingYear, $editSummary, $editISBN, $editNbPages);
         }

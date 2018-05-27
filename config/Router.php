@@ -267,6 +267,14 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'displayBook'){
+                        if(isset($_GET['bookId'])){
+                            $this->bookController->displayBook($_GET['bookId']);
+                        } else {
+                            throw new Exception('Impossible d\'afficher cet ouvrage.');
+                        }
+                    }
+
                     elseif($_GET['action'] == 'editBookDatas'){
                         if(isset($_GET['bookId'])){
                             $this->bookController->editBookDatas($_GET['bookId']);

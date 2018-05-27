@@ -1,0 +1,35 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ session.login }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% block navbarLeftSide %}
+            {% if session.status == 'admin' %}
+                {% include 'adminPages/navbarAdmin.html.twig' %}
+            {% else %}
+                {% include 'memberPages/navbarMember.html.twig' %}
+            {% endif %}
+        {% endblock %}
+
+
+        {% block displayContent %}
+            <div class="col-9">
+                {% for book in bookDatas %}
+                    <h5>Auteur</h5>
+                    <div>{{ book.author }}</div>
+                    <h5>Titre</h5>
+                    <div>{{ book.title }}</div>
+                    <h5>Résumé</h5>
+                    <div>{{ book.summary }}</div>
+                    <h5>Année de publication</h5>
+                    <div>{{ book.publishingYear }}</div>
+                    <h5>ISBN</h5>
+                    <div>{{ book.ISBN }}</div>
+                    <h5>Nombre de pages</h5>
+                    <div>{{ book.nbPages }}</div>
+                {% endfor %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

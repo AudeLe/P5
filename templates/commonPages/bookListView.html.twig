@@ -35,8 +35,8 @@
                         {% for book in memberBookList %}
                             <tr>
                                 <td>{{ book.author }}</td>
-                                <td>{{ book.title }}</td>
-                                <td>{{ book.summary }}</td>
+                                <td><a href="../public/index.php?action=displayBook&bookId={{ book.id }}">{{ book.title }}</a></td>
+                                <td>{{ book.summary[:150] }}...</td>
                                 <td>{{ book.publishingYear }}</td>
                                 <td>{{ book.ISBN }}</td>
                                 <td>{{ book.nbPages }}</td>
