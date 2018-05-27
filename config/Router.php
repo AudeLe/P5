@@ -325,6 +325,14 @@
                         }
                     }
 
+                    elseif($_GET['action'] == 'stopSharingBooklist'){
+                        if(isset($_GET['login']) && isset($_GET['loginFriend'])){
+                            $this->backController->stopSharingBooklist($_GET['login'], $_GET['loginFriend']);
+                        } else {
+                            throw new Exception('Impossible de supprimer le partage de votre liste de livres.');
+                        }
+                    }
+
                     elseif($_GET['action'] == 'contactForm'){
                         $this->backController->contactForm();
                     }

@@ -4,6 +4,8 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
+    use models\ManagingSharedLists;
+
     /*use Swift_SmtpTransport;
     use Swift_Mailer;
     use Swift_Message;*/
@@ -292,16 +294,63 @@
             $this->sendEmail($email, $subjectMail, $bodyMail);
         }
 
-        public function managingSharedLists($login){
-            //$sql = 'SELECT * FROM sharedbooklist';
-            //$result = $this->sql($sql);
+        public function stopSharingBooklist($login, $loginFriend){
+            $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :loginFriend';
+            $result = $this->sql($sql, [
+                'loginFriend' => $loginFriend
+            ]);
+            $row = $result->fetch();
+
+            if($row['login_share_booklist_1'] == $login){
+                $sql = 'UPDATE sharedbooklist SET login_share_booklist_1 = :newValue WHERE login_member = :loginFriend';
+                $this->sql($sql, [
+                    'newValue' => NULL,
+                    'loginFriend' => $loginFriend
+                ]);
+
+            } elseif ($row['login_share_booklist_2'] == $login) {
+                $sql = 'UPDATE sharedbooklist SET login_share_booklist_2 = :newValue WHERE login_member = :loginFriend';
+                $this->sql($sql, [
+                    'newValue' => NULL,
+                    'loginFriend' => $loginFriend
+                ]);
+            } elseif ($row['login_share_booklist_3'] == $login) {
+                $sql = 'UPDATE sharedbooklist SET login_share_booklist_3 = :newValue WHERE login_member = :loginFriend';
+                $this->sql($sql, [
+                    'newValue' => NULL,
+                    'loginFriend' => $loginFriend
+                ]);
+            }
+
+
+            $sql = 'SELECT email FROM members WHERE login = :loginFriend';
+            $result = $this->sql($sql, [
+                'loginFriend' => $loginFriend
+            ]);
+            $row = $result->fetch();
+
+            $email = $row['email'];
+            $subjectMail = 'Suppression de liste de partage';
+            $bodyMail = $loginFriend . ' vient de supprimer votre accès à sa liste de livres.';
+            $this->sendEmail($email, $subjectMail, $bodyMail);
+
+        }
+
+        public function managingSharedLists(){
+            $sql = 'SELECT * FROM sharedbooklist';
+            $result = $this->sql($sql);
             //$row = $result->fetch();
 
-            /*foreach ($result as $row){
-                echo $row;
+            $members = [];
+            foreach ($result as $row){
 
-            }*/
+                $memberId = $row['id'];
+                $members[$memberId] = $this->buildObjectMembers($row);
 
+
+            }
+            return $members;
+            //var_dump($members);
             //die();
         }
 
@@ -367,5 +416,15 @@
             $book->setPublishingYear($row['publishingYear']);
             $book->setNbPages($row['nbPages']);
             return $book;
+        }
+
+        private function buildObjectMembers(array $row){
+            $member = new ManagingSharedLists();
+            $member->setId($row['id']);
+            $member->setLoginMember($row['login_member']);
+            $member->setLoginShareBooklist1($row['login_share_booklist_1']);
+            $member->setLoginShareBooklist2($row['login_share_booklist_2']);
+            $member->setLoginShareBooklist3($row['login_share_booklist_3']);
+            return $member;
         }
     }

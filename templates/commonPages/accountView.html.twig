@@ -40,6 +40,24 @@
                     </div>
                 {% endblock %}
 
+                {% block booklistSharedWith %}
+
+                    {% for member in members %}
+                        {% if member.loginShareBooklist1 == session.login %}
+                            {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}"><i class="fas fa-ban"></i></a>
+                        {% elseif member.loginShareBooklist2 == session.login %}
+                            {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}"><i class="fas fa-ban"></i></a>
+                        {% elseif member.loginShareBooklist3 == session.login %}
+                            {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}"><i class="fas fa-ban"></i></a>
+                        {% else %}
+                            <p>Vous ne partagez votre liste de livres avec personne pour l'instant.</p>
+                        {% endif %}
+
+                    {% else %}
+                        <p>Vous ne partagez votre liste de livres avec personne pour l'instant.</p>
+                    {% endfor %}
+
+                {% endblock %}
             </div>
         {% endblock %}
     </div>

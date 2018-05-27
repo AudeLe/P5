@@ -115,8 +115,9 @@
         }
 
         public function accountPage($login){
-            $this->memberManager->managingSharedLists($login);
-            echo $this->twig->render('commonPages/accountView.html.twig');
+            $members = $this->memberManager->managingSharedLists();
+
+            echo $this->twig->render('commonPages/accountView.html.twig', array('members' => $members));
         }
 
         public function deleteAccountPage($login){
@@ -148,6 +149,11 @@
             $this->memberManager->deleteSharedBooklist($login, $loginFriend);
             $this->friendsPage($login);
             //echo $this->twig->render('memberPages/friendsCircleView.html.twig');
+        }
+
+        public function stopSharingBooklist($login, $loginFriend){
+            $message = $this->memberManager->stopSharingBooklist($login, $loginFriend);
+            $this->accountPage($login);
         }
 
         public function statisticsApp(){
