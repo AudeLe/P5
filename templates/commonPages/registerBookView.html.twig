@@ -1,0 +1,64 @@
+{% extends "template.html.twig" %}
+
+{% block title %}{{ session.login }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% block navbarLeftSide %}
+            {% if session.status == 'admin' %}
+                {% include 'adminPages/navbarAdmin.html.twig' %}
+            {% else %}
+                {% include 'memberPages/navbarMember.html.twig' %}
+            {% endif %}
+        {% endblock %}
+
+        {% block displayContent %}
+            <div class="col-9">
+                {% block bookInformations %}
+                    <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
+                    <p>Veuillez indiquer uniquement les chiffres</p>
+                    <input type="text" id="ISBN" name="ISBN"/>
+                    <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
+
+                    <div id="bookInformations">
+                        <form action="../public/index.php?action=registerBookDatas&id={{ session.id }}" method="post">
+                            <div>
+                                <label for="bookTitle">Titre</label><br />
+                                <input type="text" id="bookTitle" name="bookTitle" />
+                            </div>
+
+                            <div>
+                                <label for="bookAuthors">Auteur(s)</label><br />
+                                <input type="text" id="bookAuthors" name="bookAuthors"/>
+                            </div>
+
+                            <div>
+                                <label for="bookPublishedDate">Date de publication</label><br />
+                                <input type="text" id="bookPublishedDate" name="bookPublishedDate" />
+                            </div>
+
+                            <div>
+                                <label for="bookDescription">Résumé</label><br />
+                                <textarea id="bookDescription" name="bookDescription"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="bookISBN">ISBN</label><br />
+                                <input type="text" id="bookISBN" name="bookISBN" />
+                            </div>
+
+                            <div>
+                                <label for="bookNbPages">Nombre de pages</label><br />
+                                <input type="text" id="bookNbPages" name="bookNbPages"/>
+                            </div>
+
+                            <input type="submit" value="Enregistrer le livre" />
+                        </form>
+                    </div>
+                {% endblock %}
+
+            </div>
+        {% endblock %}
+    </div>
+
+{% endblock %}
