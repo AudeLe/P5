@@ -1,5 +1,11 @@
+// Checks the inputs with set crateria
 var checkForm = {
 
+    /**
+     *
+     * @param input
+     * @param error
+     */
     highlight: function(input, error){
         if(error){
             input.style.backgroundColor = "#fba";
@@ -8,6 +14,11 @@ var checkForm = {
         }
     },
 
+    /**
+     *
+     * @param input
+     * @returns {boolean}
+     */
     checkLogin: function(input){
         if(input.value.length < 2 || input.value.length > 25){
             this.highlight(input, true);
@@ -18,6 +29,11 @@ var checkForm = {
         }
     },
 
+    /**
+     *
+     * @param input
+     * @returns {boolean}
+     */
     checkPassword: function(input){
         var regex = /^(?=.*\d)(?=.*[!@#$%^&*;?])(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
         if(!regex.test(input.value)){
@@ -29,6 +45,11 @@ var checkForm = {
         }
     },
 
+    /**
+     *
+     * @param input
+     * @returns {boolean}
+     */
     checkConfirmationPassword: function(input){
         var passwordVisitor = document.getElementById("passwordVisitor");
         if (input.value != passwordVisitor.value){
@@ -40,6 +61,11 @@ var checkForm = {
         }
     },
 
+    /**
+     *
+     * @param input
+     * @returns {boolean}
+     */
     checkConfirmationEditPassword: function(input){
         var editPassword = document.getElementById("editPassword");
         if (input.value != editPassword.value){
@@ -51,6 +77,11 @@ var checkForm = {
         }
     },
 
+    /**
+     *
+     * @param input
+     * @returns {boolean}
+     */
     checkEmail: function(input){
         var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,6}$/;
         if(!regex.test(input.value)){
@@ -62,17 +93,11 @@ var checkForm = {
         }
     },
 
-    checkBirthDate: function(input){
-        var regex = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/;
-        if(!regex.test(input.value)){
-            this.highlight(input, true);
-            return false;
-        } else {
-            this.highlight(input, false);
-            return true;
-        }
-    },
-
+    /**
+     *
+     * @param f
+     * @returns {boolean}
+     */
     finalCheckForm: function(f){
         var loginOk = this.checkLogin(f.login);
         var passwordOk = this.checkPassword(f.passwordVisitor);
