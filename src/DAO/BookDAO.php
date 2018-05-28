@@ -2,9 +2,15 @@
     namespace DAO;
 
     use models\BookDatasForm;
-    use models\BookList;
+
 
     class BookDAO extends DAO {
+
+        protected $commonFunctionalities;
+
+        public function __construct(){
+            $this->commonFunctionalities = new CommonFunctionalitiesDAO();
+        }
 
         public function registerBookDatas($id, $bookTitle, $bookAuthors, $bookPublishedDate, $bookDescription, $bookISBN, $bookNbPages){
             $violations = [];
@@ -74,7 +80,7 @@
             $bookDatas = [];
             foreach($result as $row){
                 $bookId = $row['id'];
-                $bookDatas[$bookId] = $this->buildObject($row);
+                $bookDatas[$bookId] = $this->commonFunctionalities->buildObject($row);
             }
 
             return $bookDatas;
@@ -89,7 +95,7 @@
             $bookDatas = [];
             foreach($result as $row){
                 $bookId = $row['id'];
-                $bookDatas[$bookId] = $this->buildObject($row);
+                $bookDatas[$bookId] = $this->commonFunctionalities->buildObject($row);
             }
 
             return $bookDatas;
@@ -144,18 +150,6 @@
                 $message = 'Il n\' a pas d\'ouvrages enregistrés pour l\'instant.';
                 return $message;
             }
-        }
-
-        private function buildObject(array $row){
-            $book = new BookList();
-            $book->setId($row['id']);
-            $book->setAuthor($row['author']);
-            $book->setTitle($row['title']);
-            $book->setISBN($row['ISBN']);
-            $book->setSummary($row['summary']);
-            $book->setPublishingYear($row['publishingYear']);
-            $book->setNbPages($row['nbPages']);
-            return $book;
         }
 
     }

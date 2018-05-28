@@ -42,7 +42,6 @@
             $mail = new PHPMailer(true);
             try{
                 // Server settings
-
                 $mail->isSMTP();
                 $mail->Host = 'auth.smtp.1and1.fr';
                 $mail->SMTPAuth = true;
