@@ -3,15 +3,14 @@
     namespace controllers;
 
     class PersonalSpaceController extends Controller{
+
         // Access to the member's book list
         public function getMemberBookList($login){
-            $memberBookList = $this->memberManager->getMemberBookList($login);
+            $memberBookList = $this->managingSharedList->getMemberBookList($login);
             $totalBooks = $this->memberManager->nbBooks();
 
             echo $this->twig->render('commonPages/bookListView.html.twig', array('memberBookList' => $memberBookList, 'totalBooks' => $totalBooks));
         }
-
-
 
         // Access to the member's page to ask a friend to share their booklist
         public function friendsPage($login){
@@ -34,7 +33,7 @@
         }
 
         public function shareBookListWithFriend($login, $loginFriend){
-            $message = $this->memberManager->shareBookListWithFriend($login, $loginFriend);
+            $message = $this->managingSharedList->shareBookListWithFriend($login, $loginFriend);
 
             echo $this->twig->render('commonPages/resultAskShare.html.twig', array('message' => $message));
         }
@@ -51,13 +50,13 @@
         }
 
         public function deleteSharedBooklist($login, $loginFriend){
-            $this->memberManager->deleteSharedBooklist($login, $loginFriend);
+            $this->managingSharedList->deleteSharedBooklist($login, $loginFriend);
             $this->friendsPage($login);
             //echo $this->twig->render('memberPages/friendsCircleView.html.twig');
         }
 
         public function stopSharingBooklist($login, $loginFriend){
-            $message = $this->memberManager->stopSharingBooklist($login, $loginFriend);
-            $this->accountPage($login);
+            $message = $this->managingSharedList->stopSharingBooklist($login, $loginFriend);
+            $this->accountController->accountPage($login);
         }
     }
