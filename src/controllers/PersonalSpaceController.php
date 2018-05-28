@@ -122,6 +122,8 @@
         // Allows the member sharing his/her booklist to stop sharing it with someone in particular
         public function stopSharingBooklist($login, $loginFriend){
             $this->managingSharedList->stopSharingBooklist($login, $loginFriend);
-            $this->accountController->accountPage($login);
+
+            $account = new AccountController();
+            $account->accountPage($login);
         }
     }
