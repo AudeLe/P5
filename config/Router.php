@@ -2,25 +2,38 @@
 
     namespace config;
 
+    use controllers\AccountController;
     use controllers\BackController;
     use controllers\BookController;
+    use controllers\ConnectionController;
     use controllers\Controller;
     use controllers\FrontController;
+    use controllers\PageController;
+    use controllers\PersonalSpaceController;
 
     use Exception;
 
     class Router {
 
+        private $accountController;
         private $backController;
         private $bookController;
+        private $connectionController;
         private $controller;
         private $frontController;
+        private $pageController;
+        private $personalSpaceController;
 
         public function __construct(){
+
+            $this->accountController = new AccountController();
             $this->backController = new BackController();
             $this->bookController = new BookController();
+            $this->connectionController = new ConnectionController();
             $this->controller = new Controller();
             $this->frontController = new FrontController();
+            $this->pageController = new PageController();
+            $this->personalSpaceController = new PersonalSpaceController();
 
         }
 
@@ -30,14 +43,14 @@
                 if(isset($_GET['action'])){
                     $action = $_GET['action'];
                     switch($action){
-                        /* ----- CONNECTION RELATED ----- */
+                    /* ===== CONNECTION RELATED ===== */
 
-                        /* ----- REGISTRATION ----- */
+                        /* ===== REGISTRATION ===== */
 
                         // Registration on the website
                         case 'registration':
                             if(!empty($_POST['login']) && !empty($_POST['passwordVisitor']) && !empty($_POST['passwordVisitorCheck']) && !empty($_POST['emailVisitor'])){
-                                $this->backController->registration($_POST['login'], $_POST['passwordVisitor'], $_POST['passwordVisitorCheck'], $_POST['emailVisitor']);
+                                $this->connectionController->registration($_POST['login'], $_POST['passwordVisitor'], $_POST['passwordVisitorCheck'], $_POST['emailVisitor']);
                             } else {
                                 throw new Exception('Impossible d\'enregistrer vos informations.');
                             }
@@ -47,7 +60,7 @@
                         // Indicates that an email has been sent to confirm the registration
                         case 'confirmRegistrationPage':
                             if(isset($_GET['login'])){
-                                $this->backController->confirmRegistrationPage($_GET['login']);
+                                $this->pageController->confirmRegistrationPage($_GET['login']);
                             } else {
                                 throw new Exception('Impossible de vous rediriger vers la page permettant la confirmation de votre inscriptio.');
                             }
@@ -56,7 +69,7 @@
                         // Display the page indicating that the registration has been made
                         case 'confirmRegistration':
                             if(isset($_GET['login'])){
-                                $this->backController->confirmRegistration($_GET['login']);
+                                $this->connectionController->confirmRegistration($_GET['login']);
                             } else {
                                 throw new Exception('Impossible de confirmer votre inscription.');
                             }
@@ -65,7 +78,7 @@
                         // Erase the registration
                         case 'refuseRegistration':
                             if(isset($_GET['login'])){
-                                $this->backController->refuseRegistration($_GET['login']);
+                                $this->connectionController->refuseRegistration($_GET['login']);
                             } else {
                                 throw new Exception('Impossible d\'enregistrer votre refus d\'inscription pour l\'instant.');
                             }
@@ -74,18 +87,18 @@
                         // Indicates that the registration has not been confirmed yet
                         case ($action == 'awaitingRegistrationConfirmation'):
                             if(isset($_GET['login'])){
-                                $this->backController->awaitingRegistrationConfirmation($_GET['login']);
+                                $this->pageController->awaitingRegistrationConfirmation($_GET['login']);
                             } else {
                                 throw new Exception('Impossible de vous rediriger vers la page demandée. Veuillez confirmer votre inscription.');
                             }
                             break;
 
-                        /* ----- CONNECTION TO/LOG OUT FROM THE WEBSITE -----*/
+                        /* ===== CONNECTION TO/LOG OUT FROM THE WEBSITE ===== */
 
                         // Connection on the website
                         case 'connection':
                             if(!empty($_POST['loginConnection']) && !empty($_POST['passwordVisitorConnection'])){
-                                $this->backController->connection($_POST['loginConnection'], $_POST['passwordVisitorConnection']);
+                                $this->connectionController->connection($_POST['loginConnection'], $_POST['passwordVisitorConnection']);
                             } else {
                                 throw new Exception('Impossible de vous identifier.');
                             }
@@ -93,11 +106,11 @@
 
                         // Log out of the website
                         case ($action == 'logOut'):
-                            $this->backController->logOut();
+                            $this->connectionController->logOut();
                             break;
 
 
-                    /* ----- ACCESS PERSONAL PAGES -----*/
+                    /*===== ACCESS PERSONAL PAGES ===== */
 
                         // Access the member profile page
                         case  'memberProfile':
@@ -120,7 +133,7 @@
                         // Access the page allowing to register a book
                         case 'registerBookPage':
                             if(isset($_GET['login'])){
-                                $this->backController->registerBookPage($_GET['login']);
+                                $this->pageController->registerBookPage($_GET['login']);
                             } else {
                                 throw new Exception('Impossible d\'accéder à la page permettant l\'enregistrement de livres.');
                             }
@@ -134,7 +147,7 @@
                         // Access to the page allowing to reach a friend
                         case 'friendsPage':
                             if(isset($_GET['login'])){
-                                $this->backController->friendsPage($_GET['login']);
+                                $this->personalSpaceController->friendsPage($_GET['login']);
                             } else {
                                 throw new Exception('Impossible de vous identifier afin d\'accéder à la page demandée.');
                             }
@@ -143,7 +156,7 @@
                         // Access to the account informations page
                         case 'accountPage':
                             if(isset($_GET['login'])){
-                                $this->backController->accountPage($_GET['login']);
+                                $this->accountController->accountPage($_GET['login']);
                             } else {
                                 throw new Exception('Impossible d\'accéder à cette page.');
                             }
@@ -152,7 +165,7 @@
                         // Access to the deletion of the account page
                         case 'deleteAccountPage':
                             if(isset($_GET['login'])){
-                                $this->backController->deleteAccountPage($_GET['login']);
+                                $this->accountController->deleteAccountPage($_GET['login']);
                             } else {
                                 throw new Exception('Impossible d\'accéder à cette page.');
                             }
@@ -160,13 +173,13 @@
 
                         // Access to the page to search a book
                         case 'searchBookPage':
-                            $this->backController->searchBookPage();
+                            $this->pageController->searchBookPage();
                             break;
 
                         // Access the page to search if a friend already has a book
                         case 'searchBookFriendPage':
                             if(isset($_GET['login'])){
-                                $this->backController->searchBookFriendPage($_GET['login']);
+                                $this->personalSpaceController->searchBookFriendPage($_GET['login']);
                             } else {
                                 throw new Exception('Impossible de vous identifier.');
                             }
@@ -174,12 +187,12 @@
 
 
 
-                    /* ----- MODIFICATION/DELECTION ACCOUNT ----- */
+                    /* ===== MODIFICATION/DELETION ACCOUNT ===== */
 
                         // Verify the credentials before allowing the user to modify them
                         case 'verifyInformations':
                             if(!empty($_POST['verifyLogin']) && !empty($_POST['verifyPassword'])){
-                                $this->backController->verifyInformations($_POST['verifyLogin'], $_POST['verifyPassword']);
+                                $this->accountController->verifyInformations($_POST['verifyLogin'], $_POST['verifyPassword']);
                             } else {
                                 throw new Exception('Veuillez confirmer vos identifiants afin de pouvoir les modifier.');
                             }
@@ -188,7 +201,7 @@
                         // Modify the login
                         case 'editLogin':
                             if(!empty($_POST['editLogin'])){
-                                $this->backController->editLogin($_POST['login']);
+                                $this->accountController->editLogin($_POST['login']);
                             } else {
                                 throw new Exception('Impossible de modifier votre pseudonyme.');
                             }
@@ -197,7 +210,7 @@
                         // Modify the password
                         case 'editPassword':
                             if(!empty($_POST['editPassword']) && !empty($_POST['confirmEditPassword'])){
-                                $this->backController->editPassword($_POST['editPassword'], $_POST['confirmEditPassword']);
+                                $this->accountController->editPassword($_POST['editPassword'], $_POST['confirmEditPassword']);
                             } else {
                                 throw new Exception('Impossible de modifier le mot de passe.');
                             }
@@ -206,7 +219,7 @@
                         // Modify the mail
                         case 'editMail':
                             if(!empty($_POST['editMail']) && !empty($_POST['confirmEditMail'])){
-                                $this->backController->editMail($_POST['editMail'], $_POST['confirmEditMail']);
+                                $this->accountController->editMail($_POST['editMail'], $_POST['confirmEditMail']);
                             } else {
                                 throw new Exception('Impossible d\'enregistrer la modification de votre email.');
                             }
@@ -215,19 +228,19 @@
                         // Deletion of the account
                         case 'deleteAccount':
                             if(isset($_GET['id']) && !empty($_POST['loginDelete']) && !empty($_POST['passwordDelete'])){
-                                $this->backController->deleteAccount($_GET['id'], $_POST['loginDelete'], $_POST['passwordDelete']);
+                                $this->accountController->deleteAccount($_GET['id'], $_POST['loginDelete'], $_POST['passwordDelete']);
                             } else {
                                 throw new Exception('Impossible de supprimer votre compte');
                             }
                             break;
 
 
-                    /* ----- PERSONAL DATAS/SEARCH ON THEIR OWN DATAS -----*/
+                    /* ===== PERSONAL DATAS/SEARCH ON THEIR OWN DATAS ===== */
 
                         // Display the books registered by the member
                         case 'getMemberBookList':
                             if(isset($_GET['login'])){
-                                $this->backController->getMemberBookList($_GET['login']);
+                                $this->personalSpaceController->getMemberBookList($_GET['login']);
                             } else{
                                 throw new Exception('Impossible de récupérer votre liste de livres.');
                             }
@@ -272,13 +285,13 @@
                             break;
 
 
-                    /* ----- INTERACTION WITH OTHER MEMBERS -----*/
+                    /* ===== INTERACTION WITH OTHER MEMBERS ===== */
 
                         // Ask to access the booklist of someone else
                         case 'reachFriend':
                             if(isset($_GET['login'])){
                                 if(!empty($_POST['loginFriend'])){
-                                    $this->backController->reachFriend($_GET['login'], $_POST['loginFriend']);
+                                    $this->personalSpaceController->reachFriend($_GET['login'], $_POST['loginFriend']);
                                 } else {
                                     throw new Exception('Impossible de contacter la personne indiquée.');
                                 }
@@ -290,7 +303,7 @@
                         // Ask the authorization to share a book list
                         case 'shareBookList':
                             if(isset($_GET['login']) && isset($_GET['loginFriend'])){
-                                $this->backController->shareBookList($_GET['login'], $_GET['loginFriend']);
+                                $this->personalSpaceController->shareBookList($_GET['login'], $_GET['loginFriend']);
                             } else {
                                 throw new Exception('Impossible d\'accéder à la page de demande de partage de livres.');
                             }
@@ -299,7 +312,7 @@
                         // Confirm the sharing of the booklist
                         case 'shareBookListWithFriend':
                             if(isset($_GET['login']) && isset($_GET['loginFriend'])){
-                                $this->backController->shareBookListWithFriend($_GET['login'], $_GET['loginFriend']);
+                                $this->personalSpaceController->shareBookListWithFriend($_GET['login'], $_GET['loginFriend']);
                             } else {
                                 throw new Exception('Impossible d\'enregistrer votre souhait de partager votre liste de livres.');
                             }
@@ -308,7 +321,7 @@
                         // Refuse to share the booklist
                         case 'notShare':
                             if(isset($_GET['login']) && isset($_GET['loginFriend'])){
-                                $this->backController->notShare($_GET['login'], $_GET['loginFriend']);
+                                $this->personalSpaceController->notShare($_GET['login'], $_GET['loginFriend']);
                             } else {
                                 throw new Exception('Impossible d\'enregistrer votre soujait de ne pas partager votre liste de livres.');
                             }
@@ -330,7 +343,7 @@
                         // Allows to delete a shared booklist
                         case 'deleteSharedBooklist':
                             if(isset($_GET['login']) && isset($_GET['loginFriend'])){
-                                $this->backController->deleteSharedBooklist($_GET['login'], $_GET['loginFriend']);
+                                $this->personalSpaceController->deleteSharedBooklist($_GET['login'], $_GET['loginFriend']);
                             } else {
                                 throw new Exception('Impossible de supprimer cette personne de votre cercle d\'ami(e)s.');
                             }
@@ -339,7 +352,7 @@
                         // Allows the users to stop sharing their booklist with someone
                         case 'stopSharingBooklist':
                             if(isset($_GET['login']) && isset($_GET['loginFriend'])){
-                                $this->backController->stopSharingBooklist($_GET['login'], $_GET['loginFriend']);
+                                $this->personalSpaceController->stopSharingBooklist($_GET['login'], $_GET['loginFriend']);
                             } else {
                                 throw new Exception('Impossible de supprimer le partage de votre liste de livres.');
                             }
@@ -347,7 +360,7 @@
 
 
 
-                    /* ----- BOOK DATAS -----*/
+                    /* ===== BOOK DATAS ===== */
 
                         // Record the datas of the selected book
                         case 'registerBookDatas':
@@ -372,17 +385,17 @@
                             break;
 
 
-                    /* ----- CONTACT ADMIN -----*/
+                    /* ===== CONTACT ADMIN ===== */
 
                         // Display the page to access the contact form
                         case 'contactForm':
-                            $this->backController->contactForm();
+                            $this->frontController->contactForm();
                             break;
 
                         // Send the message to the admin
                         case 'contactAdmin':
                             if(!empty($_POST['loginSeeker']) && !empty($_POST['emailSeeker']) && !empty($_POST['subjectMail']) && !empty($_POST['bodyMail'])){
-                                $this->backController->contactAdmin($_POST['loginSeeker'], $_POST['emailSeeker'], $_POST['subjectMail'], $_POST['bodyMail']);
+                                $this->frontController->contactAdmin($_POST['loginSeeker'], $_POST['emailSeeker'], $_POST['subjectMail'], $_POST['bodyMail']);
                             } else {
                                 throw new Exception('Impossible d\'envoyer votre message à l\'administrateur.');
                             }
