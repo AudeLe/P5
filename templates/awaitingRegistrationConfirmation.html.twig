@@ -1,6 +1,7 @@
 {% extends "template.html.twig" %}
 
 {% block title %}Attente de confirmation d'inscription{% endblock %}
+{% block redirect %}<meta http-equiv="refresh" content="5;URL='/P5/public/index.php'"/>{% endblock %}
 
 {% block content %}
     <p>{{ login }}, un mail a été envoyé à l'adresse que vous avez indiqué.<br/>
