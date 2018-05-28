@@ -9,8 +9,6 @@
     use DAO\ManagingSharedListDAO;
     use DAO\MemberDAO;
 
-    use controllers\AccountController;
-
     // TWIG
     use \Twig_Loader_Filesystem;
     use \Twig_Environment;
@@ -27,8 +25,6 @@
         protected $managingSharedList;
         protected $memberManager;
 
-        protected $accountController;
-
         /**
          * Controller constructor.
          */
@@ -40,8 +36,6 @@
             $this->connectionManager = new ConnectionDAO();
             $this->managingSharedList = new ManagingSharedListDAO();
             $this->memberManager = new MemberDAO();
-
-            $this->accountController = new AccountController();
 
             //Twig configuration
             $loader = new Twig_Loader_Filesystem('../templates');
