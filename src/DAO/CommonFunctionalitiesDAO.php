@@ -16,7 +16,7 @@
          * @param $bodyMail
          */
         // PHPMailer is generating an email send "from the website"
-        public function sendEmail($email, $subjectMail, $bodyMail){
+        public function sendEmail($email, $subjectMail, $bodyMail, $altBodyMail){
             $mail = new PHPMailer(true);
             try{
                 // Server settings
@@ -38,7 +38,7 @@
                 $mail->isHTML(true);
                 $mail->Subject = $subjectMail;
                 $mail->Body = $bodyMail;
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients.';
+                $mail->AltBody = $altBodyMail;
 
                 $mail->send();
                 //echo 'Message has been sent';

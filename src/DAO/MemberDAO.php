@@ -122,8 +122,9 @@
 
                             $subjectMail = 'HaB - Demande de partage de liste de livres';
                             $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+                            $altBodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre à cette adresse : http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '' ;
 
-                            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+                            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
                             $message = 'Une demande de partage de liste de livres a été envoyé.';
 
                         } else {
@@ -148,8 +149,9 @@
 
                         $subjectMail = 'HaB - Demande de partage de liste de livres';
                         $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+                        $altBodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre à cette adresse : http://localhost/P5/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '' ;
 
-                        $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+                        $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
                         $message = 'Une demande de partage de liste de livres a été envoyé.';
 
                     } else {
@@ -179,8 +181,9 @@
 
             $subjectMail = 'Refus de votre demande de partage';
             $bodyMail = 'Votre demande de partage de la liste de livres de ' . $loginFriend . ' a été refusée.';
+            $altBodyMail = $bodyMail;
 
-            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
 
             $message = 'Un mail a été envoyé à ' . $login . ' afin de lui signifier que vous avez refusé sa demande.';
 

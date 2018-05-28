@@ -95,8 +95,9 @@
             $email = $row['email'];
 
             $subjectMail = 'Acceptation de votre demande de partage !';
+            $altBodyMail = $bodyMail;
 
-            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
 
             return $message;
         }
@@ -144,7 +145,8 @@
             $email = $row['email'];
             $subjectMail = 'Suppression de liste de partage';
             $bodyMail = 'Vous venez d\'être supprimé de la liste de partage de livres de ' . $login . '.';
-            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+            $altBodyMail = $bodyMail;
+            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
         }
 
         /**
@@ -190,7 +192,9 @@
             $email = $row['email'];
             $subjectMail = 'Suppression de liste de partage';
             $bodyMail = $loginFriend . ' vient de supprimer votre accès à sa liste de livres.';
-            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+            $altBodyMail = $bodyMail;
+
+            $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
 
         }
 

@@ -69,8 +69,9 @@
                     $email = $emailVisitor;
                     $subjectMail = 'Demande de confirmation d\'inscription';
                     $bodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=confirmRegistrationPage&login=' . $login . '">page</a>';
+                    $altBodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre à cette adresse : http://localhost/P5/public/index.php?action=confirmRegistrationPage&login=' . $login ;
 
-                    $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
+                    $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
                 }
             } else {
                 // If there is, the error(s) is/are displayed
