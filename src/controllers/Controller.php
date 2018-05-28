@@ -29,6 +29,9 @@
 
         protected $accountController;
 
+        /**
+         * Controller constructor.
+         */
         public function __construct(){
 
             $this->accountManager = new AccountDAO();
@@ -55,6 +58,13 @@
 
         }
 
+        /**
+         * @param $errorMessage
+         * @throws \Twig_Error_Loader
+         * @throws \Twig_Error_Runtime
+         * @throws \Twig_Error_Syntax
+         */
+        // Display the error on the specified page
         public function errorManagement($errorMessage){
 
             echo $this->twig->render('errorView.html.twig', array('errorMessage' => $errorMessage));
