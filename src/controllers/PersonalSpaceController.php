@@ -11,8 +11,8 @@
          * @throws \Twig_Error_Syntax
          */
         // Access to the member's book list
-        public function getMemberBookList($login){
-            $memberBookList = $this->memberManager->getMemberBookList($login);
+        public function getMemberBookList(){
+            $memberBookList = $this->memberManager->getMemberBookList();
             $totalBooks = $this->memberManager->nbBooks();
 
             echo $this->twig->render('commonPages/bookListView.html.twig', array('memberBookList' => $memberBookList, 'totalBooks' => $totalBooks));

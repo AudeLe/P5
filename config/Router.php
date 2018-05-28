@@ -37,8 +37,15 @@
 
         }
 
+        /**
+         * @throws \Twig_Error_Loader
+         * @throws \Twig_Error_Runtime
+         * @throws \Twig_Error_Syntax
+         */
         public function requestRouter(){
-
+            /**
+             *
+             */
             try{
                 if(isset($_GET['action'])){
                     $action = $_GET['action'];
@@ -240,7 +247,7 @@
                         // Display the books registered by the member
                         case 'getMemberBookList':
                             if(isset($_GET['login'])){
-                                $this->personalSpaceController->getMemberBookList($_GET['login']);
+                                $this->personalSpaceController->getMemberBookList();
                             } else{
                                 throw new Exception('Impossible de récupérer votre liste de livres.');
                             }
@@ -398,6 +405,16 @@
                                 $this->frontController->contactAdmin($_POST['loginSeeker'], $_POST['emailSeeker'], $_POST['subjectMail'], $_POST['bodyMail']);
                             } else {
                                 throw new Exception('Impossible d\'envoyer votre message à l\'administrateur.');
+                            }
+                            break;
+
+                    /* ===== DISPLAY ERRORS WITHIN THE MODEL ===== */
+                        // Display the error detected within the model
+                        case 'error':
+                            if(isset($_GET['errorMessage'])){
+                                $this->controller->errorManagement($_GET['errorMessage']);
+                            } else {
+                                throw new Exception('Impossible d\'afficher l\'erreur.');
                             }
                             break;
 
