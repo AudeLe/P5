@@ -2,10 +2,24 @@
     namespace DAO;
 
     use models\RegistrationForm;
-    use DAO\MemberDAO;
 
     class ConnectionDAO extends DAO{
 
+        private $commonFunctionalities;
+
+        /**
+         * ConnectionDAO constructor.
+         */
+        public function __construct(){
+            $this->commonFunctionalities = new CommonFunctionalitiesDAO();
+        }
+
+        /**
+         * @param $login
+         * @param $passwordVisitor
+         * @param $passwordVisitorCheck
+         * @param $emailVisitor
+         */
         // Register a new member
         public function registration($login, $passwordVisitor, $passwordVisitorCheck, $emailVisitor){
 
@@ -35,15 +49,18 @@
                 // If the login or the email is already used, display a message
                 // Otherwise, allows the visitor to register
                 if($rowEmail){
-                    echo 'Ce mail est déjà lié au compte d\'un(e) de nos membres.';
+                    $errorMessage = 'Ce mail est déjà lié au compte d\'un(e) de nos membres.';
+                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
                 }
                 elseif($row){
-                    echo 'Ce pseudo est déjà utilisé.';
-                } else {
+                    $errorMessage = 'Ce pseudo est déjà utilisé.';
+                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
+                }
+                else {
                     $passwordVisitorHashed = password_hash($passwordVisitor, PASSWORD_DEFAULT);
 
                     $sql = 'INSERT INTO members(login, password, email, registrationDate) VALUES (:login, :password, :email, NOW())';
-                    $result = $this->sql($sql, [
+                    $this->sql($sql, [
                         'login' => $login,
                         'email' => $emailVisitor,
                         'password' => $passwordVisitorHashed
@@ -52,8 +69,8 @@
                     $email = $emailVisitor;
                     $subjectMail = 'Demande de confirmation d\'inscription';
                     $bodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=confirmRegistrationPage&login=' . $login . '">page</a>';
-                    $sendEmailFunction = new MemberDAO();
-                    $sendEmailFunction->sendEmail($email, $subjectMail, $bodyMail);
+
+                    $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
                 }
             } else {
                 // If there is, the error(s) is/are displayed
@@ -67,6 +84,10 @@
 
         }
 
+        /**
+         * @param $login
+         */
+        // Confirms the registration
         public function confirmRegistration($login){
             $sql = 'UPDATE members SET confirmRegistration = :newValue WHERE login = :login';
             $this->sql($sql, [
@@ -75,6 +96,10 @@
             ]);
         }
 
+        /**
+         * @param $login
+         */
+        // Refuses the registration on this website
         public function refuseRegistration($login){
             $sql = 'DELETE FROM members WHERE login = :login';
             $this->sql($sql, [
@@ -82,6 +107,10 @@
             ]);
         }
 
+        /**
+         * @param $loginConnection
+         * @param $passwordVisitorConnection
+         */
         // Allows a member to connect to his/her personal space
         public function connection($loginConnection, $passwordVisitorConnection){
 
@@ -113,15 +142,20 @@
                             header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
                         }
                     } else {
-                        echo 'Mauvais identifiant ou mot de passe.';
+                        $errorMessage = 'Mauvais identifiant ou mot de passe.';
+                        header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
                     }
                 }
 
             } else {
-                echo 'Mauvais identifiant ou mot de passe.';
+                $errorMessage = 'Mauvais identifiant ou mot de passe.';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
             }
         }
 
+        /**
+         *
+         */
         // Allows the member/admin connected to log out
         public function logOut(){
             $_SESSION = array();

@@ -10,6 +10,12 @@
 
     class CommonFunctionalitiesDAO extends DAO{
 
+        /**
+         * @param $email
+         * @param $subjectMail
+         * @param $bodyMail
+         */
+        // PHPMailer is generating an email send "from the website"
         public function sendEmail($email, $subjectMail, $bodyMail){
             $mail = new PHPMailer(true);
             try{
@@ -37,12 +43,17 @@
                 $mail->send();
                 //echo 'Message has been sent';
             } catch (Exception $e){
-                echo 'Message could not be sent.';
-                echo 'Mailor Error : ' . $mail->ErrorInfo;
+                $errorMessage = 'Message could not be sent. Erreur : ' . $mail->ErrorInfo .'';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage .'');
             }
 
         }
 
+        /**
+         * @param array $row
+         * @return BookList
+         */
+        // Initiates the setters for book datas
         public function buildObject(array $row){
             $book = new BookList();
             $book->setId($row['id']);

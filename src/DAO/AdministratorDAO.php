@@ -7,6 +7,10 @@
 
     class AdministratorDAO extends DAO{
 
+        /**
+         * @return mixed
+         */
+        // Count the number of members registered on the website
         public function countMembers(){
             $sql = 'SELECT COUNT(*) FROM members WHERE status = :status';
             $result = $this->sql($sql, [
@@ -19,6 +23,10 @@
             return $nbMembers;
         }
 
+        /**
+         * @return mixed
+         */
+        // Count the number of books registered on the website
         public function countBooks(){
             $sql = 'SELECT COUNT(*) FROM bookslist';
             $result = $this->sql($sql);
@@ -29,6 +37,14 @@
             return $nbBooks;
         }
 
+        /**
+         * @param $loginSeeker
+         * @param $emailSeeker
+         * @param $subjectMail
+         * @param $bodyMail
+         * @return string
+         */
+        // Send an email to the administrator
         public function contactAdmin($loginSeeker, $emailSeeker, $subjectMail, $bodyMail){
 
             $this->sendEmail($loginSeeker, $emailSeeker, $subjectMail, $bodyMail);
@@ -38,6 +54,13 @@
             return $message;
         }
 
+        /**
+         * @param $loginSeeker
+         * @param $emailSeeker
+         * @param $subjectMail
+         * @param $bodyMail
+         */
+        // PHPMailer is generating the email with specific settings to be send to the administrator
         public function sendEmail($loginSeeker, $emailSeeker, $subjectMail, $bodyMail){
             $mail = new PHPMailer(true);
             try{
@@ -63,8 +86,8 @@
                 $mail->send();
 
             } catch (Exception $e){
-                echo 'Votre message n\'a pas pu être envoyé.';
-                echo 'Erreur : ' . $mail->ErrorInfo;
+                $errorMessage = 'Votre message n\'a pas pu être envoyé. Erreur : ' . $mail->ErrorInfo.'';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
             }
 
 

@@ -8,10 +8,18 @@
 
         protected $commonFunctionalities;
 
+        /**
+         * ManagingSharedListDAO constructor.
+         */
         public function __construct(){
             $this->commonFunctionalities = new CommonFunctionalitiesDAO();
         }
 
+        /**
+         * @param $login
+         * @param $loginFriend
+         * @return string
+         */
         public function shareBookListWithFriend($login, $loginFriend){
 
             // We are checking is the member already asked someone to share their booklist
@@ -93,6 +101,11 @@
             return $message;
         }
 
+        /**
+         * @param $login
+         * @param $loginFriend
+         */
+        // Delete all the mentions of the members in the different shared booklists
         public function deleteSharedBooklist($login, $loginFriend){
             $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :login';
             $result = $this->sql($sql, [
@@ -121,6 +134,7 @@
                 ]);
             }
 
+            // An email is sent to warn the friend
             $sql = 'SELECT email FROM members WHERE login = :loginFriend';
             $result = $this->sql($sql, [
                 'loginFriend' => $loginFriend
@@ -133,6 +147,11 @@
             $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail);
         }
 
+        /**
+         * @param $login
+         * @param $loginFriend
+         */
+        // A member can decide to stop sharing his/her booklist with someone in particular
         public function stopSharingBooklist($login, $loginFriend){
             $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :loginFriend';
             $result = $this->sql($sql, [
@@ -161,7 +180,7 @@
                 ]);
             }
 
-
+            // An email is sent to warn the friend
             $sql = 'SELECT email FROM members WHERE login = :loginFriend';
             $result = $this->sql($sql, [
                 'loginFriend' => $loginFriend
@@ -175,6 +194,10 @@
 
         }
 
+        /**
+         * @return array
+         */
+        // Display the names of the friends you are sharing your booklist with
         public function managingSharedLists(){
             $sql = 'SELECT * FROM sharedbooklist';
             $result = $this->sql($sql);
@@ -187,6 +210,11 @@
             return $members;
         }
 
+        /**
+         * @param array $row
+         * @return ManagingSharedLists
+         */
+        // Recover and prepare the datas to display the friends' names you are sharing your booklist with
         private function buildObjectMembers(array $row){
             $member = new ManagingSharedLists();
             $member->setId($row['id']);

@@ -5,10 +5,17 @@
 
         protected $commonFunctionalities;
 
+        /**
+         * MemberDAO constructor.
+         */
         public function __construct(){
             $this->commonFunctionalities = new CommonFunctionalitiesDAO();
         }
 
+        /**
+         * @return array
+         */
+        // Display the booklist of the logged member
         public function getMemberBookList(){
             $sql = 'SELECT id, author, title, summary, publishingYear, ISBN, nbPages FROM bookslist WHERE id_member = :id_member';
             $result = $this->sql($sql, [
@@ -25,7 +32,12 @@
 
         }
 
-        // Verify if a book has been registered
+        /**
+         * @param $id
+         * @param $ISBN
+         * @return string
+         */
+        // Verifies if a book has been registered
         public function searchBook($id, $ISBN){
             $sql = 'SELECT id_member, author, title, ISBN FROM bookslist WHERE id_member = :id';
             $result = $this->sql($sql, [
@@ -45,6 +57,11 @@
             return $message;
         }
 
+        /**
+         * @param $login
+         * @return array
+         */
+        // Reminds the member who he/she has shared his/her booklist with
         public function reminderFriends($login){
             $sql = 'SELECT login_share_booklist_1, login_share_booklist_2, login_share_booklist_3 FROM sharedbooklist WHERE login_member = :login';
             $result = $this->sql($sql, [
@@ -61,8 +78,14 @@
             return $friends;
         }
 
+        /**
+         * @param $login
+         * @param $loginFriend
+         * @return string
+         */
+        // Allows to reach a friend to ask him or her to share his/her booklist
         public function reachFriend($login, $loginFriend){
-            // You cannot sned an invit to yourself
+            // You cannot send an invit' to yourself
             if($login == $loginFriend){
                 $message =  'Vous ne pouvez pas vous envoyer une demande d\'ami(e).';
             } else {
@@ -139,8 +162,12 @@
             return $message;
         }
 
-
-
+        /**
+         * @param $login
+         * @param $loginFriend
+         * @return string
+         */
+        // Register the decision of the member reached to not share his/her booklist
         public function notShare($login, $loginFriend){
             $sql = 'SELECT email FROM members WHERE login = :login';
             $result = $this->sql($sql, [
@@ -160,6 +187,10 @@
             return $message;
         }
 
+        /**
+         * @return mixed
+         */
+        // Display the number of books the member has registered
         public function nbBooks(){
             $sql = 'SELECT COUNT(*) FROM bookslist WHERE id_member = :id';
             $result = $this->sql($sql, [

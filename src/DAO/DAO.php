@@ -8,6 +8,9 @@
 
         private $connection;
 
+        /**
+         * @return PDO
+         */
         private function checkConnection(){
             // Verify if the connection is already established or not
             // And 'call' getConnection()
@@ -20,6 +23,9 @@
             return $this->connection;
         }
 
+        /**
+         * @return PDO
+         */
         private function getConnection(){
             // Trying to connect to the database
             try{
@@ -35,6 +41,11 @@
             }
         }
 
+        /**
+         * @param $sql
+         * @param null $parameters
+         * @return bool|\PDOStatement
+         */
         protected function sql($sql, $parameters = null){
             if($parameters){
                 $result = $this->checkConnection()->prepare($sql);

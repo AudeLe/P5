@@ -9,17 +9,20 @@
     use Symfony\Component\Validator\Constraints\Email;
 
     class RegistrationForm{
-        private $login;
-        private $passwordVisitor;
-        private $passwordVisitorCheck;
-        private $emailVisitor;
 
-        // Validates the inputs before recording them into the db
+        /**
+         * RegistrationForm constructor.
+         */
         public function __construct()
         {
             $this->validator = Validation::createValidator();
         }
 
+        /**
+         * @param $login
+         * @return string
+         */
+        // Verifies if the login has the specifities required
         public function checkLogin($login)
         {
             $violations = $this->validator->validate($login, [
@@ -38,6 +41,11 @@
 
         }
 
+        /**
+         * @param $passwordVisitor
+         * @return string
+         */
+        // Verifies if the password has the specifities required
         public function checkPassword($passwordVisitor){
             $violations = $this->validator->validate($passwordVisitor, [
                 new NotBlank(),
@@ -52,6 +60,12 @@
             return $errors;
         }
 
+        /**
+         * @param $passwordVisitorCheck
+         * @param $passwordVisitor
+         * @return string
+         */
+        // Verifies if the password has the specifities required and if it's identical to previous input
         public function checkPasswordConfirmation($passwordVisitorCheck, $passwordVisitor){
             $violations = $this->validator->validate($passwordVisitorCheck, array(
                 new NotBlank(),
@@ -66,6 +80,11 @@
             return $errors;
         }
 
+        /**
+         * @param $emailVisitor
+         * @return string
+         */
+        // Verifies if the password has the specifities required
         public function checkEmail($emailVisitor){
             $violations = $this->validator->validate($emailVisitor, array(
                new NotBlank(),
@@ -77,6 +96,11 @@
             return $errors;
         }
 
+        /**
+         * @param $violations
+         * @return string
+         */
+        // Return the errors if there are some
         private function check($violations){
             if (0 !== count($violations)) {
                 // There are errors to show
