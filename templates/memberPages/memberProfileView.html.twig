@@ -10,7 +10,21 @@
 
         {% block displayContent %}
             <div class="col-9">
-                <p>Page de membre</p>
+                {% block profileBanner %}
+                    <div class="col-lg-12" class="generalProfileBanner">
+
+                        {% include 'commonPages/profileBanner.html.twig' %}
+
+                        <div class="col-lg-12 profileBannerText">
+                            <h3>Page de profil</h3>
+                        </div>
+
+                    </div>
+                {% endblock %}
+
+                <div class="col-lg-12">
+                    <p>Texte à insérer</p>
+                </div>
             </div>
         {% endblock %}
     </div>

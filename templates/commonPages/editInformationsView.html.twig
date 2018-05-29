@@ -14,57 +14,74 @@
 
         {% block displayContent %}
             <div class="col-9">
-                <h3>Changer ses informations</h3>
 
-                <p>Une fois votre pseudonyme, votre mot de passe ou votre email modifié, vous serez déconnecté(e) afin d'enregistrer vos modifications.<br />
-                    Veuillez vous connecter de nouveau adin d'avoir accès à votre espace personnel.</p>
+                {% block profileBanner %}
+                    <div class="col-lg-12" class="generalProfileBanner">
 
-                {% block modifyLogin %}
-                    <h4>Changer son pseudonyme</h4>
-                    <form action="../public/index.php?action=editLogin" method="post">
-                        <div>
-                            <label for="editLogin">Nouveau Pseudonyme</label>
-                            <input type="text" id="editLogin" name="editLogin" onblur="checkForm.checkLogin(this)" required/>
+                        {% include 'commonPages/profileBanner.html.twig' %}
+
+                        <div class="col-lg-12 profileBannerText">
+                            <h3>Changer ses informations</h3>
                         </div>
-                        <div>
-                            <input type="submit" value="Modifier son pseudo" class="submitButton"/>
-                        </div>
-                    </form>
+
+                    </div>
                 {% endblock %}
 
-                {% block modifyPassword %}
-                    <h4>Changer son mot de passe</h4>
-                    <form action="../public/index.php?action=editPassword" method="post">
-                        <div>
-                            <label for="editPassword">Nouveau mot de passe</label>
-                            <input type="password" id="editPassword" name="editPassword" onblur="checkForm.checkPassword(this)" required/>
-                        </div>
-                        <div>
-                            <label for="confirmEditPassword">Veuillez entrer de nouveau votre mot de passe</label>
-                            <input type="password" id="confirmEditPassword" name="confirmEditPassword" onblur="checkForm.checkConfirmationEditPassword(this)" required/>
-                        </div>
-                        <div>
-                            <input type="submit" value="Modifier son mot de passe" class="submitButton"/>
-                        </div>
-                    </form>
-                {% endblock %}
+                <div class="col-lg-12">
+                    <p>Texte à insérer</p>
 
-                {% block modifyEmail %}
-                    <h4>Changer son email</h4>
-                    <form action="../public/index.php?action=editMail" method="post">
-                        <div>
-                            <label for="editMail">Nouvel Email</label>
-                            <input type="email" name="editMail" id="editMail" required/>
-                        </div>
-                        <div>
-                            <label for="confirmEditMail">Veuillez confirmer votre email</label>
-                            <input type="email" name="confirmEditMail" id="confirmEditMail" required/>
-                        </div>
-                        <div>
-                            <input type="submit" value="Modifier son email" class="submitButton"/>
-                        </div>
-                    </form>
-                {% endblock %}
+
+
+                    <p>Une fois votre pseudonyme, votre mot de passe ou votre email modifié, vous serez déconnecté(e) afin d'enregistrer vos modifications.<br />
+                        Veuillez vous connecter de nouveau adin d'avoir accès à votre espace personnel.</p>
+
+                    {% block modifyLogin %}
+                        <h4>Changer son pseudonyme</h4>
+                        <form action="../public/index.php?action=editLogin" method="post">
+                            <div>
+                                <label for="editLogin">Nouveau Pseudonyme</label>
+                                <input type="text" id="editLogin" name="editLogin" onblur="checkForm.checkLogin(this)" required/>
+                            </div>
+                            <div>
+                                <input type="submit" value="Modifier son pseudo" class="submitButton"/>
+                            </div>
+                        </form>
+                    {% endblock %}
+
+                    {% block modifyPassword %}
+                        <h4>Changer son mot de passe</h4>
+                        <form action="../public/index.php?action=editPassword" method="post">
+                            <div>
+                                <label for="editPassword">Nouveau mot de passe</label>
+                                <input type="password" id="editPassword" name="editPassword" onblur="checkForm.checkPassword(this)" required/>
+                            </div>
+                            <div>
+                                <label for="confirmEditPassword">Veuillez entrer de nouveau votre mot de passe</label>
+                                <input type="password" id="confirmEditPassword" name="confirmEditPassword" onblur="checkForm.checkConfirmationEditPassword(this)" required/>
+                            </div>
+                            <div>
+                                <input type="submit" value="Modifier son mot de passe" class="submitButton"/>
+                            </div>
+                        </form>
+                    {% endblock %}
+
+                    {% block modifyEmail %}
+                        <h4>Changer son email</h4>
+                        <form action="../public/index.php?action=editMail" method="post">
+                            <div>
+                                <label for="editMail">Nouvel Email</label>
+                                <input type="email" name="editMail" id="editMail" required/>
+                            </div>
+                            <div>
+                                <label for="confirmEditMail">Veuillez confirmer votre email</label>
+                                <input type="email" name="confirmEditMail" id="confirmEditMail" required/>
+                            </div>
+                            <div>
+                                <input type="submit" value="Modifier son email" class="submitButton"/>
+                            </div>
+                        </form>
+                    {% endblock %}
+                </div>
             </div>
         {% endblock %}
     </div>

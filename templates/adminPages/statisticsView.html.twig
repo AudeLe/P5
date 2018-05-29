@@ -12,13 +12,31 @@
 
     {% block displayContent %}
         <div class="col-9">
-            {% block nbMembers %}
-                <p>Il y a {{ nbMembers }} membres présentemment inscrits sur le site.</p>
+
+            {% block profileBanner %}
+                <div class="col-lg-12" class="generalProfileBanner">
+
+                    {% include 'commonPages/profileBanner.html.twig' %}
+
+                    <div class="col-lg-12 profileBannerText">
+                        <h3>Statistiques</h3>
+                    </div>
+
+                </div>
             {% endblock %}
 
-            {% block nbBooks %}
-                <p>Il y a {{ nbBooks }} livres enregistrés sur le site en ce moment.</p>
-            {% endblock %}
+            <div class="col-lg-12">
+                <p>Texte à insérer</p>
+
+                {% block nbMembers %}
+                    <p>Il y a {{ nbMembers }} membres présentemment inscrits sur le site.</p>
+                {% endblock %}
+
+                {% block nbBooks %}
+                    <p>Il y a {{ nbBooks }} livres enregistrés sur le site en ce moment.</p>
+                {% endblock %}
+
+            </div>
         </div>
     {% endblock %}
 {% endblock %}

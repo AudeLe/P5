@@ -15,43 +15,59 @@
 
         {% block displayContent %}
             <div class="col-9">
-                {% block managingAccount %}
-                    <h3>Gestion de compte</h3>
-                    <div>
-                        <h4>Changer son mot de passe ou son pseudo</h4>
-                        <p>Veuillez entrer vos identifiants actuels.</p>
-                        <form action="../public/index.php?action=verifyInformations" method="post">
-                            <div>
-                                <label for="verifyLogin">Pseudo</label><br />
-                                <input type="text" id="verifyLogin" name="verifyLogin" value="{{ session.login }}" readonly/>
-                            </div>
-                            <div>
-                                <label for="verifyPassword">Mot de passe</label><br />
-                                <input type="password" id="verifyPassword" name="verifyPassword" required/>
-                            </div>
-                            <div>
-                                <input type="submit" value="Confirmer mes identifiants" class="submitButton"/>
-                            </div>
-                        </form>
+
+                {% block profileBanner %}
+                    <div class="col-lg-12" class="generalProfileBanner">
+
+                        {% include 'commonPages/profileBanner.html.twig' %}
+
+                        <div class="col-lg-12 profileBannerText">
+                            <h3>Gestion du compte</h3>
+                        </div>
+
                     </div>
                 {% endblock %}
 
-                {% block booklistSharedWith %}
-                    <p>Personnes avec qui vous partagez votre liste de livres :</p>
-                    {% for member in members %}
-                        {% if member.loginShareBooklist1 == session.login %}
-                            {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
-                        {% elseif member.loginShareBooklist2 == session.login %}
-                            {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
-                        {% elseif member.loginShareBooklist3 == session.login %}
-                            {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
-                        {% endif %}
+                <div class="col-lg-12">
+                    <p>Texte à insérer</p>
 
-                    {% else %}
-                        <p>Vous ne partagez votre liste de livres avec personne pour l'instant.</p>
-                    {% endfor %}
+                    {% block managingAccount %}
+                        <div>
+                            <h4>Changer son mot de passe ou son pseudo</h4>
+                            <p>Veuillez entrer vos identifiants actuels.</p>
+                            <form action="../public/index.php?action=verifyInformations" method="post">
+                                <div>
+                                    <label for="verifyLogin">Pseudo</label><br />
+                                    <input type="text" id="verifyLogin" name="verifyLogin" value="{{ session.login }}" readonly/>
+                                </div>
+                                <div>
+                                    <label for="verifyPassword">Mot de passe</label><br />
+                                    <input type="password" id="verifyPassword" name="verifyPassword" required/>
+                                </div>
+                                <div>
+                                    <input type="submit" value="Confirmer mes identifiants" class="submitButton"/>
+                                </div>
+                            </form>
+                        </div>
+                    {% endblock %}
 
-                {% endblock %}
+                    {% block booklistSharedWith %}
+                        <p>Personnes avec qui vous partagez votre liste de livres :</p>
+                        {% for member in members %}
+                            {% if member.loginShareBooklist1 == session.login %}
+                                {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
+                            {% elseif member.loginShareBooklist2 == session.login %}
+                                {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
+                            {% elseif member.loginShareBooklist3 == session.login %}
+                                {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
+                            {% endif %}
+
+                        {% else %}
+                            <p>Vous ne partagez votre liste de livres avec personne pour l'instant.</p>
+                        {% endfor %}
+
+                    {% endblock %}
+                </div>
             </div>
         {% endblock %}
     </div>

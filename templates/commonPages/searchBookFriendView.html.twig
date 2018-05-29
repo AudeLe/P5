@@ -14,37 +14,54 @@
 
         {% block displayContent %}
             <div class="col-9">
-                {% block checkFriendBook %}
-                    <p> Vérifier si un(e) de vos ami(e)s a déjà un livre</p>
 
-                    <form action="../public/index.php?action=checkBookFriend&login={{ session.login }}" method="post">
-                        <p>Veuillez entrer l'ISBN du livre que vous souhaiteriez vérifier et sélectionner la personne correspondante.</p>
-                        <div>
-                            <label for="checkBookFriendISBN">ISBN de l'ouvrage que l'on souhaite vérifier</label>
-                            <input type="text" name="checkBookFriendISBN" id="checkBookFriendISBN" required/>
-                        </div>
-                        <div>
-                            <label for="checkBookFriend">Liste de livres de la personne souhaitée</label><br />
-                            <select name="checkBookFriend" id="checkBookFriend" required>
-                                {% for friend in friends %}
-                                    <option value="{{ friend }}">{{ friend }}</option>
-                                {% else %}
-                                    <option value="">---</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div>
-                            <input type="submit" value="Rechercher"/>
+                {% block profileBanner %}
+                    <div class="col-lg-12" class="generalProfileBanner">
+
+                        {% include 'commonPages/profileBanner.html.twig' %}
+
+                        <div class="col-lg-12 profileBannerText">
+                            <h3>Chercher un livre d'un(e) ami(e) ?</h3>
                         </div>
 
-                    </form>
-
-                    <p>
-                        {{ message }}
-                    </p>
-
-
+                    </div>
                 {% endblock %}
+
+                <div class="col-lg-12">
+                    <p>Texte à insérer</p>
+
+                    {% block checkFriendBook %}
+                        <p> Vérifier si un(e) de vos ami(e)s a déjà un livre</p>
+
+                        <form action="../public/index.php?action=checkBookFriend&login={{ session.login }}" method="post">
+                            <p>Veuillez entrer l'ISBN du livre que vous souhaiteriez vérifier et sélectionner la personne correspondante.</p>
+                            <div>
+                                <label for="checkBookFriendISBN">ISBN de l'ouvrage que l'on souhaite vérifier</label>
+                                <input type="text" name="checkBookFriendISBN" id="checkBookFriendISBN" required/>
+                            </div>
+                            <div>
+                                <label for="checkBookFriend">Liste de livres de la personne souhaitée</label><br />
+                                <select name="checkBookFriend" id="checkBookFriend" required>
+                                    {% for friend in friends %}
+                                        <option value="{{ friend }}">{{ friend }}</option>
+                                    {% else %}
+                                        <option value="">---</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <input type="submit" value="Rechercher"/>
+                            </div>
+
+                        </form>
+
+                        <p>
+                            {{ message }}
+                        </p>
+
+
+                    {% endblock %}
+                </div>
             </div>
         {% endblock %}
     </div>

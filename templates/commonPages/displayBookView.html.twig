@@ -15,20 +15,36 @@
 
         {% block displayContent %}
             <div class="col-9">
-                {% for book in bookDatas %}
-                    <h5>Auteur</h5>
-                    <div>{{ book.author }}</div>
-                    <h5>Titre</h5>
-                    <div>{{ book.title }}</div>
-                    <h5>Résumé</h5>
-                    <div>{{ book.summary }}</div>
-                    <h5>Année de publication</h5>
-                    <div>{{ book.publishingYear }}</div>
-                    <h5>ISBN</h5>
-                    <div>{{ book.ISBN }}</div>
-                    <h5>Nombre de pages</h5>
-                    <div>{{ book.nbPages }}</div>
-                {% endfor %}
+                {% block profileBanner %}
+                    <div class="col-lg-12" class="generalProfileBanner">
+
+                        {% include 'commonPages/profileBanner.html.twig' %}
+
+                        <div class="col-lg-12 profileBannerText">
+                            <h3>Détails du livre</h3>
+                        </div>
+
+                    </div>
+                {% endblock %}
+
+                <div class="col-lg-12">
+                    <p>Texte à insérer</p>
+
+                    {% for book in bookDatas %}
+                        <h5>Auteur</h5>
+                        <div>{{ book.author }}</div>
+                        <h5>Titre</h5>
+                        <div>{{ book.title }}</div>
+                        <h5>Résumé</h5>
+                        <div>{{ book.summary }}</div>
+                        <h5>Année de publication</h5>
+                        <div>{{ book.publishingYear }}</div>
+                        <h5>ISBN</h5>
+                        <div>{{ book.ISBN }}</div>
+                        <h5>Nombre de pages</h5>
+                        <div>{{ book.nbPages }}</div>
+                    {% endfor %}
+                </div>
             </div>
         {% endblock %}
     </div>
