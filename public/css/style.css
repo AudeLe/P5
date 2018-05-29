@@ -31,6 +31,44 @@ body{
     /*font-weight: bold;*/
 }
 
+/*a{
+    color: #B57642;
+}
+
+ul{
+    list-style: none;
+}*/
+
+/*button.btn.btn-primary{
+    background-color: #B56042;
+    border-color: #B56042;
+}
+
+button.btn.btn-primary:hover{
+    background-color: #0056b3;
+    border-color: #0056b3;
+}*/
+
+header{
+    box-shadow: 0 0 20px grey;
+    margin-bottom: 2%;
+}
+
+footer{
+    bottom: 0;
+    box-shadow: 0 0 10px grey;
+    height: 60px;
+    margin-top: 5%;
+    text-align: center;
+    width: 100%;
+}
+
+footer div{
+    height: 100%;
+    padding-top: 15px;
+}
+
+
 h1, h2, h3, h4, h5{
     font-family : 'kaushan_scriptregular', sans-serif;
     font-size: 4em;
@@ -94,22 +132,65 @@ h1, h2, h3, h4, h5{
 
 
 /* ===== ADMIN PAGE =====*/
-#adminBanner{
-    background : grey;
-    /*height: 150px;*/
+#navbarAdminOutside{
+    padding: 4px;
+    border-right: 3px inset #B57642;
+}
+
+#navbarAdminInside{
+    /*background-image : url("../assets/images/ryan-loughlin-253609-unsplash.jpg");
+    width: 100%;
+    overflow: hidden;
+    padding: 3px;
+    background-color: #e0e0e0;*/
+}
+
+.generalProfileBanner{
+    margin: 0;
+    padding: 0;
+    position: relative;
     width: 100%;
 }
 
-#adminBanner img{
+#adminBanner{
     height: 150px;
     width: 100%;
+    overflow: hidden;
+}
 
+#adminBanner img{
+    /*height: auto;*/
+    width: 100%;
+
+}
+
+.profileBannerText{
+    position: absolute;
+    /*width: 100%;
+    z-index: 5;*/
+    top: 18%;
+    color: white;
+    text-shadow: 1px 1px 10px #385C91;
+}
+
+
+/* ===== MEMBER PAGE =====*/
+#navbarMemberOutside{
+    padding: 4px;
+    border-right: 3px inset #944E13;
+}
+
+#navbarMemberInside{
+    /*padding: 3px;
+    background-color: #e0e0e0;*/
+}
+
+
+/* ===== COMMON PAGES ===== */
+.personalSpace{
+    text-align: justify;
 }
 
 #bookInformations{
     display : none;
-}
-
-.navbarPersonalSpace:focus{
-    color: red;
 }
