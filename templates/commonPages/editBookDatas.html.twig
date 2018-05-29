@@ -13,38 +13,40 @@
         {% endblock %}
 
         {% block editBookDatas %}
-            {% for book in bookDatas %}
-                <form action="../public/index.php?action=registerEditBookDatas&bookId={{ book.id }}" method="post">
-                    <div>
-                        <label for="editAuthor">Auteur</label><br />
-                        <input type="text" name="editAuthor" id="editAuthor" value="{{ book.author }}" required/>
-                    </div>
-                    <div>
-                        <label for="editTitle">Titre</label><br />
-                        <input type="text" name="editTitle" id="editTitle" value="{{ book.title }}" required/>
-                    </div>
-                    <div>
-                        <label for="editSummary">Résumé</label><br />
-                        <textarea name="editSummary" id="editSummary" required>{{ book.summary }}</textarea>
-                    </div>
-                    <div>
-                        <label for="editPublishingYear">Année de publication</label><br />
-                        <input type="text" name="editPublishingYear" id="editPublishingYear" value="{{ book.publishingYear }}" required/>
-                    </div>
-                    <div>
-                        <label for="editISBN">ISBN</label><br />
-                        <p>Ce champ n'est pas modifiable.</p>
-                        <input type="text" name="editISBN" id="editISBN" value="{{ book.ISBN }}" readonly/>
-                    </div>
-                    <div>
-                        <label for="editNbPages">Nombre de pages</label><br />
-                        <input type="text" name="editNbPages" id="editNbPages" value="{{ book.nbPages }}" required/>
-                    </div>
-                    <div>
-                        <input type="submit" value="Enregistrer les modifications"/>
-                    </div>
-                </form>
-            {% endfor %}
+            <div class="col-9">
+                {% for book in bookDatas %}
+                    <form action="../public/index.php?action=registerEditBookDatas&bookId={{ book.id }}" method="post">
+                        <div>
+                            <label for="editAuthor">Auteur</label><br />
+                            <input type="text" name="editAuthor" id="editAuthor" value="{{ book.author }}" required/>
+                        </div>
+                        <div>
+                            <label for="editTitle">Titre</label><br />
+                            <input type="text" name="editTitle" id="editTitle" value="{{ book.title }}" required/>
+                        </div>
+                        <div>
+                            <label for="editSummary">Résumé</label><br />
+                            <textarea name="editSummary" id="editSummary" required>{{ book.summary }}</textarea>
+                        </div>
+                        <div>
+                            <label for="editPublishingYear">Année de publication</label><br />
+                            <input type="text" name="editPublishingYear" id="editPublishingYear" value="{{ book.publishingYear }}" required/>
+                        </div>
+                        <div>
+                            <label for="editISBN">ISBN</label><br />
+                            <p>Ce champ n'est pas modifiable.</p>
+                            <input type="text" name="editISBN" id="editISBN" value="{{ book.ISBN }}" readonly/>
+                        </div>
+                        <div>
+                            <label for="editNbPages">Nombre de pages</label><br />
+                            <input type="text" name="editNbPages" id="editNbPages" value="{{ book.nbPages }}" required/>
+                        </div>
+                        <div>
+                            <input type="submit" value="Enregistrer les modifications"/>
+                        </div>
+                    </form>
+                {% endfor %}
+            </div>
         {% endblock %}
     </div>
 {% endblock %}

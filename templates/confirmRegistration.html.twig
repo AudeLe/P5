@@ -3,9 +3,9 @@
 {% block title %}Confirmation d'inscription{% endblock %}
 
 {% block content %}
-    <div>
-        {{ login }}, confirmez-vous votre inscription ?
-        Si vous refusez, vous serez redirigé(e) vers la page d'accueil.
+    <div class="row">
+        {{ login }}, confirmez-vous votre inscription ?<br/>
+        Si vous refusez, vous serez redirigé(e) vers la page d'accueil.<br/>
         <a href="../public/index.php?action=confirmRegistration&login={{ login }}">Oui</a>
         <a href="../public/index.php?action=refuseRegistration&login={{ login }}">Non</a>
     </div>
