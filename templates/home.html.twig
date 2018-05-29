@@ -3,11 +3,23 @@
 {% block title %}<i class="fas fa-book-open"></i>Have a Book ?{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h1>Have A Book ?</h1>
+    <div class="row" id="home">
 
-        <p>Sur ce site, vous pouvez enregistrer vos ouvrages, afin de suivre quels livres vous avez déjà.<br />
-            Grâce à cette application, vous pouvez partager votre liste avec vos proches et vos amis afin qu'ils/elles puissent vérifier si vous les avez déjà.
-        </p>
+            <img class="img-responsive" src="../public/assets/images/james-bold-343821-unsplash.jpg" alt="Book open on a bed" />
+
+            <div id="homeText">
+                <h1>Have A Book ?</h1>
+
+                <p>Sur ce site, vous pouvez enregistrer vos ouvrages, afin de suivre quels livres vous avez déjà.<br />
+                    Grâce à cette application, vous pouvez partager votre liste avec vos proches et vos amis afin qu'ils/elles puissent vérifier si vous les avez déjà.
+                </p>
+            </div>
+
+
+
     </div>
+{% endblock %}
+
+{% block footer %}
+    <div>Photo by James Bold on Unsplash</div>
 {% endblock %}
