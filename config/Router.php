@@ -116,6 +116,11 @@
                             $this->connectionController->logOut();
                             break;
 
+                        // Access to the log out page
+                        case ($action == 'logOutPage'):
+                            $this->connectionController->logOutPage();
+                            break;
+
 
                     /*===== ACCESS PERSONAL PAGES ===== */
 

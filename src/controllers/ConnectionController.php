@@ -55,14 +55,21 @@
         }
 
         /**
-         * @throws \Twig_Error_Loader
-         * @throws \Twig_Error_Runtime
-         * @throws \Twig_Error_Syntax
+         *
          */
         // Log out of the website
         public function logOut(){
             $this->connectionManager->logOut();
 
+
+        }
+
+        /**
+         * @throws \Twig_Error_Loader
+         * @throws \Twig_Error_Runtime
+         * @throws \Twig_Error_Syntax
+         */
+        public function logOutPage(){
             echo $this->twig->render('logOut.html.twig');
         }
     }

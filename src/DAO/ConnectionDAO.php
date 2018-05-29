@@ -161,6 +161,8 @@
         public function logOut(){
             $_SESSION = array();
             session_destroy();
+
+            header('Location: ../public/index.php?action=logOutPage');
         }
 
     }
