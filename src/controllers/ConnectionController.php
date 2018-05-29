@@ -63,6 +63,6 @@
         public function logOut(){
             $this->connectionManager->logOut();
 
-            echo $this->twig->render('logout.html.twig');
+            echo $this->twig->render('logOut.html.twig');
         }
     }
