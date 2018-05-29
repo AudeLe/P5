@@ -28,8 +28,6 @@
                 {% endblock %}
 
                 <div class="col-lg-12">
-                    <p>Texte à insérer</p>
-
                     {% for book in bookDatas %}
                         <form action="../public/index.php?action=registerEditBookDatas&bookId={{ book.id }}" method="post">
                             <div>

@@ -28,8 +28,6 @@
                 {% endblock %}
 
                 <div class="col-lg-12">
-                    <p>Texte à insérer</p>
-
                     {% block searchBook %}
                         <h4>Chercher si l'on a déjà un livre</h4>
                         <form action="../public/index.php?action=searchBook&id={{ session.id }}" method="post">

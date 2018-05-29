@@ -52,7 +52,7 @@
                     {% endblock %}
 
                     {% block booklistSharedWith %}
-                        <p>Personnes avec qui vous partagez votre liste de livres :</p>
+                        <p>Récapitulatif, des personnes avec qui vous partagez votre liste de livres :</p>
                         {% for member in members %}
                             {% if member.loginShareBooklist1 == session.login %}
                                 {{ member.loginMember }} <a href="../public/index.php?action=stopSharingBooklist&login={{ session.login }}&loginFriend={{ member.loginMember }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer l\'accès à votre liste de partage à {{ member.loginMember }} ?')) return true; else return false"><i class="fas fa-ban"></i></a>
