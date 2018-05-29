@@ -2,6 +2,63 @@ body{
     width: 100%;
 }
 
+.row{
+    text-align: center;
+}
+
+/* ===== HOME PAGE ===== */
+#home{
+    text-align: center;
+    height: 100%;
+    position: relative;
+    /*width: 100%;*/
+}
+
+#home:after{
+    background-color: rgba(195, 201, 201, 0.25);
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+}
+
+#homeText{
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    z-index: 2;
+}
+
+/* ===== CONTACT PAGE ===== */
+#contactUs{
+    text-align: center;
+    height: 100%;
+    position: relative;
+    /*width: 100%;*/
+}
+
+#contactUs:after{
+    background-color: rgba(130, 65, 27, 0.35);
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+}
+
+#contactUsText{
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    z-index: 2;
+}
+
+
 #bookInformations{
     display : none;
 }
