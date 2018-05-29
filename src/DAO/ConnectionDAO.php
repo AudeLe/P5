@@ -68,8 +68,8 @@
 
                     $email = $emailVisitor;
                     $subjectMail = 'Demande de confirmation d\'inscription';
-                    $bodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre sur cette <a href="http://localhost/P5/public/index.php?action=confirmRegistrationPage&login=' . $login . '">page</a>';
-                    $altBodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre à cette adresse : http://localhost/P5/public/index.php?action=confirmRegistrationPage&login=' . $login ;
+                    $bodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre sur cette <a href="http://audeleissen.com/HaB/public/index.php?action=confirmRegistrationPage&login=' . $login . '">page</a>';
+                    $altBodyMail = $login . ', afin de confirmer votre inscription, veuillez vous rendre à cette adresse : http://audeleissen.com/HaB/public/index.php?action=confirmRegistrationPage&login=' . $login ;
 
                     $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
                 }
