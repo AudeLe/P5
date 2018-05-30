@@ -103,9 +103,8 @@ var checkForm = {
         var passwordOk = this.checkPassword(f.passwordVisitor);
         var confirmPassword = this.checkConfirmationPassword(f.passwordVisitorCheck);
         var emailOk = this.checkEmail(f.emailVisitor);
-        var birthDateOk = this.checkBirthDate(f.birthDateVisitor);
 
-        if (loginOk && passwordOk && confirmPassword && emailOk && birthDateOk){
+        if (loginOk && passwordOk && confirmPassword && emailOk){
             return true;
         } else {
             alert ("Veuillez remplir correctement tous les champs.");
