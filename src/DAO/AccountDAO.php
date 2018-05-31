@@ -86,13 +86,25 @@
         // Edit the email
         public function editMail($editMail, $confirmEditMail){
             if($editMail == $confirmEditMail){
-                $sql = 'UPDATE members SET email = :email WHERE id = :id';
-                $this->sql($sql, [
-                    'email' => $editMail,
-                    'id' => $_SESSION['id']
+                $sql = 'SELECT email FROM members WHERE = email = :email';
+                $result = $this->sql($sql, [
+                    'email' => $editMail
                 ]);
+                $row = $result->fetch();
 
-                header('Location: ../public/index.php');
+                if($row){
+                    $errorMessage = 'Votre email est déjà lié à un autre compte.';
+                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
+                } else {
+                    $sql = 'UPDATE members SET email = :email WHERE id = :id';
+                    $this->sql($sql, [
+                        'email' => $editMail,
+                        'id' => $_SESSION['id']
+                    ]);
+
+                    header('Location: ../public/index.php');
+                }
+
             } else {
                 $errorMessage = 'Votre email n\'a pas pu être modifié.';
                 header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
