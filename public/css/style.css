@@ -51,14 +51,14 @@ button.btn.btn-primary:hover{
 
 header{
     box-shadow: 0 0 20px grey;
-    margin-bottom: 2%;
+    /*margin-bottom: 2%;*/
 }
 
 footer{
     bottom: 0;
     box-shadow: 0 0 10px grey;
     height: 60px;
-    margin-top: 5%;
+    /*margin-top: 5%;*/
     text-align: center;
     width: 100%;
 }
@@ -69,9 +69,14 @@ footer div{
 }
 
 
-h1, h2, h3, h4, h5{
+h1, h2, h3{
     font-family : 'kaushan_scriptregular', sans-serif;
     font-size: 4em;
+}
+
+textarea{
+    width: 600px;
+    height: 200px;
 }
 
 .row{
@@ -124,6 +129,7 @@ h1, h2, h3, h4, h5{
 }
 
 #contactUsText{
+    font-weight: bold;
     position: absolute;
     top: 20%;
     width: 100%;
@@ -152,13 +158,14 @@ h1, h2, h3, h4, h5{
     width: 100%;
 }
 
-#adminBanner{
+#profileBanner{
+    border-radius: 7px;
     height: 150px;
     width: 100%;
     overflow: hidden;
 }
 
-#adminBanner img{
+#profileBanner img{
     /*height: auto;*/
     width: 100%;
 
@@ -187,10 +194,110 @@ h1, h2, h3, h4, h5{
 
 
 /* ===== COMMON PAGES ===== */
-.personalSpace{
+.personalPage{
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+.personalPageText{
+    margin-top: 5%;
     text-align: justify;
+}
+
+/* ===== REGISTER BOOK DATAS ===== */
+#registerBookExplanations{
+    margin: 3% 0;
+    text-align: justify;
+}
+
+.ISBNSpace{
+    margin-top: 5%;
 }
 
 #bookInformations{
     display : none;
+    margin-top: 5%;
+}
+
+.formElement{
+    margin: 15px 0;
+}
+
+/* ===== BOOKLIST =====*/
+#booksTotal{
+    margin: 3% 0;
+}
+
+.book{
+    border-bottom: 1px solid #D3D3D3;
+}
+
+/* ===== BOOK DISPLAY ===== */
+.bookViewDisplay{
+    margin: 5% 0;
+}
+
+.bookViewDiv{
+    margin: 10px 0;
+}
+
+.bookView{
+    font-size: 1.1em;
+}
+
+/* ===== EDIT BOOK DATAS ===== */
+#editBook{
+    margin: 3% 0;
+}
+
+#editISBN{
+    background-color: #D3D3D3;
+}
+
+/* ===== ACCOUNT PAGE ===== */
+#friendShareBooklistWith{
+    margin: 3% 0;
+}
+
+/* ===== EDIT CREDENTIALS ===== */
+#modifyCredentialsText{
+    margin: 3% 0;
+}
+
+.modifyCredentials{
+    border-top: 1px solid #D3D3D3;
+    margin: 3% 0;
+}
+
+/* ===== FRIENDS CIRCLE ===== */
+.friendsCircle{
+    margin: 3% 0;
+    text-align: justify;
+}
+
+.addFriend{
+    text-align: center;
+}
+
+#searchFriendBook{
+    margin: 3% 0;
+}
+
+/* ===== SEARCH BOOK ===== */
+#searchBook{
+    margin: 3% 0;
+}
+
+/* ===== STATISTICS ===== */
+#statistics{
+    margin: 3% 0;
+}
+
+/* ===== DELETE ACCOUNT =====*/
+#deleteAccount{
+    margin: 3% 0;
+}
+
+#warningDeletion{
+    font-weight: bold;
 }
