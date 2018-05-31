@@ -3,7 +3,7 @@
 {% block title %}Modification des données de "{{ book.title }}"{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row personalPage">
         {% block navbarLeftSide %}
             {% if session.status == 'admin' %}
                 {% include 'adminPages/navbarAdmin.html.twig' %}

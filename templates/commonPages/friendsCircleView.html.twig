@@ -3,7 +3,7 @@
 {% block title %}Cercle d'ami(e)s - {{ session.login }}{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row personalPage">
         {% block navbarLeftSide %}
             {% if session.status == 'admin' %}
                 {% include 'adminPages/navbarAdmin.html.twig' %}

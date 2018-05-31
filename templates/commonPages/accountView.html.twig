@@ -3,7 +3,7 @@
 {% block title %}Compte - {{ session.login }}{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row personalPage">
         {% block navbarLeftSide %}
             {% if session.status == 'admin' %}
                 {% include 'adminPages/navbarAdmin.html.twig' %}

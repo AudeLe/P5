@@ -3,7 +3,7 @@
 {% block title %}Espace d'administration - {{ session.login }}{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row personalPage">
         {% block navbarLeftSide %}
 
             {% include 'adminPages/navbarAdmin.html.twig' %}
@@ -25,10 +25,10 @@
                     </div>
                 {% endblock %}
 
-                <div class="col-lg-12">
-                    <p>Ici, vous trouverez toutes les fonctionnalités nécessaires afin d'ajouter un livre ou bien de vous connecter aux bibliothèques de vos ami(e)s.</p>
+                <div class="col-lg-12 personalPageText">
+                    <p>Vous trouverez ici toutes les fonctionnalités nécessaires afin d'ajouter un livre ou bien de vous connecter aux bibliothèques de vos ami(e)s.<br/>
+                        Cette page regroupe les informations sur les différents liens que vous pouvez voir sur votre gauche.</p>
                     <p>
-                        Cette page regroupe les informations sur les différents liens que vous pouvez voir sur votre gauche.<br/>
                         Nous allons passer en revue les différents éléments :
                     </p>
                     <ul>
