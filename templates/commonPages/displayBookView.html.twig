@@ -27,20 +27,32 @@
                     </div>
                 {% endblock %}
 
-                <div class="col-lg-12">
+                <div class="col-lg-12 bookViewDisplay">
                     {% for book in bookDatas %}
-                        <h5>Auteur</h5>
-                        <div>{{ book.author }}</div>
-                        <h5>Titre</h5>
-                        <div>{{ book.title }}</div>
-                        <h5>Résumé</h5>
-                        <div>{{ book.summary }}</div>
-                        <h5>Année de publication</h5>
-                        <div>{{ book.publishingYear }}</div>
-                        <h5>ISBN</h5>
-                        <div>{{ book.ISBN }}</div>
-                        <h5>Nombre de pages</h5>
-                        <div>{{ book.nbPages }}</div>
+                        <div class="bookViewDiv">
+                            <em class="bookView">Auteur</em> : {{ book.author }}
+                        </div>
+
+                        <div class="bookViewDiv">
+                            <em class="bookView">Titre</em> : {{ book.title }}
+                        </div>
+
+                        <div class="bookViewDiv">
+                            <em class="bookView">Résumé</em> : {{ book.summary }}
+                        </div>
+
+                        <div class="bookViewDiv">
+                            <em class="bookView">Année de publication</em> : {{ book.publishingYear }}
+                        </div>
+
+                        <div class="bookViewDiv">
+                            <em class="bookView">ISBN</em> : {{ book.ISBN }}
+                        </div>
+
+                        <div class="bookViewDiv">
+                            <em class="bookView">Nombre de pages</em> : {{ book.nbPages }}
+                        </div>
+
                     {% endfor %}
                 </div>
             </div>

@@ -28,35 +28,44 @@
                 {% endblock %}
 
                 <div class="col-lg-12">
+                    <div class="friendsCircle">
+                        {% block reminderFriends %}
+                            {% if friends is empty %}
+                                <p>Vous n'avez pas d'ami(e)s ajouté(e)s pour l'instant.</p>
+                            {% else %}
+                                <p>Vous avez ajouté ces personnes à votre cercle d'ami(e)s :</p>
+                                {% for friend in friends %}
+                                    <ul>
+                                        {% if friend is not null %}
+                                            <li>{{ friend }}<a href="../public/index.php?action=deleteSharedBooklist&login={{ session.login }}&loginFriend={{ friend }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer {{ friend }} de votre liste de partage ?')) return true; else return false"><i class="fas fa-ban"></i></a></li>
+                                        {% endif %}
+                                    </ul>
+
+                                {% endfor %}
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+
+
                     {% block friendsCircle %}
-                        <h3>Ajout ami(e)</h3>
-                        <p>Entrez le pseudo de la personne que vous souhaitez ajouter à votre cercle d'amis.<br/>
-                            Si la personne accepte votre demande, vous pourrez alors savoir si elle a déjà un ouvrage en rentrant l'ISBN de celui-ci.
-                        </p>
+                        <div class="friendsCircle">
+                            <p>Vous pouvez ajouter quelqu'un en entrant le pseudo de la personne que vous souhaitez ajouter.<br/>
+                                Si la personne accepte votre demande, vous pourrez alors savoir si elle a déjà un ouvrage en rentrant l'ISBN de celui-ci.
+                            </p>
 
-                        <form action="../public/index.php?action=reachFriend&login={{ session.login }}" method="post">
-                            <label for="loginFriend">Entrez le pseudo de la personne que vous souhaitez ajouter</label><br/>
-                            <input type="text" id="loginFriend" name="loginFriend" required/>
-                            <input type="submit" value="Envoyer une demande d'ami(e)" class="submitButton"/>
-                        </form>
+                            <form action="../public/index.php?action=reachFriend&login={{ session.login }}" method="post" class="addFriend">
+                                <label for="loginFriend">Entrez le pseudo de la personne que vous souhaitez ajouter</label><br/>
+                                <input type="text" id="loginFriend" name="loginFriend" required/>
+                                <input type="submit" value="Envoyer une demande d'ami(e)" class="submitButton"/>
+                            </form>
 
-                        <p>
-                            {{ message }}
-                        </p>
+                            <p class="addFriend">
+                                {{ message }}
+                            </p>
+                        </div>
                     {% endblock %}
 
-                    {% block reminderFriends %}
-                        {% if friends is empty %}
-                            <p>Vous n'avez pas d'ami(e)s ajouté(e)s pour l'instant.</p>
-                        {% else %}
-                            <p>Vous avez ajouté ces personnes à votre cercle d'ami(e)s :</p>
-                            {% for friend in friends %}
-                                {% if friend is not null %}
-                                    {{ friend }}<a href="../public/index.php?action=deleteSharedBooklist&login={{ session.login }}&loginFriend={{ friend }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer {{ friend }} de votre liste de partage ?')) return true; else return false"><i class="fas fa-ban"></i></a><br />
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    {% endblock %}
+
                 </div>
             </div>
         {% endblock %}

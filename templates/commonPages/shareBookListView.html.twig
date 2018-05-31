@@ -4,8 +4,10 @@
 
 {% block content %}
     <div class="row">
-        <p>{{ loginFriend }}, souhaitez vous partager votre liste de livres avec {{ login }} ?</p>
-        <a href="../public/index.php?action=shareBookListWithFriend&login={{ login }}&loginFriend={{ loginFriend }}">oui</a>
-        <a href="../public/index.php?action=notShare&login={{ login }}&loginFriend={{ loginFriend }}">non</a>
+        <div class="col-lg-12">
+            <p>{{ loginFriend }}, souhaitez vous partager votre liste de livres avec {{ login }} ?</p>
+            <a href="../public/index.php?action=shareBookListWithFriend&login={{ login }}&loginFriend={{ loginFriend }}">oui</a>
+            <a href="../public/index.php?action=notShare&login={{ login }}&loginFriend={{ loginFriend }}">non</a>
+        </div>
     </div>
 {% endblock %}

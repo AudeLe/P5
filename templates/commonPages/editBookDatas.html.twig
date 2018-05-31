@@ -27,35 +27,34 @@
                     </div>
                 {% endblock %}
 
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="editBook">
                     {% for book in bookDatas %}
                         <form action="../public/index.php?action=registerEditBookDatas&bookId={{ book.id }}" method="post">
-                            <div>
-                                <label for="editAuthor">Auteur</label><br />
+                            <div class="formElement">
+                                <label for="editAuthor">Auteur : </label>
                                 <input type="text" name="editAuthor" id="editAuthor" value="{{ book.author }}" required/>
                             </div>
-                            <div>
-                                <label for="editTitle">Titre</label><br />
+                            <div class="formElement">
+                                <label for="editTitle">Titre : </label>
                                 <input type="text" name="editTitle" id="editTitle" value="{{ book.title }}" required/>
                             </div>
-                            <div>
-                                <label for="editSummary">Résumé</label><br />
+                            <div class="formElement">
+                                <label for="editSummary">Résumé</label><br/>
                                 <textarea name="editSummary" id="editSummary" required>{{ book.summary }}</textarea>
                             </div>
-                            <div>
-                                <label for="editPublishingYear">Année de publication</label><br />
+                            <div class="formElement">
+                                <label for="editPublishingYear">Année de publication : </label>
                                 <input type="text" name="editPublishingYear" id="editPublishingYear" value="{{ book.publishingYear }}" required/>
                             </div>
-                            <div>
-                                <label for="editISBN">ISBN</label><br />
-                                <p>Ce champ n'est pas modifiable.</p>
+                            <div class="formElement">
+                                <label for="editISBN">ISBN : </label>
                                 <input type="text" name="editISBN" id="editISBN" value="{{ book.ISBN }}" readonly/>
                             </div>
-                            <div>
-                                <label for="editNbPages">Nombre de pages</label><br />
+                            <div class="formElement">
+                                <label for="editNbPages">Nombre de pages : </label>
                                 <input type="text" name="editNbPages" id="editNbPages" value="{{ book.nbPages }}" required/>
                             </div>
-                            <div>
+                            <div class="formElement">
                                 <input type="submit" value="Enregistrer les modifications"/>
                             </div>
                         </form>

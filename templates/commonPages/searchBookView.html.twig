@@ -27,16 +27,18 @@
                     </div>
                 {% endblock %}
 
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="searchBook">
                     {% block searchBook %}
-                        <h4>Chercher si l'on a déjà un livre</h4>
+                        <p>Ici, vous pouvez savoir si vous avez déjà enregistré un livre dans votre propre bibliothèque. <br/>
+                            Vous n'avez qu'à indiquer l'ISBN ci-dessous.
+                        </p>
                         <form action="../public/index.php?action=searchBook&id={{ session.id }}" method="post">
-                            <div>
-                                <label for="ISBNSearch">ISBN</label>
+                            <div class="formElement">
+                                <label for="ISBNSearch">ISBN : </label>
                                 <input type="text" id="ISBNSearch" name="ISBNSearch" required/>
                             </div>
-                            <div>
-                                <input type="submit" value="Rechercher"/>
+                            <div class="formElement">
+                                <input type="submit" value="Rechercher" class="submitButton"/>
                             </div>
                         </form>
 

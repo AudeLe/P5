@@ -29,11 +29,13 @@
 
                 <div class="col-lg-12">
                     {% block nbBooks %}
-                        <p>Vous avez {{ totalBooks }} livre(s) enregistré(s).</p>
+                        <div id="booksTotal">
+                            Vous avez {{ totalBooks }} livre(s) enregistré(s).
+                        </div>
                     {% endblock %}
                     {% block memberBookListArray %}
                         <table>
-                            <tr>
+                            <tr class="book">
                                 <th>Auteur</th>
                                 <th>Titre</th>
                                 <th>Résumé</th>
@@ -44,15 +46,15 @@
                                 <th>Supprimer de la liste</th>
                             </tr>
                             {% for book in memberBookList %}
-                                <tr>
-                                    <td>{{ book.author }}</td>
-                                    <td><a href="../public/index.php?action=displayBook&bookId={{ book.id }}">{{ book.title }}</a></td>
-                                    <td>{{ book.summary[:150] }}...</td>
-                                    <td>{{ book.publishingYear }}</td>
-                                    <td>{{ book.ISBN }}</td>
-                                    <td>{{ book.nbPages }}</td>
-                                    <td><a href="../public/index.php?action=editBookDatas&bookId={{ book.id }}"><i class="fas fa-edit"></i></a></td>
-                                    <td><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer ce livre de votre liste ?')) return true; else return false"><i class="fas fa-trash alt"></i></a></td>
+                                <tr class="book">
+                                    <td class="col-lg-1">{{ book.author }}</td>
+                                    <td class="col-lg-2"><a href="../public/index.php?action=displayBook&bookId={{ book.id }}">{{ book.title }}</a></td>
+                                    <td class="col-lg-3">{{ book.summary[:150] }}...</td>
+                                    <td class="col-lg-1">{{ book.publishingYear }}</td>
+                                    <td class="col-lg-2">{{ book.ISBN }}</td>
+                                    <td class="col-lg-1">{{ book.nbPages }}</td>
+                                    <td class="col-lg-1"><a href="../public/index.php?action=editBookDatas&bookId={{ book.id }}"><i class="fas fa-edit"></i></a></td>
+                                    <td class="col-lg-1"><a href="../public/index.php?action=deleteBook&bookId={{ book.id }}" onclick="if(confirm('Êtes-vous sûr(e) de vouloir supprimer ce livre de votre liste ?')) return true; else return false"><i class="fas fa-trash alt"></i></a></td>
                                 </tr>
                             {% else %}
                                 <p>Vous n'avez pas d'ouvrages enregistrés pour l'instant.</p>

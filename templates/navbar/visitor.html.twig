@@ -23,23 +23,25 @@
 
                     <div class="modal-body">
                         <form action="../public/index.php?action=registration" id="registrationForm" method="post" onsubmit="return checkForm.finalCheckForm(this)">
-                            <div>
+                            <div class="formElement">
                                 <label for="login">Identifiant</label><br />
+                                <em class="registrationText">Le pseudo doit contenir entre 2 et 25 caractères.</em>
                                 <input type="text" id="login" name="login" onblur="checkForm.checkLogin(this)" required/>
                             </div>
-                            <div>
+                            <div class="formElement">
                                 <label for="passwordVisitor">Mot de passe</label><br />
+                                <em class="registrationText">Le mot de passe doit contenir entre 8 et 20 caractères, dont au moins un caractère spécial (!@#$%^&*;?), une minuscule, une majuscule et un chiffre.</em>
                                 <input type="password" id="passwordVisitor" name="passwordVisitor" onblur="checkForm.checkPassword(this)" required/>
                             </div>
-                            <div>
+                            <div class="formElement">
                                 <label for="passwordVisitorCheck">Veuillez saisir à nouveau votre mot de passe</label><br />
                                 <input type="password" id="passwordVisitorCheck" name="passwordVisitorCheck" onblur="checkForm.checkConfirmationPassword(this)" required/>
                             </div>
-							<div>
+							<div class="formElement">
 								<label for="emailVisitor">Email</label><br/>
 								<input type="email" id="emailVisitor" name="emailVisitor" onblur="checkForm.checkEmail(this)" required/>
 							</div>
-                            <div>
+                            <div class="formElement">
                                 <input type="submit" value="S'inscrire" class="submitButton"/>
                             </div>
                         </form>
@@ -75,17 +77,17 @@
 
                     <div class="modal-body">
                         <form action="../public/index.php?action=connection" id="connectionForm" method="post">
-                            <div>
+                            <div class="formElement">
                                 <label for="loginConnection">Identifiant</label><br />
                                 <input type="text" id="loginConnection" name="loginConnection" required />
                             </div>
 
-                            <div>
+                            <div class="formElement">
                                 <label for="passwordVisitorConnection">Mot de passe</label><br />
                                 <input type="password" id="passwordVisitorConnection" name="passwordVisitorConnection" required />
                             </div>
 
-                            <div>
+                            <div class="formElement">
                                 <input type="submit" value="Se connecter" class="submitButton" />
                             </div>
                         </form>
