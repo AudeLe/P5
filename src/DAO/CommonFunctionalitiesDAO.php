@@ -4,10 +4,6 @@
 
     use models\BookList;
 
-    // PHPMailer
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-
     class CommonFunctionalitiesDAO extends DAO{
 
         /**
@@ -15,36 +11,59 @@
          * @param $subjectMail
          * @param $bodyMail
          */
-        // PHPMailer is generating an email send "from the website"
+        // Sending email through PHP's mail() functon
         public function sendEmail($email, $subjectMail, $bodyMail, $altBodyMail){
-            $mail = new PHPMailer(true);
-            try{
-                // Server settings
+            $hab = 'hab@audeleissen.com';
 
-                //$mail->SMTPDebug = 2;
-                $mail->isSMTP();
-                $mail->Host = 'auth.smtp.1and1.fr';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'hab@audeleissen.com';
-                $mail->Password = '#mp;W"=2qgLbgL]V?-g';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+            if(!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,6}$#", $email)){
+                $return_line = "\r\n";
+            } else{
+                $return_line = "\n";
+            }
 
-                // Recipients
-                $mail->setfrom('hab@audeleissen.com', 'Plop');
-                $mail->addAddress($email);
+            // Creation of the messages with a text format and an HTML one
+            $message_txt = $bodyMail;
+            $message_html = $bodyMail;
 
-                // Content
-                $mail->isHTML(true);
-                $mail->Subject = $subjectMail;
-                $mail->Body = $bodyMail;
-                $mail->AltBody = $altBodyMail;
+            // Creation of the boundary
+            $boundary = "-----=".md5(rand());
 
-                $mail->send();
-                //echo 'Message has been sent';
-            } catch (Exception $e){
-                $errorMessage = 'Message could not be sent. Erreur : ' . $mail->ErrorInfo .'';
-                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage .'');
+            //$to = "hab@audeleissen.com";
+            // Define the subject
+            $subject = $subjectMail;
+
+            // Creation of the email header
+            $headers = 'From: \'Have a Book\' <hab@audeleissen.com >' . $return_line;
+            $headers .= 'Reply-To: ' . $hab;
+            $headers .= 'MIME-Version: 1.0' . $return_line;
+            $headers .= 'X-Priority: 3' . $return_line;
+            $headers .= 'Content-Type: multipart/alternative;' . $return_line . ' boundary= ' . $boundary . $return_line;
+
+            // Creation of the message
+            $message = $return_line . '--' . $boundary . $return_line;
+            // Adding the message with a text format
+            $message .= 'Content-Type: text/plain; charset=\'ISO-8859-1\''.$return_line;
+            $message .= 'Content-Transfer-Encoding: 8bit'.$return_line;
+            $message .= $return_line . $message_txt . $return_line;
+
+            $message .= $return_line . '--' . $boundary .$return_line;
+            // Adding the message with the HTML format
+            $message .= 'Content-Type: text/html; charset=\'ISO-8859-1\''.$return_line;
+            $message .= 'Content-Transfer-Encoding: 8bit'.$return_line;
+            $message .= $return_line . $message_html . $return_line;
+
+            $message .= $return_line . '--' . $boundary . '--' . $return_line;
+            $message .= $return_line . '--' . $boundary . '--' . $return_line;
+
+            mail($email, $subject, $message, $headers);
+            if(mail($email, $subject, $message, $headers)){
+                $message = 'Votre message a été envoyé. Vous receverez une réponse le plus rapidement possible.';
+                var_dump($message);
+                return $message;
+            } else {
+                $message = 'Votre message n\'a pas pu être envoyé. Veuillez réessayer ultérieurement.';
+                var_dump($message);
+                return $message;
             }
 
         }
