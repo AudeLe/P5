@@ -52,7 +52,7 @@ var checkForm = {
      */
     checkConfirmationPassword: function(input){
         var passwordVisitor = document.getElementById("passwordVisitor");
-        if (input.value != passwordVisitor.value){
+        if (input.value !== passwordVisitor.value){
             this.highlight(input, true);
             return false;
         } else {
@@ -68,7 +68,7 @@ var checkForm = {
      */
     checkConfirmationEditPassword: function(input){
         var editPassword = document.getElementById("editPassword");
-        if (input.value != editPassword.value){
+        if (input.value !== editPassword.value){
             this.highlight(input, true);
             return false;
         } else {
