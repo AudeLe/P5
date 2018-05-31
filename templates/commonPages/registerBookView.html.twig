@@ -1,6 +1,6 @@
 {% extends "template.html.twig" %}
 
-{% block title %}Enregistremet d'un livre - {{ session.login }}{% endblock %}
+{% block title %}Enregistrement d'un livre - {{ session.login }}{% endblock %}
 
 {% block content %}
     <div class="row personalPage">
@@ -29,45 +29,58 @@
 
                 <div class="col-lg-12">
                     {% block bookInformations %}
-                        <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
-                        <p>Veuillez indiquer uniquement les chiffres</p>
-                        <input type="text" id="ISBN" name="ISBN" required/>
-                        <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
+
+                        <div id="registerBookExplanations">
+                            Afin d'ajouter un livre vous avez besoin de son ISBN. Ce numéro, composé de 10 ou 13 chiffres, se situe à l'intérieur du livre (au début ou à la fin).<br/>
+                            Vous n'avez plus à renter ce numéro dans le champ ci-dessous et à cliquer sur "Soumettre l'ISBN". Le résultat de votre recherche va apparaître en dessous.<br/>
+                            Si le livre n'est pas connu de la base de données, vous pouvez entrer les données directement dans les champs.<br/>
+                            <em>Veuillez faire attention aux indications présentes. S'il y a plusieurs auteurs, seul le premier sera indiqué.</em><br/>
+                            <br/>
+                            Lorsque vous êtes satisfait(e) des informations indiquées, vous n'avez plus qu'à cliquer sur le bouton "Enregistrer un livre".<br/>
+                            Sachez que vous pourrez modifier par la suite les données en vous rendant sur la liste de vos livres.<br/>
+                            Vous serez alors redirigé(e) vers la page 'Liste de livres' afin de voir que l'ouvrage a bien été enregistré.
+                        </div>
+                        <div id="ISBNSpace">
+                            <label for="ISBN">Veuillez rentrer l'ISBN de l'ouvrage souhaité</label><br/>
+                            <input type="text" id="ISBN" name="ISBN" required/>
+                            <input type="submit" id="ISBNSubmission" value="Soumettre l'ISBN"/>
+                        </div>
 
                         <div id="bookInformations">
                             <form action="../public/index.php?action=registerBookDatas&id={{ session.id }}" method="post">
-                                <div>
-                                    <label for="bookTitle">Titre</label><br />
+                                <div class="formElement">
+                                    <label for="bookTitle">Titre : </label>
                                     <input type="text" id="bookTitle" name="bookTitle" required/>
                                 </div>
 
-                                <div>
-                                    <label for="bookAuthors">Auteur(s)</label><br />
+                                <div class="formElement">
+                                    <label for="bookAuthors">Auteur(s) : </label>
                                     <input type="text" id="bookAuthors" name="bookAuthors" required/>
                                 </div>
 
-                                <div>
-                                    <label for="bookPublishedDate">Année de publication</label><br />
-                                    <p>Veuillez uniquement indiquer l'année.</p>
-                                    <input type="text" id="bookPublishedDate" name="bookPublishedDate" required/>
+                                <div class="formElement">
+                                    <label for="bookPublishedDate">Année de publication : </label>
+                                    <input type="text" id="bookPublishedDate" name="bookPublishedDate" onblur="checkForm.checkPublishedYearInput(this)" required/>
                                 </div>
 
-                                <div>
-                                    <label for="bookDescription">Résumé</label><br />
+                                <div class="formElement">
+                                    <label for="bookDescription">Résumé : </label><br/>
                                     <textarea id="bookDescription" name="bookDescription" required></textarea>
                                 </div>
 
-                                <div>
-                                    <label for="bookISBN">ISBN</label><br />
+                                <div class="formElement">
+                                    <label for="bookISBN">ISBN : </label>
                                     <input type="text" id="bookISBN" name="bookISBN" required/>
                                 </div>
 
-                                <div>
-                                    <label for="bookNbPages">Nombre de pages</label><br />
+                                <div class="formElement">
+                                    <label for="bookNbPages">Nombre de pages : </label>
                                     <input type="text" id="bookNbPages" name="bookNbPages" required/>
                                 </div>
 
-                                <input type="submit" value="Enregistrer le livre" />
+                                <div class="formElement">
+                                    <input type="submit" value="Enregistrer le livre" />
+                                </div>
                             </form>
                         </div>
                     {% endblock %}
