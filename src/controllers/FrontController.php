@@ -35,7 +35,8 @@
          */
         // Send the email written by the visitor/user
         public function contactAdmin($loginSeeker, $emailSeeker, $subjectMail, $bodyMail){
-            $message = $this->adminManager->contactAdmin($loginSeeker, $emailSeeker, $subjectMail, $bodyMail);
+
+            $message = $this->adminManager->sendEmail($loginSeeker, $emailSeeker, $subjectMail, $bodyMail);
 
             echo $this->twig->render('statusContactMail.html.twig', array('message' => $message));
         }
