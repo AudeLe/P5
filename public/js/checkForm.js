@@ -93,6 +93,16 @@ var checkForm = {
         }
     },
 
+    checkPublishedYearInput: function(input){
+        if(input.value.length !== 4){
+            this.highlight(input, true);
+            return false;
+        } else {
+            this.highlight(input, false);
+            return false;
+        }
+    },
+
     /**
      *
      * @param f
