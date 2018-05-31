@@ -103,7 +103,10 @@ textarea{
 }
 
 #homeText{
+    color: white;
+    font-weight: bold;
     position: absolute;
+    text-shadow: 4px 5px 6px #5E5E5E;
     top: 40%;
     width: 100%;
     z-index: 2;
