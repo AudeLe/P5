@@ -145,7 +145,7 @@
                         // Access the page allowing to register a book
                         case 'registerBookPage':
                             if(isset($_GET['login'])){
-                                $this->pageController->registerBookPage($_GET['login']);
+                                $this->pageController->registerBookPage();
                             } else {
                                 throw new Exception('Impossible d\'accéder à la page permettant l\'enregistrement de livres.');
                             }
