@@ -1,5 +1,28 @@
 <!-- Header with a nav bar displayed if the visitor is connected -->
 <ul class="navbar-nav ml-auto">
+    <!-- Access personal page -->
+    <li class="nav-item">
+
+        {% if session.status == 'admin' %}
+            <a class="nav-link" href="../public/index.php?action=adminProfile&login={{ session.login }}"><i class="fas fa-user-circle"></i>{{ session.login }}</a>
+        {% else %}
+            <a class="nav-link" href="../public/index.php?action=memberProfile&login={{ session.login }}"><i class="fas fa-user-circle"></i>{{ session.login }}</a>
+        {% endif %}
+
+    </li>
+
+    <!-- Link to the home page -->
+    <li class="nav-item">
+        <a class="nav-link" href="../public/index.php"><i class="fas fa-home"></i>Accueil du site</a>
+    </li>
+
+    <!-- Link to contact the administration of the webiste-->
+    {% if session.status == 'member' %}
+        <li class="nav-item">
+            <a class="nav-link" href="../public/index.php?action=contactForm">Contactez-nous !</a>
+        </li>
+    {% endif %}
+
     <!-- Log out button -->
     <li class="nav-item">
         <!-- Button trigger modal -->
@@ -32,26 +55,4 @@
             </div>
         </div>
     </li>
-
-    <li class="nav-item">
-
-        {% if session.status == 'admin' %}
-            <a class="nav-link" href="../public/index.php?action=adminProfile&login={{ session.login }}"><i class="fas fa-user-circle"></i>{{ session.login }}</a>
-        {% else %}
-            <a class="nav-link" href="../public/index.php?action=memberProfile&login={{ session.login }}"><i class="fas fa-user-circle"></i>{{ session.login }}</a>
-        {% endif %}
-
-    </li>
-
-    <!-- Link to the home page -->
-    <li class="nav-item">
-        <a class="nav-link" href="../public/index.php"><i class="fas fa-home"></i>Accueil du site</a>
-    </li>
-
-    <!-- Link to contact the administration of the webiste-->
-    {% if session.status == 'member' %}
-        <li class="nav-item">
-            <a class="nav-link" href="../public/index.php?action=contactForm">Contactez-nous !</a>
-        </li>
-    {% endif %}
 </ul>

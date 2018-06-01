@@ -13,21 +13,21 @@
         {% endblock %}
 
         {% block editBookDatas %}
-            <div class="col-9">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 
                 {% block profileBanner %}
-                    <div class="col-lg-12" class="generalProfileBanner">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" class="generalProfileBanner">
 
                         {% include 'commonPages/profileBanner.html.twig' %}
 
-                        <div class="col-lg-12 profileBannerText">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 profileBannerText">
                             <h3>Edition des données du livre</h3>
                         </div>
 
                     </div>
                 {% endblock %}
 
-                <div class="col-lg-12" id="editBook">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="editBook">
                     {% for book in bookDatas %}
                         <form action="../public/index.php?action=registerEditBookDatas&bookId={{ book.id }}" method="post">
                             <div class="formElement">

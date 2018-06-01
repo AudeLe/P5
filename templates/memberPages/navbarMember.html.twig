@@ -1,14 +1,36 @@
-{% block navbarLeftSide %}
-    <div class="col-3" id="navbarMemberOutside">
-        <div class="nav flex-column" id="navbarMemberInsider" aria-orientation="vertical" >
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=memberProfile&login={{ session.login }}">Accueil espace personnel</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=registerBookPage&login={{ session.login }}">Enregistrer un livre</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=getMemberBookList&login={{ session.login }}">Liste de livres</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=searchBookPage">Rechercher un livre</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=friendsPage&login={{ session.login }}">Cercle d'amis</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=searchBookFriendPage&login={{ session.login }}">Rechercher un livre parmi ses ami(e)s</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=accountPage&login={{ session.login }}">Compte</a>
-            <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=deleteAccountPage&login={{ session.login }}">Suppression de compte</a>
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="navbarProfileOutside">
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMember" aria-controls="navbarMember" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="dropdown-divider"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMember">
+            <ul class="navbar-nav mr-auto flex-column">
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=memberProfile&login={{ session.login }}">Accueil espace personnel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=registerBookPage&login={{ session.login }}">Enregistrer un livre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=getMemberBookList&login={{ session.login }}">Liste de livres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=searchBookPage">Rechercher un livre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=friendsPage&login={{ session.login }}">Cercle d'amis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=searchBookFriendPage&login={{ session.login }}">Rechercher un livre parmi ses ami(e)s</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=accountPage&login={{ session.login }}">Compte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbarPersonalSpace" href="../public/index.php?action=deleteAccountPage&login={{ session.login }}">Suppression de compte</a>
+                </li>
+            </ul>
         </div>
-    </div>
-{% endblock %}
+    </nav>
+</div>
