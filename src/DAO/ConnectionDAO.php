@@ -114,60 +114,43 @@
          */
         // Allows a member to connect to his/her personal space
         public function connection($loginConnection, $passwordVisitorConnection){
+            $sql = 'SELECT id, login, password, email, status, confirmRegistration FROM members WHERE login = ?';
+            $result = $this->sql($sql, [$loginConnection]);
+            $row = $result -> fetch();
 
-            $violations = [];
-
-            $validator = new RegistrationForm();
-            $validator['login'] = $validator->checkLogin($loginConnection);
-            $validator['password'] = $validator->checkPassword($passwordVisitorConnection);
-
-            if(empty($violations['login']) && empty($violations['password'])){
-                $sql = 'SELECT id, login, password, email, status, confirmRegistration FROM members WHERE login = ?';
-                $result = $this->sql($sql, [$loginConnection]);
-                $row = $result -> fetch();
-
-                // Verifies if the login is in the database
-                if($row){
-                    if($row['confirmRegistration'] == 0){
-                        // If the confirmation has not been done, redirect to this page
-                        header('Location: ../public/index.php?action=awaitingRegistrationConfirmation&login=' . $loginConnection . '');
-
-                    } else {
-                        $checkPassword = password_verify($passwordVisitorConnection, $row['password']);
-
-                        // And if the password typed is the right one
-                        if($checkPassword == true){
-                            // Charging the credentials of the session
-                            $_SESSION['id'] = $row['id'];
-                            $_SESSION['login'] = $row['login'];
-                            $_SESSION['email'] = $row['email'];
-                            $_SESSION['status'] = $row['status'];
-
-                            // Regarding the status of the member, the redirection is different
-                            if($row['status'] == 'admin'){
-                                header('Location: ../public/index.php?action=adminProfile&login=' .$_SESSION['login'].'');
-                            } else {
-                                header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
-                            }
-                        } else {
-                            $errorMessage = 'Mauvais identifiant ou mot de passe.';
-                            header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
-                        }
-                    }
+            // Verifies if the login is in the database
+            if($row){
+                if($row['confirmRegistration'] == 0){
+                    // If the confirmation has not been done, redirect to this page
+                    header('Location: ../public/index.php?action=awaitingRegistrationConfirmation&login=' . $loginConnection . '');
 
                 } else {
-                    $errorMessage = 'Mauvais identifiant ou mot de passe.';
-                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
-                }
-            } else {
-                // If there is, the error(s) is/are displayed
-                foreach ($violations as $violation) {
-                    if ($violation !== null){
-                        echo $violation . '<br />';
+                    $checkPassword = password_verify($passwordVisitorConnection, $row['password']);
+
+                    // And if the password typed is the right one
+                    if($checkPassword == true){
+                        // Charging the credentials of the session
+                        $_SESSION['id'] = $row['id'];
+                        $_SESSION['login'] = $row['login'];
+                        $_SESSION['email'] = $row['email'];
+                        $_SESSION['status'] = $row['status'];
+
+                        // Regarding the status of the member, the redirection is different
+                        if($row['status'] == 'admin'){
+                            header('Location: ../public/index.php?action=adminProfile&login=' .$_SESSION['login'].'');
+                        } else {
+                            header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                        }
+                    } else {
+                        $errorMessage = 'Mauvais identifiant ou mot de passe.';
+                        header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
                     }
                 }
-            }
 
+            } else {
+                $errorMessage = 'Mauvais identifiant ou mot de passe.';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
+            }
         }
 
         /**
