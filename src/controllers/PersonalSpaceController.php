@@ -5,7 +5,6 @@
     class PersonalSpaceController extends Controller{
 
         /**
-         * @param $login
          * @throws \Twig_Error_Loader
          * @throws \Twig_Error_Runtime
          * @throws \Twig_Error_Syntax
@@ -79,7 +78,7 @@
          * @throws \Twig_Error_Runtime
          * @throws \Twig_Error_Syntax
          */
-        // If the member asked doesn't want to share his/er booklist
+        // If the member asked doesn't want to share his/her booklist
         public function notShare($login, $loginFriend){
             $message = $this->memberManager->notShare($login, $loginFriend);
 

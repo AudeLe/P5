@@ -63,7 +63,7 @@
         public function displayBook($bookId){
             $bookDatas = $this->bookManager->displayBook($bookId);
 
-            echo $this->twig->render('commonPages/displayBooKview.html.twig', array('bookDatas' => $bookDatas));
+            echo $this->twig->render('commonPages/displayBooKView.html.twig', array('bookDatas' => $bookDatas));
         }
 
 
@@ -78,7 +78,7 @@
         public function searchBook($id, $ISBN){
             $message = $this->memberManager->searchBook($id, $ISBN);
 
-            echo $this->twig->render('memberPages/searchBookView.html.twig', array('message' => $message));
+            echo $this->twig->render('commonPages/searchBookView.html.twig', array('message' => $message));
         }
 
         /**
@@ -94,6 +94,6 @@
             $message = $this->bookManager->checkBookFriend($ISBN, $loginFriend);
             $friends = $this->memberManager->reminderFriends($login);
 
-            echo $this->twig->render('memberPages/searchBookFriendView.html.twig', array('message' => $message, 'friends' => $friends));
+            echo $this->twig->render('commonPages/searchBookFriendView.html.twig', array('message' => $message, 'friends' => $friends));
         }
     }
