@@ -52,6 +52,7 @@
                         <div class="modifyCredentials">
                             <h4>Changer son mot de passe</h4>
                             <form action="../public/index.php?action=editPassword" method="post">
+                                <p><em>Le mot de passe doit contenir entre 8 et 20 caractères, dont au moins un caractère spécial (!@#$%^&*;?), une minuscule, une majuscule et un chiffre.</em></p>
                                 <div class="formElement">
                                     <label for="editPassword">Nouveau mot de passe : </label>
                                     <input type="password" id="editPassword" name="editPassword" onblur="checkForm.checkPassword(this)" required/>
