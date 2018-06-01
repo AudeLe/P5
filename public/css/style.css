@@ -54,6 +54,11 @@ header{
     /*margin-bottom: 2%;*/
 }
 
+/* ----- HEADER NAV BAR ----- */
+li.nav-item button{
+    margin: 0 5px;
+}
+
 footer{
     bottom: 0;
     box-shadow: 0 0 10px grey;
@@ -83,6 +88,10 @@ textarea{
     text-align: center;
 }
 
+.registrationText{
+    font-size: 0.85em;
+}
+
 /* ===== HOME PAGE ===== */
 #home{
     text-align: center;
@@ -103,11 +112,12 @@ textarea{
 }
 
 #homeText{
-    color: white;
+    background-color : rgba(255, 255, 255, 0.6);
+    color: #303030;
     font-weight: bold;
     position: absolute;
-    text-shadow: 4px 5px 6px #5E5E5E;
-    top: 40%;
+    text-shadow: 4px 5px 6px #CCCCCC;
+    top: 30%;
     width: 100%;
     z-index: 2;
 }
