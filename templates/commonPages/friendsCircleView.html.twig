@@ -50,7 +50,8 @@
                     {% block friendsCircle %}
                         <div class="friendsCircle">
                             <p>Vous pouvez ajouter quelqu'un en entrant le pseudo de la personne que vous souhaitez ajouter.<br/>
-                                Si la personne accepte votre demande, vous pourrez alors savoir si elle a déjà un ouvrage en rentrant l'ISBN de celui-ci.
+                                Un email sera alors envoyé à la personne afin qu'il/elle puisse accepter ou refuser ce partage.<br/>
+                                Si la personne accepte votre demande, vous pourrez alors savoir si elle a déjà un ouvrage en rentrant l'ISBN de celui-ci sur la page 'Rechercher un livre parmi ses ami(e)s'.
                             </p>
 
                             <form action="../public/index.php?action=reachFriend&login={{ session.login }}" method="post" class="addFriend">
