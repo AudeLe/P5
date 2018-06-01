@@ -11,7 +11,7 @@
          * @param $subjectMail
          * @param $bodyMail
          */
-        // Sending email through PHP's mail() functon
+        // Sending email through PHP's mail() function
         public function sendEmail($email, $subjectMail, $bodyMail, $altBodyMail){
             $hab = 'hab@audeleissen.com';
 
@@ -22,7 +22,7 @@
             }
 
             // Creation of the messages with a text format and an HTML one
-            $message_txt = $bodyMail;
+            $message_txt = $altBodyMail;
             $message_html = $bodyMail;
 
             // Creation of the boundary
