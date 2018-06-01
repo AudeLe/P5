@@ -1,5 +1,5 @@
 <!-- Header with a nav bar displayed if the visitor is NOT connected -->
-<ul class="navbar-nav mr-auto">
+<ul class="navbar-nav ml-auto">
     <!-- Opens the form to register yourself on the website -->
     <li class="nav-item">
         <!-- Button trigger modal -->
@@ -25,12 +25,12 @@
                         <form action="../public/index.php?action=registration" id="registrationForm" method="post" onsubmit="return checkForm.finalCheckForm(this)">
                             <div class="formElement">
                                 <label for="login">Identifiant</label><br />
-                                <em class="registrationText">Le pseudo doit contenir entre 2 et 25 caractères.</em>
+                                <em class="registrationText">Le pseudo doit contenir entre 2 et 25 caractères.</em><br/>
                                 <input type="text" id="login" name="login" onblur="checkForm.checkLogin(this)" required/>
                             </div>
                             <div class="formElement">
                                 <label for="passwordVisitor">Mot de passe</label><br />
-                                <em class="registrationText">Le mot de passe doit contenir entre 8 et 20 caractères, dont au moins un caractère spécial (!@#$%^&*;?), une minuscule, une majuscule et un chiffre.</em>
+                                <em class="registrationText">Le mot de passe doit contenir entre 8 et 20 caractères, dont au moins un caractère spécial (!@#$%^&*;?), une minuscule, une majuscule et un chiffre.</em><br/>
                                 <input type="password" id="passwordVisitor" name="passwordVisitor" onblur="checkForm.checkPassword(this)" required/>
                             </div>
                             <div class="formElement">
