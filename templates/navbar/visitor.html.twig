@@ -24,25 +24,25 @@
                     <div class="modal-body">
                         <form action="../public/index.php?action=registration" id="registrationForm" method="post" onsubmit="return checkForm.finalCheckForm(this)">
                             <div class="formElement">
-                                <label for="login">Identifiant</label><br />
+                                <label for="login" class="registrationLabel">Identifiant</label><br />
                                 <em class="registrationText">Le pseudo doit contenir entre 2 et 25 caractères.</em><br/>
                                 <input type="text" id="login" name="login" onblur="checkForm.checkLogin(this)" required/>
                             </div>
                             <div class="formElement">
-                                <label for="passwordVisitor">Mot de passe</label><br />
+                                <label for="passwordVisitor" class="registrationLabel">Mot de passe</label><br />
                                 <em class="registrationText">Le mot de passe doit contenir entre 8 et 20 caractères, dont au moins un caractère spécial (!@#$%^&*;?), une minuscule, une majuscule et un chiffre.</em><br/>
                                 <input type="password" id="passwordVisitor" name="passwordVisitor" onblur="checkForm.checkPassword(this)" required/>
                             </div>
                             <div class="formElement">
-                                <label for="passwordVisitorCheck">Veuillez saisir à nouveau votre mot de passe</label><br />
+                                <label for="passwordVisitorCheck" class="registrationLabel">Veuillez saisir à nouveau votre mot de passe</label><br />
                                 <input type="password" id="passwordVisitorCheck" name="passwordVisitorCheck" onblur="checkForm.checkConfirmationPassword(this)" required/>
                             </div>
 							<div class="formElement">
-								<label for="emailVisitor">Email</label><br/>
-                                <em>L'email doit être valide, car un message vous demandant de confirmer votre inscription va vous être envoyé.<br/>
+								<label for="emailVisitor" class="registrationLabel">Email</label><br/>
+                                <em class="registrationText">L'email doit être valide, car un message vous demandant de confirmer votre inscription va vous être envoyé.<br/>
                                     Votre email vous permettra également de demander l'autorisation de partager votre liste de livres.<br/>
                                     Attention, il peut arriver dans les spams.
-                                </em>
+                                </em><br/>
 								<input type="email" id="emailVisitor" name="emailVisitor" onblur="checkForm.checkEmail(this)" required/>
 							</div>
                             <div class="formElement">

@@ -63,7 +63,7 @@ footer{
     bottom: 0;
     box-shadow: 0 0 10px grey;
     height: 60px;
-    /*margin-top: 5%;*/
+    padding-top: 7px;
     text-align: center;
     width: 100%;
 }
@@ -90,6 +90,16 @@ textarea{
 
 .registrationText{
     font-size: 0.85em;
+}
+
+.submitButton{
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* ===== REGISTRATION FORM ===== */
+.registrationLabel{
+    border-bottom: 1px solid #D3D3D3;
 }
 
 /* ===== HOME PAGE ===== */
