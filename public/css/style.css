@@ -68,10 +68,10 @@ footer{
     width: 100%;
 }
 
-footer div{
+/*footer div{
     height: 100%;
     padding-top: 15px;
-}
+}*/
 
 
 h1, h2, h3{
@@ -313,4 +313,18 @@ textarea{
 
 #warningDeletion{
     font-weight: bold;
+}
+
+/* ===== LEGAL MENTIONS ===== */
+#legalMentions{
+    margin: 3% 0;
+    text-align: justify;
+}
+
+#legalMentions h1{
+    text-align: center;
+}
+
+.legalMentionsDetails{
+    margin: 2% 0;
 }

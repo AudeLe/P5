@@ -41,4 +41,14 @@
             echo $this->twig->render('statusContactMail.html.twig', array('message' => $message));
         }
 
+        /**
+         * @throws \Twig_Error_Loader
+         * @throws \Twig_Error_Runtime
+         * @throws \Twig_Error_Syntax
+         */
+        // Access the legal mentions page
+        public function legalMentionsPage(){
+            echo $this->twig->render('legalMentionsView.html.twig');
+        }
+
     }

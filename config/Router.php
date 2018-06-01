@@ -413,6 +413,11 @@
                             }
                             break;
 
+                    /* ===== LEGAL MENTIONS ===== */
+                        case 'legalMentionsPage':
+                            $this->frontController->legalMentionsPage();
+                            break;
+
                     /* ===== DISPLAY ERRORS WITHIN THE MODEL ===== */
                         // Display the error detected within the model
                         case 'error':
