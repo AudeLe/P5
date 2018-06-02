@@ -351,12 +351,15 @@ button.navbar-toggler{
 /* ===== MEDIA QUERIES ===== */
 @media(max-width: 450px){
     #profileBanner{
+        height: auto;
         display: none;
         position: static;
     }
 
     .profileBannerText{
         position: static;
+        top: 0;
+        word-wrap: break-word;
     }
 
     footer p{
@@ -381,12 +384,21 @@ button.navbar-toggler{
     #profileBanner{
         height: 200px;
     }
+
+    #searchBookText{
+        top: 5%;
+    }
+
 }
 
 @media(max-width: 680px){
     #homeText{
         background-color: rgba(181, 118, 66, 0.5);
         top: 20%;
+    }
+
+    #searchBookText{
+        top: 2%;
     }
 
 }
