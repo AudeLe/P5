@@ -403,6 +403,11 @@ button.navbar-toggler{
         position: static;
     }
 
+    #contactUs:after{
+        display: none;
+    }
+
+
     #contactUs img{
         display: none;
     }
