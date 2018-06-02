@@ -33,6 +33,7 @@ body{
 }
 
 header{
+    -webkit-box-shadow: 0 0 20px grey;
     box-shadow: 0 0 20px grey;
 }
 
@@ -52,6 +53,7 @@ textarea{
 
 footer{
     bottom: 0;
+    -webkit-box-shadow: 0 0 10px grey;
     box-shadow: 0 0 10px grey;
     padding-top: 7px;
     text-align: center;
@@ -85,6 +87,12 @@ li.nav-item button{
     height: 100%;
     position: relative;
     text-align: center;
+    /*width: 100%; Chrome*/
+}
+
+#home img{
+    height: 100%;
+    width: 100%;
 }
 
 #home:after{
@@ -115,6 +123,11 @@ li.nav-item button{
     height: 100%;
     position: relative;
     text-align: center;
+}
+
+#contactUs img{
+    height: 100%;
+    width: 100%;
 }
 
 #contactUs:after{
