@@ -161,9 +161,13 @@ textarea{
 
 
 /* ===== ADMIN PAGE =====*/
-#navbarAdminOutside{
+#navbarProfileOutside{
     padding: 4px;
     border-right: 3px inset #B57642;
+}
+
+button.navbar-toggler{
+    background-color: rgba(181, 118, 66, 0.5);
 }
 
 #navbarAdminInside{
@@ -205,10 +209,10 @@ textarea{
 
 
 /* ===== MEMBER PAGE =====*/
-#navbarMemberOutside{
+/*#navbarProfileOutside{
     padding: 4px;
     border-right: 3px inset #944E13;
-}
+}*/
 
 #navbarMemberInside{
     /*padding: 3px;
@@ -278,6 +282,10 @@ textarea{
 }
 
 /* ===== ACCOUNT PAGE ===== */
+#accountCredentials{
+    margin: 3% 0;
+}
+
 #friendShareBooklistWith{
     margin: 3% 0;
 }
@@ -337,4 +345,60 @@ textarea{
 
 .legalMentionsDetails{
     margin: 2% 0;
+}
+
+
+/* ===== MEDIA QUERIES ===== */
+@media(max-width: 450px){
+    #profileBanner{
+        display: none;
+        position: static;
+    }
+
+    .profileBannerText{
+        position: static;
+    }
+
+    footer p{
+        display: none;
+    }
+}
+
+@media(max-width: 600px){
+    #home{
+        /*display: none;*/
+        position: static;
+    }
+
+    #home img{
+        display: none;
+    }
+
+    #homeText{
+        position: static;
+    }
+
+    #profileBanner{
+        height: 200px;
+    }
+}
+
+@media(max-width: 680px){
+    #homeText{
+        background-color: rgba(181, 118, 66, 0.5);
+        top: 20%;
+    }
+
+}
+
+@media(max-width: 800px){
+    #adminText{
+        top: 0;
+    }
+}
+
+@media(max-width: 992px){
+    header button.btn.btn-primary{
+        margin-top: 1%;
+    }
 }
