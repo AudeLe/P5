@@ -25,54 +25,16 @@
 
 }
 
+/*===== GENERAL TAGS =====*/
+
 body{
-    width: 100%;
     font-family: 'antic_sansregular', sans-serif;
-    /*font-weight: bold;*/
+    width: 100%;
 }
-
-/*a{
-    color: #B57642;
-}
-
-ul{
-    list-style: none;
-}*/
-
-/*button.btn.btn-primary{
-    background-color: #B56042;
-    border-color: #B56042;
-}
-
-button.btn.btn-primary:hover{
-    background-color: #0056b3;
-    border-color: #0056b3;
-}*/
 
 header{
     box-shadow: 0 0 20px grey;
-    /*margin-bottom: 2%;*/
 }
-
-/* ----- HEADER NAV BAR ----- */
-li.nav-item button{
-    margin: 0 5px;
-}
-
-footer{
-    bottom: 0;
-    box-shadow: 0 0 10px grey;
-    height: 60px;
-    padding-top: 7px;
-    text-align: center;
-    width: 100%;
-}
-
-/*footer div{
-    height: 100%;
-    padding-top: 15px;
-}*/
-
 
 h1, h2, h3{
     font-family : 'kaushan_scriptregular', sans-serif;
@@ -80,12 +42,26 @@ h1, h2, h3{
 }
 
 textarea{
-    width: 600px;
-    height: 200px;
+    height: 150px;
+    width: 500px;
 }
 
 .row{
     text-align: center;
+}
+
+footer{
+    bottom: 0;
+    box-shadow: 0 0 10px grey;
+    padding-top: 7px;
+    text-align: center;
+    width: 100%;
+}
+
+/* ===== HEADER NAV BAR ===== */
+
+li.nav-item button{
+    margin: 0 5px;
 }
 
 .registrationText{
@@ -98,16 +74,17 @@ textarea{
 }
 
 /* ===== REGISTRATION FORM ===== */
+
 .registrationLabel{
     border-bottom: 1px solid #D3D3D3;
 }
 
 /* ===== HOME PAGE ===== */
+
 #home{
-    text-align: center;
     height: 100%;
     position: relative;
-    /*width: 100%;*/
+    text-align: center;
 }
 
 #home:after{
@@ -133,11 +110,11 @@ textarea{
 }
 
 /* ===== CONTACT PAGE ===== */
+
 #contactUs{
-    text-align: center;
     height: 100%;
     position: relative;
-    /*width: 100%;*/
+    text-align: center;
 }
 
 #contactUs:after{
@@ -159,23 +136,15 @@ textarea{
     z-index: 2;
 }
 
+/* ===== ADMIN/MEMBER PAGE =====*/
 
-/* ===== ADMIN PAGE =====*/
 #navbarProfileOutside{
-    padding: 4px;
     border-right: 3px inset #B57642;
+    padding: 4px;
 }
 
 button.navbar-toggler{
-    background-color: rgba(181, 118, 66, 0.5);
-}
-
-#navbarAdminInside{
-    /*background-image : url("../assets/images/ryan-loughlin-253609-unsplash.jpg");
-    width: 100%;
-    overflow: hidden;
-    padding: 3px;
-    background-color: #e0e0e0;*/
+    background-color: #D9C3C0;
 }
 
 .generalProfileBanner{
@@ -188,42 +157,26 @@ button.navbar-toggler{
 #profileBanner{
     border-radius: 7px;
     height: 150px;
-    width: 100%;
     overflow: hidden;
+    width: 100%;
 }
 
 #profileBanner img{
-    /*height: auto;*/
     width: 100%;
-
 }
 
 .profileBannerText{
-    position: absolute;
-    /*width: 100%;
-    z-index: 5;*/
-    top: 18%;
     color: white;
+    position: absolute;
     text-shadow: 1px 1px 10px #385C91;
+    top: 18%;
 }
-
-
-/* ===== MEMBER PAGE =====*/
-/*#navbarProfileOutside{
-    padding: 4px;
-    border-right: 3px inset #944E13;
-}*/
-
-#navbarMemberInside{
-    /*padding: 3px;
-    background-color: #e0e0e0;*/
-}
-
 
 /* ===== COMMON PAGES ===== */
+
 .personalPage{
-    margin-top: 2%;
     margin-bottom: 5%;
+    margin-top: 2%;
 }
 
 .personalPageText{
@@ -232,6 +185,7 @@ button.navbar-toggler{
 }
 
 /* ===== REGISTER BOOK DATAS ===== */
+
 #registerBookExplanations{
     margin: 3% 0;
     text-align: justify;
@@ -251,6 +205,7 @@ button.navbar-toggler{
 }
 
 /* ===== BOOKLIST =====*/
+
 #booksTotal{
     margin: 3% 0;
 }
@@ -260,6 +215,7 @@ button.navbar-toggler{
 }
 
 /* ===== BOOK DISPLAY ===== */
+
 .bookViewDisplay{
     margin: 5% 0;
 }
@@ -273,6 +229,7 @@ button.navbar-toggler{
 }
 
 /* ===== EDIT BOOK DATAS ===== */
+
 #editBook{
     margin: 3% 0;
 }
@@ -282,6 +239,7 @@ button.navbar-toggler{
 }
 
 /* ===== ACCOUNT PAGE ===== */
+
 #accountCredentials{
     margin: 3% 0;
 }
@@ -291,6 +249,7 @@ button.navbar-toggler{
 }
 
 /* ===== EDIT CREDENTIALS ===== */
+
 #modifyCredentialsText{
     margin: 3% 0;
 }
@@ -301,6 +260,7 @@ button.navbar-toggler{
 }
 
 /* ===== FRIENDS CIRCLE ===== */
+
 .friendsCircle{
     margin: 3% 0;
     text-align: justify;
@@ -315,16 +275,19 @@ button.navbar-toggler{
 }
 
 /* ===== SEARCH BOOK ===== */
+
 #searchBook{
     margin: 3% 0;
 }
 
 /* ===== STATISTICS ===== */
+
 #statistics{
     margin: 3% 0;
 }
 
 /* ===== DELETE ACCOUNT =====*/
+
 #deleteAccount{
     margin: 3% 0;
 }
@@ -334,6 +297,7 @@ button.navbar-toggler{
 }
 
 /* ===== LEGAL MENTIONS ===== */
+
 #legalMentions{
     margin: 3% 0;
     text-align: justify;
@@ -349,10 +313,12 @@ button.navbar-toggler{
 
 
 /* ===== MEDIA QUERIES ===== */
+
 @media(max-width: 450px){
+
     #profileBanner{
-        height: auto;
         display: none;
+        height: auto;
         position: static;
     }
 
@@ -368,8 +334,8 @@ button.navbar-toggler{
 }
 
 @media(max-width: 600px){
+
     #home{
-        /*display: none;*/
         position: static;
     }
 
@@ -378,6 +344,7 @@ button.navbar-toggler{
     }
 
     #homeText{
+        background-color: #D9C3C0;
         position: static;
     }
 
@@ -389,11 +356,20 @@ button.navbar-toggler{
         top: 5%;
     }
 
+    #footerHome{
+        display: none;
+    }
+
+    textarea{
+        height: 100px;
+        width: 250px;
+    }
+
 }
 
 @media(max-width: 680px){
+
     #homeText{
-        background-color: rgba(181, 118, 66, 0.5);
         top: 20%;
     }
 
@@ -404,13 +380,39 @@ button.navbar-toggler{
 }
 
 @media(max-width: 800px){
+
     #adminText{
         top: 0;
     }
 }
 
 @media(max-width: 992px){
+
     header button.btn.btn-primary{
         margin-top: 1%;
+    }
+
+    #deleteAccountText{
+        top: 0;
+    }
+}
+
+@media(max-width: 1120px){
+
+    #contactUs{
+        position: static;
+    }
+
+    #contactUs img{
+        display: none;
+    }
+
+    #contactUsText{
+        background-color: #D9C3C0;
+        position: static;
+    }
+
+    #footerContact{
+        display: none;
     }
 }
