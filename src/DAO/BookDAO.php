@@ -40,15 +40,23 @@
             // Verifies if there is an error
             if (empty($violations['bookTitle']) && empty($violations['bookAuthors']) && empty($violations['publishedDate']) && empty($violations['bookDescription']) && empty($violations['bookISBN']) && empty($violations['nbPages'])){
                 // If there is not, the code continues to execute
-                $sql = 'SELECT ISBN, id_member FROM bookslist WHERE id_member = :idMember';
+                $sql = 'SELECT ISBN, id_member FROM bookslist WHERE ISBN = :ISBN';
                 $result = $this->sql($sql, [
-                    'idMember' => $id
+                    'ISBN' => $bookISBN
                 ]);
-                $row = $result->fetch();
 
-                if ($row['id_member'] == $id){
+                $totalId = [];
+                // Storage of the ids linked to the ids linked to the ISBN
+                foreach($result as $row){
+                    $id_member = $row['id_member'];
+                    array_push($totalId, $id_member);
+                }
+
+                // Checking if the person already registered the book
+                if (in_array($id, $totalId)){
                     $errorMessage = 'Vous avez déjà enregistré ce livre.';
                     header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
+
                 } else {
                     $sql = 'INSERT INTO bookslist(id_member, title, author, summary, publishingYear, ISBN, nbPages) VALUES(:idMember, :title, :author, :summary, :publishingYear, :ISBN, :nbPages)';
                     $this->sql($sql, [
@@ -60,9 +68,10 @@
                         'ISBN' => $bookISBN,
                         'nbPages' => $bookNbPages
                     ]);
+                    header('Location: ../public/index.php?action=getMemberBookList&login='. $_SESSION['login'] .'');
                 }
 
-                header('Location: ../public/index.php?action=getMemberBookList&login='. $_SESSION['login'] .'');
+
             } else {
                 // Otherwise the error(s) is/are displayed
                 foreach ($violations as $violation){
@@ -84,7 +93,7 @@
                 'id' => $id
             ]);
 
-            header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+            header('Location: ../public/index.php?action=getMemberBookList&login='.$_SESSION['login'].'');
         }
 
         /**
@@ -164,7 +173,7 @@
                     'id' => $bookId
                 ]);
 
-                header('Location: ../public/index.php?action=memberProfile&login='.$_SESSION['login'].'');
+                header('Location: ../public/index.php?action=getMemberBookList&login='.$_SESSION['login'].'');
 
             } else{
                 // Otherwise the error(s) is/are displayed

@@ -123,6 +123,6 @@
             $this->managingSharedList->stopSharingBooklist($login, $loginFriend);
 
             $account = new AccountController();
-            $account->accountPage($login);
+            $account->accountPage();
         }
     }

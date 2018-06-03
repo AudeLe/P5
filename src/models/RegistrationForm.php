@@ -88,7 +88,6 @@
         public function checkEmail($emailVisitor){
             $violations = $this->validator->validate($emailVisitor, array(
                new NotBlank(),
-               new Email(['message' => 'Email invalide.'])
             ));
 
             $errors = $this->check($violations);

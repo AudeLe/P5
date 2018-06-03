@@ -58,11 +58,9 @@
             mail($email, $subject, $message, $headers);
             if(mail($email, $subject, $message, $headers)){
                 $message = 'Votre message a été envoyé. Vous receverez une réponse le plus rapidement possible.';
-                var_dump($message);
                 return $message;
             } else {
                 $message = 'Votre message n\'a pas pu être envoyé. Veuillez réessayer ultérieurement.';
-                var_dump($message);
                 return $message;
             }
 

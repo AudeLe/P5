@@ -17,7 +17,7 @@
          */
         // Display the booklist of the logged member
         public function getMemberBookList(){
-            $sql = 'SELECT id, author, title, summary, publishingYear, ISBN, nbPages FROM bookslist WHERE id_member = :id_member';
+            $sql = 'SELECT id, author, title, summary, publishingYear, ISBN, nbPages FROM bookslist WHERE id_member = :id_member ORDER BY title';
             $result = $this->sql($sql, [
                 'id_member' => $_SESSION['id']
             ]);
@@ -121,7 +121,7 @@
                             $email = $row['email'];
 
                             $subjectMail = 'HaB - Demande de partage de liste de livres';
-                            $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="https://audeleissen.com/HaB/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+                            $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="https://audeleissen.com/HaB/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>.';
                             $altBodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre à cette adresse : https://audeleissen.com/HaB/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '' ;
 
                             $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);
@@ -148,7 +148,7 @@
                         $email = $row['email'];
 
                         $subjectMail = 'HaB - Demande de partage de liste de livres';
-                        $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="https://audeleissen.com/HaB/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>';
+                        $bodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre sur cette <a href="https://audeleissen.com/HaB/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '">page</a>.';
                         $altBodyMail = 'Vous avez reçu ce message car '.$login.' souhaite accéder à votre liste de livres.<br/>Veuillez vous rendre à cette adresse : https://audeleissen.com/HaB/public/index.php?action=shareBookList&login=' . $login . '&loginFriend=' .$loginFriend. '' ;
 
                         $this->commonFunctionalities->sendEmail($email, $subjectMail, $bodyMail, $altBodyMail);

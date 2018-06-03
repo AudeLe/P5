@@ -35,6 +35,9 @@
                         </div>
                     {% endblock %}
                     {% block memberBookListArray %}
+                        <div>
+                            <em>Les livres sont classés par titre suivant l'ordre alphabétique.</em>
+                        </div>
                         <table class="table-responsive">
                             <tr class="book">
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Auteur</th>
@@ -50,7 +53,7 @@
                                 <tr class="book">
                                     <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">{{ book.author }}</td>
                                     <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><a href="../public/index.php?action=displayBook&bookId={{ book.id }}">{{ book.title }}</a></td>
-                                    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3">{{ book.summary[:150] }}...</td>
+                                    <td class="col-lg-3 col-md-3 col-sm-3 col-xs-3">{{ book.summary[:100] }}...</td>
                                     <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">{{ book.publishingYear }}</td>
                                     <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{ book.ISBN }}</td>
                                     <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">{{ book.nbPages }}</td>

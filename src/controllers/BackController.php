@@ -5,24 +5,22 @@
     class BackController extends Controller{
 
         /**
-         * @param $login
          * @throws \Twig_Error_Loader
          * @throws \Twig_Error_Runtime
          * @throws \Twig_Error_Syntax
          */
         // Access the admin's profile
-        public function adminProfile($login){
+        public function adminProfile(){
             echo $this->twig->render('adminPages/adminProfileView.html.twig');
         }
 
         /**
-         * @param $login
          * @throws \Twig_Error_Loader
          * @throws \Twig_Error_Runtime
          * @throws \Twig_Error_Syntax
          */
         // Access the member's profile
-        public function memberProfile($login){
+        public function memberProfile(){
            echo $this->twig->render('memberPages/memberProfileView.html.twig');
         }
 

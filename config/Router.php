@@ -127,7 +127,7 @@
                         // Access the member profile page
                         case  'memberProfile':
                             if(isset($_GET['login'])){
-                                $this->backController->memberProfile($_GET['login']);
+                                $this->backController->memberProfile();
                             } else {
                                 throw new Exception('Veuillez vous connecter afin d\'accéder à votre page personnelle.');
                             }
@@ -136,7 +136,7 @@
                         // Access the admin profile page
                         case 'adminProfile':
                             if(isset($_GET['login'])){
-                                $this->backController->adminProfile($_GET['login']);
+                                $this->backController->adminProfile();
                             } else {
                                 throw new Exception('Veuillez vous connecter afin d\'accéder à la page d\'administration.');
                             }

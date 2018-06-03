@@ -63,7 +63,7 @@
         public function displayBook($bookId){
             $bookDatas = $this->bookManager->displayBook($bookId);
 
-            echo $this->twig->render('commonPages/displayBooKView.html.twig', array('bookDatas' => $bookDatas));
+            echo $this->twig->render('commonPages/displayBookView.html.twig', array('bookDatas' => $bookDatas));
         }
 
 
