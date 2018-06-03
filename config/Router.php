@@ -168,7 +168,7 @@
                         // Access to the account informations page
                         case 'accountPage':
                             if(isset($_GET['login'])){
-                                $this->accountController->accountPage($_GET['login']);
+                                $this->accountController->accountPage();
                             } else {
                                 throw new Exception('Impossible d\'accéder à cette page.');
                             }
@@ -177,7 +177,7 @@
                         // Access to the deletion of the account page
                         case 'deleteAccountPage':
                             if(isset($_GET['login'])){
-                                $this->accountController->deleteAccountPage($_GET['login']);
+                                $this->accountController->deleteAccountPage();
                             } else {
                                 throw new Exception('Impossible d\'accéder à cette page.');
                             }
@@ -213,7 +213,7 @@
                         // Modify the login
                         case 'editLogin':
                             if(!empty($_POST['editLogin'])){
-                                $this->accountController->editLogin($_POST['login']);
+                                $this->accountController->editLogin($_POST['editLogin']);
                             } else {
                                 throw new Exception('Impossible de modifier votre pseudonyme.');
                             }
