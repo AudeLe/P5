@@ -23,7 +23,6 @@
         // Edit the login
         public function editLogin($login){
             $this->accountManager->editLogin($login);
-            $this->connectionManager->logOut();
         }
 
         /**
@@ -33,7 +32,6 @@
         // Edit the password
         public function editPassword($password, $confirmPassword){
             $this->accountManager->editPassword($password, $confirmPassword);
-            $this->connectionManager->logOut();
         }
 
         /**
@@ -43,7 +41,6 @@
         // Edit the mail
         public function editMail($editMail, $confirmEditMail){
             $this->accountManager->editMail($editMail, $confirmEditMail);
-            $this->connectionManager->logOut();
         }
 
         /**
@@ -57,26 +54,24 @@
         }
 
         /**
-         * @param $login
          * @throws \Twig_Error_Loader
          * @throws \Twig_Error_Runtime
          * @throws \Twig_Error_Syntax
          */
         // Access the page allowing to modify the account's informations
-        public function accountPage($login){
+        public function accountPage(){
             $members = $this->managingSharedList->managingSharedLists();
 
             echo $this->twig->render('commonPages/accountView.html.twig', array('members' => $members));
         }
 
         /**
-         * @param $login
          * @throws \Twig_Error_Loader
          * @throws \Twig_Error_Runtime
          * @throws \Twig_Error_Syntax
          */
         // Access the page allowing to delete the account
-        public function deleteAccountPage($login){
+        public function deleteAccountPage(){
             echo $this->twig->render('memberPages/deletionAccountView.html.twig');
         }
     }

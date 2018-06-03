@@ -19,33 +19,18 @@
         // Verify the credentials before allowing the member/admin to change them
         public function verifyInformations($login, $password){
 
-            $violations = [];
+            $sql = 'SELECT id, password FROM members WHERE login = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
 
-            $validator = new RegistrationForm();
-            $validator['login'] = $validator->checkLogin($login);
-            $validator['password'] = $validator->checkPassword($password);
+            if($row){
+                $confirmPassword = password_verify($password, $row['password']);
 
-            if(empty($violations['login']) && empty($violations['password'])){
-                $sql = 'SELECT id, password FROM members WHERE login = :login';
-                $result = $this->sql($sql, [
-                    'login' => $login
-                ]);
-                $row = $result->fetch();
-
-                if($row){
-                    $confirmPassword = password_verify($password, $row['password']);
-
-                    if($confirmPassword == false){
-                        $errorMessage = 'Mauvais identifiant ou mot de passe.';
-                        header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
-                    }
-                }
-            } else {
-                // If there is, the error(s) is/are displayed
-                foreach ($violations as $violation) {
-                    if ($violation !== null){
-                        echo $violation . '<br />';
-                    }
+                if($confirmPassword == false){
+                    $errorMessage = 'Mauvais identifiant ou mot de passe.';
+                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
                 }
             }
 
@@ -57,40 +42,26 @@
         // Edit the login
         public function editLogin($login){
 
-            $violations = [];
+            $sql = 'SELECT login FROM members WHERE login = :login';
+            $result = $this->sql($sql, [
+                'login' => $login
+            ]);
+            $row = $result->fetch();
 
-            $validator = new RegistrationForm();
-            $validator['password'] = $validator->checkLogin($login);
+            if($row){
+                $errorMessage = 'Ce pseudo est déjà utilisé.';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
 
-            if(empty($violations['login'])){
-                $sql = 'SELECT login FROM members WHERE login = :login';
-                $result = $this->sql($sql, [
-                    'login' => $login
-                ]);
-                $row = $result->fetch();
-
-                if($row){
-                    $errorMessage = 'Ce pseudo est déjà utilisé.';
-                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
-
-                } else {
-                    $sql = 'UPDATE members SET login = :login WHERE id = :id';
-                    $this->sql($sql, [
-                        'login' => $login,
-                        'id' => $_SESSION['id']
-                    ]);
-                }
-                header('Location: ../public/index.php');
             } else {
-                // If there is, the error(s) is/are displayed
-                foreach ($violations as $violation) {
-                    if ($violation !== null){
-                        echo $violation . '<br />';
-                    }
-                }
+                $sql = 'UPDATE members SET login = :login WHERE id = :id';
+                $this->sql($sql, [
+                    'login' => $login,
+                    'id' => $_SESSION['id']
+                ]);
+
+                $this->connectionDAO->logOut();
+                header('Location: ../public/index.php');
             }
-
-
         }
 
         /**
@@ -100,34 +71,20 @@
         // Edit the password
         public function editPassword($password, $confirmPassword){
 
-            $violations = [];
+            if($password == $confirmPassword){
+                $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
 
-            $validator = new RegistrationForm();
-            $validator['password'] = $validator->checkPassword($password);
-            $validator['confirmPassword'] = $validator->checkPasswordConfirmation($confirmPassword, $password);
+                $sql = 'UPDATE members SET password = :password WHERE id = :id';
+                $this->sql($sql, [
+                    'id' => $_SESSION['id'],
+                    'password' => $passwordHashed
+                ]);
 
-            if(empty($violations['password']) && empty($violations['confirmPassword'])){
-                if($password == $confirmPassword){
-                    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-
-                    $sql = 'UPDATE members SET password = :password WHERE id = :id';
-                    $this->sql($sql, [
-                        'id' => $_SESSION['id'],
-                        'password' => $passwordHashed
-                    ]);
-
-                    header('Location: ../public/index.php');
-                } else {
-                    $errorMessage ='Votre mot de passe n\'a pas pu être modifié.';
-                    header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
-                }
+                $this->connectionDAO->logOut();
+                header('Location: ../public/index.php');
             } else {
-                // If there is, the error(s) is/are displayed
-                foreach ($violations as $violation) {
-                    if ($violation !== null){
-                        echo $violation . '<br />';
-                    }
-                }
+                $errorMessage ='Vous n\'avez pas renseigné les mêmes mots de passe.';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
             }
         }
 
@@ -138,43 +95,29 @@
         // Edit the email
         public function editMail($editMail, $confirmEditMail){
 
-            $violations = [];
+            if($editMail == $confirmEditMail){
+                $sql = 'SELECT email FROM members WHERE email = :email';
+                $result = $this->sql($sql, [
+                    'email' => $editMail
+                ]);
+                $row = $result->fetch();
 
-            $validator = new RegistrationForm();
-            $validator['email'] = $validator->checkEmail($editMail);
-
-            if(empty($violations['email'])){
-                if($editMail == $confirmEditMail){
-                    $sql = 'SELECT email FROM members WHERE = email = :email';
-                    $result = $this->sql($sql, [
-                        'email' => $editMail
-                    ]);
-                    $row = $result->fetch();
-
-                    if($row){
-                        $errorMessage = 'Votre email est déjà lié à un autre compte.';
-                        header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
-                    } else {
-                        $sql = 'UPDATE members SET email = :email WHERE id = :id';
-                        $this->sql($sql, [
-                            'email' => $editMail,
-                            'id' => $_SESSION['id']
-                        ]);
-
-                        header('Location: ../public/index.php');
-                    }
-
-                } else {
-                    $errorMessage = 'Votre email n\'a pas pu être modifié.';
+                if($row){
+                    $errorMessage = 'Votre email est déjà lié à un autre compte.';
                     header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
+                } else {
+                    $sql = 'UPDATE members SET email = :email WHERE id = :id';
+                    $this->sql($sql, [
+                        'email' => $editMail,
+                        'id' => $_SESSION['id']
+                    ]);
+                    $this->connectionDAO->logOut();
+                    header('Location: ../public/index.php');
                 }
+
             } else {
-                // If there is, the error(s) is/are displayed
-                foreach ($violations as $violation) {
-                    if ($violation !== null){
-                        echo $violation . '<br />';
-                    }
-                }
+                $errorMessage = 'Vous n\'avez pas renseigné les mêmes emails.';
+                header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
             }
 
 
