@@ -28,7 +28,6 @@
             // Creation of the boundary
             $boundary = "-----=".md5(rand());
 
-            //$to = "hab@audeleissen.com";
             // Define the subject
             $subject = $subjectMail;
 

@@ -2,12 +2,13 @@
 
     namespace DAO;
 
-    use models\RegistrationForm;
-
     class AccountDAO extends DAO{
 
         private $connectionDAO;
 
+        /**
+         * AccountDAO constructor.
+         */
         public function __construct(){
             $this->connectionDAO = new ConnectionDAO();
         }
@@ -119,8 +120,6 @@
                 $errorMessage = 'Vous n\'avez pas renseigné les mêmes emails.';
                 header('Location: ../public/index.php?action=error&errorMessage=' . $errorMessage . '');
             }
-
-
         }
 
         /**
