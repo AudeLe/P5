@@ -24,6 +24,9 @@
         private $pageController;
         private $personalSpaceController;
 
+        /**
+         * Router constructor.
+         */
         public function __construct(){
 
             $this->accountController = new AccountController();
@@ -62,7 +65,6 @@
                                 throw new Exception('Impossible d\'enregistrer vos informations.');
                             }
                             break;
-
 
                         // Indicates that an email has been sent to confirm the registration
                         case 'confirmRegistrationPage':
@@ -276,6 +278,7 @@
                             }
                             break;
 
+                        // Recover the datas of the book we want to edit
                         case 'editBookDatas':
                             if(isset($_GET['bookId'])){
                                 $this->bookController->editBookDatas($_GET['bookId']);
@@ -284,6 +287,7 @@
                             }
                             break;
 
+                        // Register the edit datas of the selected book
                         case 'registerEditBookDatas':
                             if(isset($_GET['bookId'])){
                                 if(!empty($_POST['editTitle']) && !empty($_POST['editAuthor']) && !empty($_POST['editPublishingYear']) && !empty($_POST['editSummary']) && !empty($_POST['editISBN']) && !empty($_POST['editNbPages'])){
@@ -414,6 +418,7 @@
                             break;
 
                     /* ===== LEGAL MENTIONS ===== */
+                        // Display the legal mentions of the website
                         case 'legalMentionsPage':
                             $this->frontController->legalMentionsPage();
                             break;
