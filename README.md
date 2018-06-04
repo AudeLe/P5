@@ -2,7 +2,7 @@
 
 # Have a Book ?
 
-"Have a Book ?" est un gestionnaire de livres réalisé en HTML, CSS, JavaScript, PHP et MySQL et disponible sur tous les formats d'écrans.
+"Have a Book ?" est un gestionnaire de livres réalisé en HTML, CSS, JavaScript, PHP et MySQL et est disponible sur tous les formats d'écrans.
 
 Il vous permet d'ajouter vos livres (papier et/ou numériques) à votre bibliothèque via leur ISBN. Lorsque vous souhaitez acheter un livre, mais que vous avez un doute concernant le fait que vous l'ayez déjà ou non, vous n'avez qu'à aller dans votre bibliothèque et à entrer l'ISBN du livre souhaité.
 Vous saurez dès lors si vous l'avez déjà enregistré ou non !
