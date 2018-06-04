@@ -60,8 +60,6 @@
         // Log out of the website
         public function logOut(){
             $this->connectionManager->logOut();
-
-
         }
 
         /**
